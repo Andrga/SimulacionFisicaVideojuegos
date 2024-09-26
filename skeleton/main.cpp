@@ -30,7 +30,8 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-
+RenderItem *xRenderItem = NULL, *yRenderItem = NULL, *zRenderItem = NULL;
+PxTransform x, y, z, t;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -54,6 +55,18 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+	x = { 10.0,0.0,0.0 };
+	y = { 0.0,10.0,0.0 };
+	z = { 0.0,0.0,10.0 };
+	t = { 0.0,0.0,0.0 };
+
+	// create sphere
+	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &x, { 1.0, 0.0, 0.0, 1.0 });
+	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &y, { 0.0, 1.0, 0.0, 1.0 });
+	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
+	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, {1.0, 1.0, 1.0, 1.0});
+
 	}
 
 
