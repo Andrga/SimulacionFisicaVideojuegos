@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "Particle.h"
+
 std::string display_text = "This is a test";
 
 
@@ -32,6 +34,8 @@ ContactReportCallback gContactReportCallback;
 
 RenderItem *xRenderItem = NULL, *yRenderItem = NULL, *zRenderItem = NULL;
 PxTransform x, y, z, t;
+
+Particle *particle = NULL;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -67,6 +71,8 @@ void initPhysics(bool interactive)
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, {1.0, 1.0, 1.0, 1.0});
 
+	particle = new Particle({ 0,0,0 }, { 0,1,0 });
+
 	}
 
 
@@ -79,6 +85,8 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	particle->integrate(t);
 }
 
 // Function to clean data
