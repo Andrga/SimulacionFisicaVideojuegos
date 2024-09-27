@@ -15,6 +15,7 @@
     <ClCompile Include="Particle.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -33,6 +34,7 @@
     <ClInclude Include="Particle.h">
       <Filter>Head</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

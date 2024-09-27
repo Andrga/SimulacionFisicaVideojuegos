@@ -71,7 +71,7 @@ void initPhysics(bool interactive)
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, {1.0, 1.0, 1.0, 1.0});
 
-	particle = new Particle({ 0,0,0 }, { 0,1,0 });
+	particle = new Particle({ 0,0,0 }, { 0,1,0 }, {0,10,0}, 0.98);
 
 	}
 
