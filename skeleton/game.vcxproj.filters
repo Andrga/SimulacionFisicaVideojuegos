@@ -7,15 +7,21 @@
     <ClCompile Include="Render\Render.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUtils.cpp" />
-    <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>cpp\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="callbacks.cpp">
+      <Filter>cpp\basics</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>cpp</Filter>
+      <Filter>cpp\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>cpp\basics</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>cpp</Filter>
+      <Filter>cpp\basics</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -30,11 +36,15 @@
     <ClInclude Include="Vector3D.h">
       <Filter>Head</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Particle.h">
       <Filter>Head</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene.h">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Head</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -45,6 +55,9 @@
     </Filter>
     <Filter Include="cpp">
       <UniqueIdentifier>{6a8ce9b8-75ae-47d6-ba94-59bf8cd3c47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp\basics">
+      <UniqueIdentifier>{d5e39e65-7ab6-4553-95d5-7a1af76062f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
