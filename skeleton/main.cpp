@@ -10,7 +10,8 @@
 
 #include <iostream>
 
-#include "Particle.h"
+#include "Scene.h"
+#include "Proyectile.h"
 
 std::string display_text = "This is a test";
 
@@ -32,10 +33,11 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-RenderItem *xRenderItem = NULL, *yRenderItem = NULL, *zRenderItem = NULL;
+Scene* scene = nullptr;
+
+RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL;
 PxTransform x, y, z, t;
 
-Particle *particle = NULL;
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -60,18 +62,23 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
+	// ------ Creamos los ejes ------
 	x = { 10.0,0.0,0.0 };
 	y = { 0.0,10.0,0.0 };
 	z = { 0.0,0.0,10.0 };
 	t = { 0.0,0.0,0.0 };
 
-	// create sphere
 	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &x, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &y, { 0.0, 1.0, 0.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
-	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, {1.0, 1.0, 1.0, 1.0});
+	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, { 1.0, 1.0, 1.0, 1.0 });
 
-	particle = new Particle({ 0,0,0 }, { 0,1,0 }, {0,10,0}, 0.98);
+
+	// ------ creamos scena ------
+	scene = new Scene();
+
+	//scene->addParticle( new Particle({0,0,0}, {0,1,0}, {0,10,0}, 0.98));
+	scene->addParticle( new Proyectile({0,0,0}, {25,25,0}));
 
 	}
 
@@ -86,7 +93,9 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	particle->integrate(t);
+	// Update de la escena
+	if (scene != nullptr)
+		scene->update(t);
 }
 
 // Function to clean data

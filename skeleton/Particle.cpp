@@ -8,13 +8,9 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc) :
 	Particle(Pos, Vel, Acc, 1)
 {}
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp)
+Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp):
+	pose(physx::PxTransform(Pos)), velocity(Vel), acceleration(Acc), damping(Dmp), alive(true)
 {
-	pose = physx::PxTransform(Pos);
-	vel = Vel;
-	acc = Acc;
-	dmp = Dmp;
-
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(3)), &pose, { 0.5, 1, 1, 1.0 });
 }
 
@@ -25,8 +21,15 @@ Particle::~Particle()
 
 void Particle::integrate(double t)
 {
-	pose.p = pose.p + t * vel;
-	vel = vel + t * acc;
-	vel = vel * pow(dmp, t);
+	pose.p = pose.p + t * velocity;
+	velocity = velocity + t * acceleration;
+	velocity = velocity * pow(damping, t);
+}
+
+void Particle::update(double t)
+{
+
+	std::cout << velocity.x << velocity.y << velocity.z << std::endl;
+	integrate(t);
 }
 

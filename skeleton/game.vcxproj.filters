@@ -22,6 +22,9 @@
     <ClCompile Include="Particle.cpp">
       <Filter>cpp\basics</Filter>
     </ClCompile>
+    <ClCompile Include="Proyectile.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -33,17 +36,20 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Vector3D.h">
+    <ClInclude Include="Proyectile.h">
       <Filter>Head</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>Head</Filter>
+      <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Head</Filter>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Head\basics</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Head</Filter>
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Head\basics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +64,9 @@
     </Filter>
     <Filter Include="cpp\basics">
       <UniqueIdentifier>{d5e39e65-7ab6-4553-95d5-7a1af76062f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head\basics">
+      <UniqueIdentifier>{41e79493-0db8-4cfd-b502-46266e27ee0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
