@@ -16,6 +16,7 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp):
 
 Particle::~Particle()
 {
+	cout << "-----PARTICULA ELIMINADA -----" << endl;
 	DeregisterRenderItem(renderItem);
 }
 
@@ -26,10 +27,14 @@ void Particle::integrate(double t)
 	velocity = velocity * pow(damping, t);
 }
 
-void Particle::update(double t)
+bool Particle::update(double t)
 {
+	if (!alive)
+		return false;
 
-	std::cout << velocity.x << velocity.y << velocity.z << std::endl;
+	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
+	
+	return true;
 }
 

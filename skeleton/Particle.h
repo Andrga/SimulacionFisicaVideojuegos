@@ -14,8 +14,10 @@ public:
 	~Particle();
 
 	void integrate(double t);
-	// Metodo que actualiza la particula
-	virtual void update(double t);
+	// Metodo que actualiza la particula( Return "TRUE" Viva || "FALSE" A eliminar)
+	virtual bool update(double t);
+
+		
 
 protected:
 	bool alive;
