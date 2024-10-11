@@ -8,22 +8,25 @@
       <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="RenderUtils.cpp">
-      <Filter>cpp\basics</Filter>
+      <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="callbacks.cpp">
-      <Filter>cpp\basics</Filter>
+      <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>cpp\basics</Filter>
+      <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>cpp\basics</Filter>
+      <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>cpp\basics</Filter>
+      <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="Proyectile.cpp">
-      <Filter>cpp</Filter>
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +54,9 @@
     <ClInclude Include="Scene.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Head</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -59,14 +65,14 @@
     <Filter Include="Head">
       <UniqueIdentifier>{dd7220de-693a-44a5-a0f4-a768a14e0990}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp">
-      <UniqueIdentifier>{6a8ce9b8-75ae-47d6-ba94-59bf8cd3c47f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp\basics">
-      <UniqueIdentifier>{d5e39e65-7ab6-4553-95d5-7a1af76062f8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Head\basics">
       <UniqueIdentifier>{41e79493-0db8-4cfd-b502-46266e27ee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{6a8ce9b8-75ae-47d6-ba94-59bf8cd3c47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\basics">
+      <UniqueIdentifier>{d5e39e65-7ab6-4553-95d5-7a1af76062f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

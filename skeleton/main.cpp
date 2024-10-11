@@ -130,7 +130,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	}
 	case 'K':
-		scene->addParticle(new Proyectile(camera.p, camera.q.getBasisVector2() * -25));
+		scene->addParticle(new Proyectile(camera.p, camera.q.getBasisVector2() *-25));
 		break;
 	default:
 		break;
