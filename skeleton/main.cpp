@@ -12,6 +12,7 @@
 
 #include "Scene.h"
 #include "Proyectile.h"
+#include "ParticleSystem.h"
 
 std::string display_text = "This is a test";
 
@@ -21,16 +22,16 @@ using namespace physx;
 PxDefaultAllocator		gAllocator;
 PxDefaultErrorCallback	gErrorCallback;
 
-PxFoundation*			gFoundation = NULL;
-PxPhysics*				gPhysics	= NULL;
+PxFoundation* gFoundation = NULL;
+PxPhysics* gPhysics = NULL;
 
 
-PxMaterial*				gMaterial	= NULL;
+PxMaterial* gMaterial = NULL;
 
-PxPvd*                  gPvd        = NULL;
+PxPvd* gPvd = NULL;
 
-PxDefaultCpuDispatcher*	gDispatcher = NULL;
-PxScene*				gScene      = NULL;
+PxDefaultCpuDispatcher* gDispatcher = NULL;
+PxScene* gScene = NULL;
 ContactReportCallback gContactReportCallback;
 
 Scene* scene = nullptr;
@@ -47,9 +48,9 @@ void initPhysics(bool interactive)
 
 	gPvd = PxCreatePvd(*gFoundation);
 	PxPvdTransport* transport = PxDefaultPvdSocketTransportCreate(PVD_HOST, 5425, 10);
-	gPvd->connect(*transport,PxPvdInstrumentationFlag::eALL);
+	gPvd->connect(*transport, PxPvdInstrumentationFlag::eALL);
 
-	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(),true,gPvd);
+	gPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *gFoundation, PxTolerancesScale(), true, gPvd);
 
 	gMaterial = gPhysics->createMaterial(0.5f, 0.5f, 0.6f);
 
@@ -78,9 +79,13 @@ void initPhysics(bool interactive)
 	scene = new Scene();
 
 	//scene->addParticle( new Particle({0,0,0}, {0,1,0}, {0,10,0}, 0.98));
-	scene->addParticle( new Proyectile({0,0,0}, {25,25,0}));
+	scene->addObject(new Proyectile({ 0,0,0 }, { 25,25,0 }));
+	ParticleSystem* partsyst = new ParticleSystem(scene);
+	scene->addObject(partsyst);
 
-	}
+	partsyst->addParticleGenerator(new ParticleGenerator(new Proyectile({ 0,0,0 }, { 25,25,0 }), 10));
+
+}
 
 
 // Function to configure what happens in each step of physics
@@ -108,29 +113,29 @@ void cleanupPhysics(bool interactive)
 	gScene->release();
 	gDispatcher->release();
 	// -----------------------------------------------------
-	gPhysics->release();	
+	gPhysics->release();
 	PxPvdTransport* transport = gPvd->getTransport();
 	gPvd->release();
 	transport->release();
-	
+
 	gFoundation->release();
-	}
+}
 
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	switch(toupper(key))
+	switch (toupper(key))
 	{
-	//case 'B': break;
-	//case ' ':	break;
+		//case 'B': break;
+		//case ' ':	break;
 	case ' ':
 	{
 		break;
 	}
 	case 'K':
-		scene->addParticle(new Proyectile(camera.p, camera.q.getBasisVector2() *-25));
+		scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25));
 		break;
 	default:
 		break;
@@ -144,7 +149,7 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 }
 
 
-int main(int, const char*const*)
+int main(int, const char* const*)
 {
 #ifndef OFFLINE_EXECUTION 
 	extern void renderLoop();
@@ -152,7 +157,7 @@ int main(int, const char*const*)
 #else
 	static const PxU32 frameCount = 100;
 	initPhysics(false);
-	for(PxU32 i=0; i<frameCount; i++)
+	for (PxU32 i = 0; i < frameCount; i++)
 		stepPhysics(false);
 	cleanupPhysics(false);
 #endif

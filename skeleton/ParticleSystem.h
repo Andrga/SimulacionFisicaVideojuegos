@@ -1,31 +1,23 @@
 #pragma once
 #include <vector>
-#include "Particle.h"
+#include "ParticleGenerator.h"
+#include "Scene.h"
 
 using namespace std;
 
-class ParticleSystem
+class ParticleSystem : public Object
 {
 private:
-	Particle* particleModel;
+	vector<ParticleGenerator*> particleGenerators;
 	vector<Particle*> particles;
-
-	// Propiedades inicio
-	int startNParticles;
-	Vector3 startPos;
-	Vector3 startVel;
-	float startSize;
-	Vector4 startColor;
-	float startLifetime;
-
-	// Current particles
-	int nParticles = 0;
+	Scene* scene;
 
 public:
-	ParticleSystem(Particle* partMod, int sNParticles = 1, Vector3 Pos = {0,0,0}, Vector3 Vel = {0,0,0}, 
-		float size = 1, Vector4 color = {1,1,1,1});
+	ParticleSystem(Scene* scn);
 	~ParticleSystem();
 
-	virtual void Update(float t);
+	bool update(double t) override;
+
+	void addParticleGenerator(ParticleGenerator* partGen);
 };
 

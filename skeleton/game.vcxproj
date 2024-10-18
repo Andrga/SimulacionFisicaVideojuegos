@@ -255,7 +255,9 @@
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Proyectile.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
@@ -266,7 +268,9 @@
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="RenderUtils.hpp" />

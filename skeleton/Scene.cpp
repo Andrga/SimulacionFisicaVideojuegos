@@ -10,22 +10,33 @@ Scene::~Scene()
 
 void Scene::update(double t)
 {
+	int siz = objects.size();
+
 	// Actualiza todas las particulas
-	for (Particle* e : particles) {
+
+	for (int i = 0; i < siz; i++) {
 
 		// Si el update devuelve false es que la particula ha muerto por lo que la elimina y la quita del vector
-		if (!e->update(t))
+		objects[i]->update(t);
+	}
+
+	for (int i = 0; i < siz; i++) {
 		{
-			// Elimina la particula
-			delete e;
-			// Encuentra la particula y elimina la referencia del vector
-			auto ref = std::find(particles.begin(), particles.end(), e);
-			particles.erase(ref);
+			if (!objects[i]->getAlive())
+			{
+				// Elimina la particula
+				delete objects[i];
+				// Encuentra la particula y elimina la referencia del vector
+				auto ref = std::find(objects.begin(), objects.end(), objects[i]);
+				objects.erase(ref);
+				i--;
+				siz--;
+			}
+
 		}
 	}
 }
-
-void Scene::addParticle(Particle* part)
+void Scene::addObject(Object* obj)
 {
-	particles.push_back(part);
+	objects.push_back(obj);
 }

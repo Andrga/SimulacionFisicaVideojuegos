@@ -1,20 +1,20 @@
 #pragma once
 #include <vector>
 
-#include "Particle.h"
+#include "Object.h"
 
 using namespace std;
 
 class Scene
 {
 protected:
-	vector<Particle*> particles;
+	vector<Object*> objects;
 
 public:
 	Scene();
 	~Scene();
 
 	void update(double t);
-	void addParticle(Particle* part);
+	void addObject(Object* obj);
 };
 
