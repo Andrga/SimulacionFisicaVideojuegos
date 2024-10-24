@@ -21,19 +21,20 @@ void Scene::update(double t)
 	}
 
 	for (int i = 0; i < siz; i++) {
-		{
-			if (!objects[i]->getAlive())
-			{
-				// Elimina la particula
-				delete objects[i];
-				// Encuentra la particula y elimina la referencia del vector
-				auto ref = std::find(objects.begin(), objects.end(), objects[i]);
-				objects.erase(ref);
-				i--;
-				siz--;
-			}
 
+		if (!objects[i]->getAlive())
+		{
+			// Elimina la particula
+			delete objects[i];
+			// Encuentra la particula y elimina la referencia del vector
+			auto ref = std::find(objects.begin(), objects.end(), objects[i]);
+			objects.erase(ref);
+			cout << "elimina scena" << endl;
+			i--;
+			siz--;
 		}
+
+
 	}
 }
 void Scene::addObject(Object* obj)

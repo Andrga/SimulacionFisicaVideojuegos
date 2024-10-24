@@ -83,7 +83,7 @@ void initPhysics(bool interactive)
 	ParticleSystem* partsyst = new ParticleSystem(scene);
 	scene->addObject(partsyst);
 
-	partsyst->addParticleGenerator(new ParticleGenerator(new Proyectile({ 0,0,0 }, { 25,25,0 }), 10));
+	partsyst->addParticleGenerator(new ParticleGenerator(new Proyectile({ 0,0,0 }, { 25,25,0 }), 1000));
 
 }
 

@@ -10,7 +10,7 @@ class Particle: public Object
 {
 public:
 	Particle(const Particle& other);
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 10);
+	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2);
 	~Particle();
 
 	void integrate(double t);
@@ -19,6 +19,15 @@ public:
 
 	float getLifeTime() const { return lifeTime; }
 	void setPosition(Vector3 pos);
+	//void setRotation(Vector3 pos);
+
+	// getters
+	Vector3 getVelocity() { return velocity; }
+	Vector3 getAcceleration() { return acceleration; }
+
+	float getSize() { return size; }
+	float getStartLifeTime(){ return startlifeTime; }
+	physx::PxTransform getPose() { return pose; }
 
 protected:
 	Vector3 velocity;

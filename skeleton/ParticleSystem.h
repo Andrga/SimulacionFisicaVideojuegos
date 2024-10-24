@@ -9,7 +9,6 @@ class ParticleSystem : public Object
 {
 private:
 	vector<ParticleGenerator*> particleGenerators;
-	vector<Particle*> particles;
 	Scene* scene;
 
 public:
