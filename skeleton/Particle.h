@@ -6,10 +6,12 @@
 
 using namespace std;
 
-class Particle: public Object
+class Particle : public Object
 {
 public:
 	Particle(const Particle& other);
+	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, float siz = 3);
+	//Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2);
 	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2);
 	~Particle();
 
@@ -26,10 +28,13 @@ public:
 	Vector3 getAcceleration() { return acceleration; }
 
 	float getSize() { return size; }
-	float getStartLifeTime(){ return startlifeTime; }
+	float getStartLifeTime() { return startlifeTime; }
+	void setStartLifeTime(float life) { startlifeTime = life; }
+	void setColor(Vector4 color) { renderItem->color = color; }
 	physx::PxTransform getPose() { return pose; }
 
 protected:
+	bool eulerSemiimplicito = true;
 	Vector3 velocity;
 	Vector3 acceleration;
 	float damping;

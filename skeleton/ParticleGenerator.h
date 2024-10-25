@@ -1,28 +1,36 @@
 #pragma once
 #include "Particle.h"
+#include <random>
+
+class ParticleSystem;
+
 class ParticleGenerator
 {
-private:
-	Particle particleReference;
+protected:
+	//Particle particleReference;
+	std::default_random_engine generator;
+	ParticleSystem* particleSystem;
 
 	// Propiedades inicio
 	int startNParticles;
-	physx::PxTransform startTransform;
+	Vector3 origen;
 	Vector3 startVel;
-	Vector3 startAcc;
+	float startLifetime;
+
+
 	float startSize;
 	Vector4 startColor;
-	float startLifetime;
 
 	// Current particles
 	int nParticles = 0;
 	vector<Particle*> particles;
 
 public:
-	ParticleGenerator(Particle* partRef, int stNpart);
+	ParticleGenerator(Vector3 org, int stNpart, ParticleSystem* partsys);
 	~ParticleGenerator();
 
-	Particle* generateParticle(Vector3 Pos = { 0,0,0 });
+
+	virtual void generateParticle();
 	bool mayGenerate();
 	int getNParticles() { return nParticles; }
 

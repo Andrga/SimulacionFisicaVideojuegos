@@ -1,13 +1,8 @@
 #include "ParticleGenerator.h"
 
 
-ParticleGenerator::ParticleGenerator(Particle* partRef, int stNpart) : particleReference(*partRef), startNParticles(stNpart)
+ParticleGenerator::ParticleGenerator(Vector3 org, int stNpart, ParticleSystem* partsys) : origen(org), startNParticles(stNpart), particleSystem(partsys)
 {
-	startTransform = particleReference.getPose();
-	startVel = particleReference.getVelocity();
-	startAcc = particleReference.getAcceleration();
-	startSize = particleReference.getSize();
-	startLifetime = particleReference.getStartLifeTime();
 }
 
 ParticleGenerator::~ParticleGenerator()
@@ -18,7 +13,7 @@ void ParticleGenerator::update(double t)
 {
 	// Genera particulas si hace falta
 	if (mayGenerate()) {
-		particles.push_back(generateParticle());
+		generateParticle();
 	}
 
 	// Actualiza todas las particulas
@@ -50,11 +45,7 @@ bool ParticleGenerator::mayGenerate()
 	return nParticles <= startNParticles;
 }
 
-Particle* ParticleGenerator::generateParticle(Vector3 Pos) {
+void ParticleGenerator::generateParticle() {
 
 	cout << "---Nueva particula generada del sistema---" << endl;
-	nParticles++;
-	Particle* aux = new Particle(startTransform.p, startVel, startAcc, 1, startSize, startLifetime);
-	aux->setPosition(Pos);
-	return aux;
 }

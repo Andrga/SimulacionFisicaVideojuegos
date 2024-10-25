@@ -254,7 +254,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Cascada.cpp" />
+    <ClCompile Include="Disparo.cpp" />
+    <ClCompile Include="Sangre.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Niebla.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
@@ -267,7 +271,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
+    <ClInclude Include="Cascada.h" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="Disparo.h" />
+    <ClInclude Include="Sangre.h" />
+    <ClInclude Include="Niebla.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />

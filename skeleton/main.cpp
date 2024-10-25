@@ -13,6 +13,10 @@
 #include "Scene.h"
 #include "Proyectile.h"
 #include "ParticleSystem.h"
+#include "Cascada.h"
+#include "Niebla.h"
+#include "Sangre.h"
+#include "Disparo.h"
 
 std::string display_text = "This is a test";
 
@@ -72,19 +76,36 @@ void initPhysics(bool interactive)
 	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &x, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &y, { 0.0, 1.0, 0.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
-	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, { 1.0, 1.0, 1.0, 1.0 });
+	//zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, { 1.0, 1.0, 1.0, 1.0 });
 
 
 	// ------ creamos scena ------
 	scene = new Scene();
 
+	// ----- PARTICULA -----
 	//scene->addParticle( new Particle({0,0,0}, {0,1,0}, {0,10,0}, 0.98));
-	scene->addObject(new Proyectile({ 0,0,0 }, { 25,25,0 }));
+	// ----- PROYECTIL -----
+	//scene->addObject(new Proyectile({ 0,0,0 }, { 25,25,0 }));
+
+
+	// ------- SISTEMAS DE PARTICULAS ------
 	ParticleSystem* partsyst = new ParticleSystem(scene);
 	scene->addObject(partsyst);
 
-	partsyst->addParticleGenerator(new ParticleGenerator(new Proyectile({ 0,0,0 }, { 25,25,0 }), 1000));
 
+	//------ Sistema 4 ------
+	// sistema de particula cascada
+	//partsyst->addParticleGenerator(new Cascada(Vector3(0, 50, 0), 10000, partsyst));
+
+	//------ Sistema 2 ------
+	// sistema de particula niebla
+	//partsyst->addParticleGenerator(new Niebla(Vector3(0, 0, 0), 1000, partsyst));
+
+	// ------ Sistema 3 -----
+	// sistema de particula disparo
+	partsyst->addParticleGenerator(new Disparo(Vector3(0, 10, 0), 10, partsyst));
+	// sistema de particula sangre
+	partsyst->addParticleGenerator(new Sangre(Vector3(0, 10, 50), 15, partsyst));
 }
 
 
@@ -135,7 +156,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	}
 	case 'K':
-		scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25));
+		scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25, { 0,0,0 }));
 		break;
 	default:
 		break;

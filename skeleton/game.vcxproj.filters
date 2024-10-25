@@ -34,6 +34,16 @@
     <ClCompile Include="Object.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
+    <ClCompile Include="Sangre.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Niebla.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Cascada.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Disparo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -69,6 +79,16 @@
     <ClInclude Include="Object.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
+    <ClInclude Include="Sangre.h">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Niebla.h">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Cascada.h">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Disparo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
