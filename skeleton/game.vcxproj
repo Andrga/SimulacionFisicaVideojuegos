@@ -256,6 +256,8 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Cascada.cpp" />
     <ClCompile Include="Disparo.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="ForceSystem.cpp" />
     <ClCompile Include="Sangre.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Niebla.cpp" />
@@ -274,6 +276,8 @@
     <ClInclude Include="Cascada.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Disparo.h" />
+    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="ForceSystem.h" />
     <ClInclude Include="Sangre.h" />
     <ClInclude Include="Niebla.h" />
     <ClInclude Include="Object.h" />

@@ -89,8 +89,8 @@ void initPhysics(bool interactive)
 
 
 	// ------- SISTEMAS DE PARTICULAS ------
-	ParticleSystem* partsyst = new ParticleSystem(scene);
-	scene->addObject(partsyst);
+	//ParticleSystem* partsyst = new ParticleSystem(scene);
+	//scene->addObject(partsyst);
 
 
 	//------ Sistema 4 ------
@@ -103,9 +103,12 @@ void initPhysics(bool interactive)
 
 	// ------ Sistema 3 -----
 	// sistema de particula disparo
-	partsyst->addParticleGenerator(new Disparo(Vector3(0, 10, 0), 10, partsyst));
+	//partsyst->addParticleGenerator(new Disparo(Vector3(0, 10, 0), 10, partsyst));
 	// sistema de particula sangre
-	partsyst->addParticleGenerator(new Sangre(Vector3(0, 10, 50), 15, partsyst));
+	//partsyst->addParticleGenerator(new Sangre(Vector3(0, 10, 50), 15, partsyst));
+	Particle* part = new Particle(Particle({ 0,10,0 },{0,0,0},3,10));
+		scene->addObject(part);
+		part->addForce({ 0,-9.8,0 });
 }
 
 

@@ -41,7 +41,7 @@ void Niebla::generateParticle()
 		lifetime = Bdistribution(generator);
 
 		// creamos la nueva particula
-		Particle* aux = new Particle(origen2, velocity, .25);
+		Particle* aux = new Particle(origen2, velocity, .25, 1);
 		aux->setStartLifeTime(lifetime);
 
 		// añadimos las particulas a la lista

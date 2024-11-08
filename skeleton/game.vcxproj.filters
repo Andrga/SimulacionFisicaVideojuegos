@@ -22,28 +22,34 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
-    <ClCompile Include="Proyectile.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGenerator.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Sangre.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Niebla.cpp">
-      <Filter>Resource</Filter>
+    <ClCompile Include="Disparo.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
     </ClCompile>
     <ClCompile Include="Cascada.cpp">
-      <Filter>Resource</Filter>
+      <Filter>Resource\Sistemas de particulas</Filter>
     </ClCompile>
-    <ClCompile Include="Disparo.cpp" />
+    <ClCompile Include="Niebla.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="Sangre.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyectile.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceSystem.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGenerator.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -55,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Proyectile.h">
-      <Filter>Head</Filter>
-    </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
@@ -70,25 +73,34 @@
     <ClInclude Include="Scene.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Head</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleGenerator.h">
-      <Filter>Head</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Sangre.h">
-      <Filter>Head</Filter>
-    </ClInclude>
-    <ClInclude Include="Niebla.h">
-      <Filter>Head</Filter>
+    <ClInclude Include="Disparo.h">
+      <Filter>Head\Sistemas de particulas</Filter>
     </ClInclude>
     <ClInclude Include="Cascada.h">
-      <Filter>Head</Filter>
+      <Filter>Head\Sistemas de particulas</Filter>
     </ClInclude>
-    <ClInclude Include="Disparo.h" />
+    <ClInclude Include="Niebla.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="Sangre.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyectile.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGenerator.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceSystem.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -105,6 +117,18 @@
     </Filter>
     <Filter Include="Resource\basics">
       <UniqueIdentifier>{d5e39e65-7ab6-4553-95d5-7a1af76062f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Sistemas de particulas">
+      <UniqueIdentifier>{52fdc625-d219-4766-84d2-300cea9637d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head\Sistemas de particulas">
+      <UniqueIdentifier>{218731dc-61ac-47a0-b853-7571eba247c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head\Systems">
+      <UniqueIdentifier>{5b8e7910-656c-4db1-a4f1-0e273de4b447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Systems">
+      <UniqueIdentifier>{8289dae3-feb5-49f1-9b3b-e28f99f2a4eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
