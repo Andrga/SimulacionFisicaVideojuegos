@@ -22,7 +22,7 @@ public:
 	bool update(double t) override;
 
 	void applyGravity();
-	void setVisibility(bool visibility);
+	void setVisibility(bool visibility) override;
 	// getters:
 
 	physx::PxTransform& getPose() { return pose; }

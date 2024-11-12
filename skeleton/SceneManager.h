@@ -16,5 +16,7 @@ public:
 	void addScene(Scene* scn);
 	void update(float t);
 
+	void setScene(int id);
+
 };
 

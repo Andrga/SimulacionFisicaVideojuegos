@@ -34,6 +34,8 @@ public:
 	bool mayGenerate();
 	int getNParticles() { return nParticles; }
 
+	void setVisibility(bool visibility);
+
 	void update(double t);
 };
 

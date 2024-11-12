@@ -18,5 +18,7 @@ public:
 	bool update(double t) override;
 
 	void addParticleGenerator(ParticleGenerator* partGen);
+
+	void setVisibility(bool visibility) override;
 };
 

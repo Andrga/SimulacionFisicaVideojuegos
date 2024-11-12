@@ -271,6 +271,7 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneNiebla.cpp" />
     <ClCompile Include="SceneParticleSystem.cpp" />
     <ClCompile Include="VientoGenerador.cpp" />
   </ItemGroup>
@@ -294,6 +295,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneNiebla.h" />
     <ClInclude Include="SceneParticleSystem.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="VientoGenerador.h" />

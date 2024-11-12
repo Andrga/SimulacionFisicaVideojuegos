@@ -18,6 +18,7 @@ public:
 	~ForceSystem();
 
 	bool update(double t) override;
+	void setVisibility(bool visibility) override {}
 
 	void addForceGenerator(ForceGenerator* forcGen);
 };

@@ -11,7 +11,6 @@ Scene::~Scene()
 
 void Scene::update(double t)
 {
-	if (!active) return;
 
 	int siz = objects.size();
 
@@ -57,12 +56,16 @@ void Scene::show()
 {
 	for (auto p : objects)
 		p->setVisibility(true);
+	for (auto p : systems)
+		p->setVisibility(true);
 	active = true;
 }
 
 void Scene::hide()
 {
 	for (auto p : objects)
+		p->setVisibility(false);
+	for (auto p : systems)
 		p->setVisibility(false);
 	active = false;
 }

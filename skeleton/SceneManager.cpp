@@ -20,3 +20,10 @@ void SceneManager::update(float t)
 {
 	scenes[actualScene]->update(t);
 }
+
+void SceneManager::setScene(int id)
+{
+	scenes[actualScene]->hide();
+	actualScene = id;
+	scenes[actualScene]->show();
+}

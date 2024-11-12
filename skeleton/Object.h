@@ -11,5 +11,7 @@ public:
 	virtual bool update(double t) = 0;
 
 	bool getAlive() const { return alive; }
+
+	virtual void setVisibility(bool visibility){}
 };
 

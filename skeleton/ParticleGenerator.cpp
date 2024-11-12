@@ -9,6 +9,13 @@ ParticleGenerator::~ParticleGenerator()
 {
 }
 
+void ParticleGenerator::setVisibility(bool visibility)
+{
+	for (auto p : particles) {
+		p->setVisibility(visibility);
+	}
+}
+
 void ParticleGenerator::update(double t)
 {
 	// Genera particulas si hace falta

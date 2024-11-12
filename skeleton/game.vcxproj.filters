@@ -55,8 +55,15 @@
     <ClCompile Include="VientoGenerador.cpp">
       <Filter>Head\Sistemas de fuerzas</Filter>
     </ClCompile>
-    <ClCompile Include="SceneParticleSystem.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneParticleSystem.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNiebla.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -113,8 +120,15 @@
     <ClInclude Include="VientoGenerador.h">
       <Filter>Resource\Sistemas de fuerzas</Filter>
     </ClInclude>
-    <ClInclude Include="SceneParticleSystem.h" />
-    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneNiebla.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneParticleSystem.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

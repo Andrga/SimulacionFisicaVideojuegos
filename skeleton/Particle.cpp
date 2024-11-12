@@ -72,9 +72,11 @@ void Particle::applyGravity()
 
 void Particle::setVisibility(bool visibility)
 {
+	//cout << visibility << endl;
 	visibility ?
-		DeregisterRenderItem(renderItem) :
-		RegisterRenderItem(renderItem);
+		RegisterRenderItem(renderItem) :
+		DeregisterRenderItem(renderItem);
+	//renderItem->setVisible(visibility);
 }
 
 void Particle::setPosition(Vector3 pos)

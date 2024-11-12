@@ -12,6 +12,7 @@
 
 #include "SceneManager.h"
 #include "SceneParticleSystem.h"
+#include "SceneNiebla.h"
 
 
 std::string display_text = "This is a test";
@@ -34,7 +35,7 @@ PxDefaultCpuDispatcher* gDispatcher = NULL;
 PxScene* gScene = NULL;
 ContactReportCallback gContactReportCallback;
 
-SceneManager* scenemanager = nullptr;
+SceneManager* sceneManager = nullptr;
 
 RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL;
 PxTransform x, y, z, t;
@@ -76,8 +77,9 @@ void initPhysics(bool interactive)
 
 
 	// ------ creamos scena ------
-	scenemanager = new SceneManager();
-	scenemanager->addScene(new SceneParticleSystem());
+	sceneManager = new SceneManager();
+	sceneManager->addScene(new SceneParticleSystem());
+	sceneManager->addScene(new SceneNiebla());
 
 
 	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
@@ -103,8 +105,8 @@ void stepPhysics(bool interactive, double t)
 	gScene->fetchResults(true);
 
 	// Update de la escena
-	if (scenemanager != nullptr)
-		scenemanager->update(t);
+	if (sceneManager != nullptr)
+		sceneManager->update(t);
 }
 
 // Function to clean data
@@ -136,6 +138,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		//case ' ':	break;
 	case ' ':
 	{
+		break;
+	}
+	case 'P':
+	{
+		sceneManager->setScene(0);
+		break;
+	}
+	case 'O':
+	{
+		sceneManager->setScene(1);
 		break;
 	}
 	case 'K':
