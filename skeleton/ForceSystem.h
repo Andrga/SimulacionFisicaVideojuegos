@@ -9,6 +9,7 @@ class ForceGenerator;
 class ForceSystem : public Object
 {
 private:
+	
 	vector<ForceGenerator*> forceGenerators;
 public:
 	ForceSystem();

@@ -89,13 +89,13 @@ void initPhysics(bool interactive)
 
 
 	// ------- SISTEMAS DE PARTICULAS ------
-	//ParticleSystem* partsyst = new ParticleSystem(scene);
-	//scene->addObject(partsyst);
+	ParticleSystem* partsyst = new ParticleSystem(scene);
+	scene->addObject(partsyst);
 
 
 	//------ Sistema 4 ------
 	// sistema de particula cascada
-	//partsyst->addParticleGenerator(new Cascada(Vector3(0, 50, 0), 10000, partsyst));
+	partsyst->addParticleGenerator(new Cascada(Vector3(0, 50, 0), 10000, partsyst));
 
 	//------ Sistema 2 ------
 	// sistema de particula niebla
@@ -106,9 +106,10 @@ void initPhysics(bool interactive)
 	//partsyst->addParticleGenerator(new Disparo(Vector3(0, 10, 0), 10, partsyst));
 	// sistema de particula sangre
 	//partsyst->addParticleGenerator(new Sangre(Vector3(0, 10, 50), 15, partsyst));
-	Particle* part = new Particle(Particle({ 0,10,0 },{0,0,0},3,10));
-		scene->addObject(part);
-		part->addForce({ 0,-9.8,0 });
+	Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
+	part->applyGravity();
+	scene->addObject(part);
+	//part->addForce({ 0,-9.8,0 });
 }
 
 

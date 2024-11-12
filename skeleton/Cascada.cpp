@@ -45,7 +45,7 @@ void Cascada::generateParticle()
 
 		// añadimos las particulas a la lista
 		particles.push_back(aux);
-		nParticles ++;
+		nParticles++;
 
 	}
 

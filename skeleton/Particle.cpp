@@ -4,11 +4,10 @@ Particle::Particle(const Particle& other) :
 	Particle(other.pose.p, other.velocity, other.acceleration, other.damping, other.size, other.startlifeTime)
 {}
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, float siz) : Particle(Pos, Vel, { 0,0,0 }, 1, siz, 2)
+Particle::Particle(Vector3 Pos, Vector3 Vel) : Particle(Pos, Vel, { 0,0,0 }, 1, 1, 2)
 {
 }
-
-Particle::Particle(Vector3 Pos, Vector3 Vel, float siz, float mass): Particle(Pos, Vel, {0,0,0}, 1, siz, 2, mass)
+Particle::Particle(Vector3 Pos, Vector3 Vel, float mass) : Particle(Pos, Vel, { 0,0,0 }, 1, 1, 2, mass)
 {
 }
 
@@ -16,12 +15,12 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float siz, 
 	pose(physx::PxTransform(Pos)), velocity(Vel), acceleration(Acc), damping(Dmp), size(siz), startlifeTime(lifet), mass(mas)
 {
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), &pose, { 0.5, 1, 1, 1.0 });
-	
+
 }
 
 Particle::~Particle()
 {
-	cout << "-----PARTICULA ELIMINADA -----" << endl;
+	//cout << "-----PARTICULA ELIMINADA -----" << endl;
 	DeregisterRenderItem(renderItem);
 }
 
@@ -30,8 +29,8 @@ void Particle::integrate(double t)
 	// selecciona si euler semi-implicito
 	if (eulerSemiimplicito) {
 		velocity = velocity + t * acceleration;
-		velocity = velocity * pow(damping, t);
 		pose.p = pose.p + t * velocity;
+		velocity = velocity * pow(damping, t);
 	}
 	else {
 		pose.p = pose.p + t * velocity;
@@ -53,11 +52,22 @@ bool Particle::update(double t)
 	else
 		lifeTime += t;
 	// Aplicacion de las fuerzas:
-	applyForce();
+	if (forces.size() > 0)
+		applyForce();
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
 
+	cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;
 	return true;
+}
+
+void Particle::applyGravity()
+{
+	gravitable = !gravitable;
+
+	gravitable ?
+		acceleration += gravity :
+		acceleration -= gravity;
 }
 
 void Particle::setPosition(Vector3 pos)
@@ -67,8 +77,8 @@ void Particle::setPosition(Vector3 pos)
 
 void Particle::applyForce()
 {
-	Vector3 totalForce;
-	for (auto f: forces)
+	Vector3 totalForce = { 0, 0, 0 };
+	for (auto f : forces)
 	{
 		totalForce += f;
 	}

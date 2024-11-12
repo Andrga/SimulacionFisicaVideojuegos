@@ -11,9 +11,8 @@ class Particle : public Object
 public:
 	// constructoras:
 	Particle(const Particle& other);
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, float siz = 3);
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, float siz = 3, float mas = 1);
-	//Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2);
+	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 });
+	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, float siz = 1);
 	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2, float mass = 1);
 	~Particle();
 
@@ -22,18 +21,19 @@ public:
 	// Metodo que actualiza la particula( Return "TRUE" Viva || "FALSE" A eliminar)
 	bool update(double t) override;
 
-	//void setRotation(Vector3 pos);
+	void applyGravity();
 
 	// getters:
-	physx::PxTransform getPose() { return pose; }
+	physx::PxTransform& getPose() { return pose; }
 	Vector3 getVelocity() { return velocity; }
 	Vector3 getAcceleration() { return acceleration; }
-	float getSize() { return size; }
 	float getLifeTime() const { return lifeTime; }
 	float getStartLifeTime() { return startlifeTime; }
+	bool getGravity() { return gravitable; }
 
 	// setters:
 	void setPosition(Vector3 pos);
+	void setAcceleration(Vector3 acc) { acceleration = acc; }
 	void setStartLifeTime(float life) { startlifeTime = life; }
 	void setColor(Vector4 color) { renderItem->color = color; }
 	void setMass(float mas) { mass = mas; }
@@ -55,6 +55,9 @@ protected:
 	Vector3 velocity;
 	Vector3 acceleration;
 	float damping;
+	//gravity
+	Vector3 gravity = { 0,-9.8,0 };
+	bool gravitable = false;
 
 	// propiedades de vida por tiempo de la particula
 	float lifeTime = 0;
