@@ -270,6 +270,9 @@
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneParticleSystem.cpp" />
+    <ClCompile Include="VientoGenerador.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
@@ -290,7 +293,10 @@
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneParticleSystem.h" />
     <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="VientoGenerador.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />

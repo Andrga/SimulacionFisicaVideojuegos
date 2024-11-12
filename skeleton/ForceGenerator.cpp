@@ -1,6 +1,6 @@
 #include "ForceGenerator.h"
 
-ForceGenerator::ForceGenerator(Vector3 org, int stNpart)
+ForceGenerator::ForceGenerator(Vector3 org): origen(org)
 {
 }
 
@@ -8,15 +8,7 @@ ForceGenerator::~ForceGenerator()
 {
 }
 
-void ForceGenerator::generateForce()
+bool ForceGenerator::onRadious(Vector3 Pos)
 {
-}
-
-bool ForceGenerator::mayGenerate()
-{
-	return false;
-}
-
-void ForceGenerator::update(double t)
-{
+	return (Pos - origen).magnitude() <= radious;
 }

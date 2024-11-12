@@ -57,7 +57,7 @@ bool Particle::update(double t)
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
 
-	cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;
+	//cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;
 	return true;
 }
 
@@ -68,6 +68,13 @@ void Particle::applyGravity()
 	gravitable ?
 		acceleration += gravity :
 		acceleration -= gravity;
+}
+
+void Particle::setVisibility(bool visibility)
+{
+	visibility ?
+		DeregisterRenderItem(renderItem) :
+		RegisterRenderItem(renderItem);
 }
 
 void Particle::setPosition(Vector3 pos)

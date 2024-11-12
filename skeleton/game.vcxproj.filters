@@ -49,7 +49,14 @@
     <ClCompile Include="ParticleGenerator.cpp">
       <Filter>Resource\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="VientoGenerador.cpp">
+      <Filter>Head\Sistemas de fuerzas</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneParticleSystem.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -100,7 +107,14 @@
     <ClInclude Include="ForceSystem.h">
       <Filter>Head\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="VientoGenerador.h">
+      <Filter>Resource\Sistemas de fuerzas</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneParticleSystem.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -129,6 +143,18 @@
     </Filter>
     <Filter Include="Resource\Systems">
       <UniqueIdentifier>{8289dae3-feb5-49f1-9b3b-e28f99f2a4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Sistemas de fuerzas">
+      <UniqueIdentifier>{edc2897a-a124-4716-86a1-18bf0f03ea88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head\Sistemas de fuerzas">
+      <UniqueIdentifier>{f9b2a5c6-b074-4a43-9e72-4ce541391752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Head\Scenes">
+      <UniqueIdentifier>{89b35705-d48d-4171-8475-d7743f1d68d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Scenes">
+      <UniqueIdentifier>{e59d36d3-b914-40d9-b348-033b66715327}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

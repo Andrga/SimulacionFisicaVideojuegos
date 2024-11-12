@@ -1,21 +1,26 @@
 #pragma once
 #include <vector>
-#include "iostream"
-
-#include "Object.h"
-
-using namespace std;
+#include "Particle.h"
 
 class Scene
 {
 protected:
-	vector<Object*> objects;
+	vector<Particle*> objects;
+	vector<Object*> systems;
+
+	bool active = false;
 
 public:
 	Scene();
 	~Scene();
 
+	virtual void setup() {};
+
 	void update(double t);
-	void addObject(Object* obj);
+	void addParticle(Particle* obj);
+	void addSystem(Object* obj);
+	// activa y desactiva la escena
+	void show();
+	void hide();
 };
 

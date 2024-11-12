@@ -1,37 +1,21 @@
 #pragma once
 #include "Particle.h"
-#include <random>
 
 class ForceSystem;
 
 class ForceGenerator
 {
 protected:
-	//Particle particleReference;
-	std::default_random_engine generator;
-
 	// Propiedades inicio
-	int startNParticles;
-	Vector3 origen;
-	Vector3 startVel;
-	float startLifetime;
-
-
-	float startSize;
-	Vector4 startColor;
-
-	// Current particles
-	int nParticles = 0;
-	vector<Particle*> particles;
+	float radious = 0;
+	Vector3 origen = { 0,0,0 };
 
 public:
-	ForceGenerator(Vector3 org, int stNpart);
-	~ForceGenerator();
+	ForceGenerator(Vector3 org);
+	virtual~ForceGenerator() = 0;
 
 
-	virtual void generateForce();
-	bool mayGenerate();
-
-	void update(double t);
+	virtual Vector3 generateForce(Vector3 pos, Vector3 velocity) = 0;
+	bool onRadious(Vector3 Pos);
 };
 

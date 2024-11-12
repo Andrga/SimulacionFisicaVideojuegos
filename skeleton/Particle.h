@@ -22,8 +22,9 @@ public:
 	bool update(double t) override;
 
 	void applyGravity();
-
+	void setVisibility(bool visibility);
 	// getters:
+
 	physx::PxTransform& getPose() { return pose; }
 	Vector3 getVelocity() { return velocity; }
 	Vector3 getAcceleration() { return acceleration; }

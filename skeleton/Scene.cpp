@@ -2,6 +2,7 @@
 
 Scene::Scene()
 {
+	setup();
 }
 
 Scene::~Scene()
@@ -10,6 +11,8 @@ Scene::~Scene()
 
 void Scene::update(double t)
 {
+	if (!active) return;
+
 	int siz = objects.size();
 
 	// Actualiza todas las particulas
@@ -33,11 +36,33 @@ void Scene::update(double t)
 			i--;
 			siz--;
 		}
-
-
 	}
+
+	//actualizacion de los sistemas
+	for (auto s : systems)
+		s->update(t);
 }
-void Scene::addObject(Object* obj)
+
+void Scene::addParticle(Particle* obj)
 {
 	objects.push_back(obj);
+}
+
+void Scene::addSystem(Object* obj)
+{
+	systems.push_back(obj);
+}
+
+void Scene::show()
+{
+	for (auto p : objects)
+		p->setVisibility(true);
+	active = true;
+}
+
+void Scene::hide()
+{
+	for (auto p : objects)
+		p->setVisibility(false);
+	active = false;
 }
