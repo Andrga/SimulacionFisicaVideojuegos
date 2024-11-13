@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(Scene* scn) : scene(scn)
+ParticleSystem::ParticleSystem()
 {
 
 }
@@ -24,8 +24,8 @@ void ParticleSystem::addParticleGenerator(ParticleGenerator* partGen)
 	particleGenerators.push_back(partGen);
 }
 
-void ParticleSystem::setVisibility(bool visibility)
-{
-	for (auto p : particleGenerators)
-		p->setVisibility(visibility);
-}
+//void ParticleSystem::setVisibility(bool visibility)
+//{
+//	for (auto p : particleGenerators)
+//		p->setVisibility(visibility);
+//}

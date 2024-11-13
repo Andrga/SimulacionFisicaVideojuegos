@@ -4,6 +4,10 @@
 #include "Proyectile.h"
 #include "ParticleSystem.h"
 #include "Niebla.h"
+
+#include "ForceSystem.h"
+#include "VientoGenerador.h"
+
 class SceneNiebla :    public Scene
 {
 public:

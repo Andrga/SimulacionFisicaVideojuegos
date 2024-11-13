@@ -1,6 +1,7 @@
 #include "Disparo.h"
+#include "Scene.h"
 
-Disparo::Disparo(Vector3 org, int nparts, ParticleSystem* partsys) : ParticleGenerator(org, nparts, partsys)
+Disparo::Disparo(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn)
 {
 }
 
@@ -21,8 +22,9 @@ void Disparo::generateParticle()
 		// creamos la nueva particula
 		Particle* aux = new Particle(origen, { 0,0,50 }, 0.5);
 		aux->setStartLifeTime(1);
-		// añadimos las particulas a la lista
-		particles.push_back(aux);
+		// aniaadimos las particulas a la lista
+		generatedParticles[aux] = true; // Aniaadir al mapa
+		scene->addParticle(aux, this); // Aniaadir a la escena y pasar referencia del generador
 		nParticles++;
 
 	}

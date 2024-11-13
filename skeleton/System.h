@@ -1,22 +1,18 @@
 #pragma once
+#include "Particle.h"
 #include <vector>
-#include "Generator.h"
-#include "Scene.h"
 
 using namespace std;
 
-class System : public Object
+class System
 {
-private:
-	vector<Generator*> generators;
-	Scene* scene;
-
 public:
-	System(Scene* scn);
+	System();
 	~System();
 
-	bool update(double t) override;
+	virtual bool update(double t) { return false; };
 
-	void addGenerator(Generator* generator);
+	// Método virtual para afectar partículas (opcional para sistemas que no lo necesiten)
+	virtual void affectParticles(vector<Particle*>& particles) {}
 };
 

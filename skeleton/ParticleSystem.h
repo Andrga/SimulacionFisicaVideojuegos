@@ -1,24 +1,21 @@
 #pragma once
 #include <vector>
 #include "ParticleGenerator.h"
-#include "Scene.h"
+#include "System.h"
 
 using namespace std;
 
-class ParticleSystem : public Object
+class ParticleSystem : public System
 {
 private:
 	vector<ParticleGenerator*> particleGenerators;
-	Scene* scene;
 
 public:
-	ParticleSystem(Scene* scn);
+	ParticleSystem();
 	~ParticleSystem();
 
 	bool update(double t) override;
 
 	void addParticleGenerator(ParticleGenerator* partGen);
-
-	void setVisibility(bool visibility) override;
 };
 

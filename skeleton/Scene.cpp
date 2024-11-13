@@ -11,52 +11,55 @@ Scene::~Scene()
 
 void Scene::update(double t)
 {
-
-	int siz = objects.size();
-
 	// Actualiza todas las particulas
-
-	for (int i = 0; i < siz; i++) {
+	for (int i = 0; i < objects.size(); i++) {
 
 		// Si el update devuelve false es que la particula ha muerto por lo que la elimina y la quita del vector
 		objects[i]->update(t);
-	}
 
-	for (int i = 0; i < siz; i++) {
+		if (!objects[i]->getAlive()) {
+			Particle* deadParticle = objects[i];
 
-		if (!objects[i]->getAlive())
-		{
-			// Elimina la particula
-			delete objects[i];
-			// Encuentra la particula y elimina la referencia del vector
-			auto ref = std::find(objects.begin(), objects.end(), objects[i]);
-			objects.erase(ref);
-			cout << "elimina scena" << endl;
+			// Notificar al generador, si existe
+			if (particleToGenerator.find(deadParticle) != particleToGenerator.end()) {
+				ParticleGenerator* generator = particleToGenerator[deadParticle];
+				generator->onParticleDeath(deadParticle);
+				particleToGenerator.erase(deadParticle);
+			}
+
+			// Eliminar la particula
+			delete deadParticle;
+			objects.erase(objects.begin() + i);
 			i--;
-			siz--;
 		}
 	}
 
 	//actualizacion de los sistemas
 	for (auto s : systems)
+	{
 		s->update(t);
+		s->affectParticles(objects);
+	}
 }
 
-void Scene::addParticle(Particle* obj)
+void Scene::addParticle(Particle* obj, ParticleGenerator* gen)
 {
 	objects.push_back(obj);
+
+	// Si la particula viene de un generador
+	if (gen) {
+		particleToGenerator[obj] = gen; // Asociar particula con su generador
+	}
 }
 
-void Scene::addSystem(Object* obj)
+void Scene::addSystem(System* sys)
 {
-	systems.push_back(obj);
+	systems.push_back(sys);
 }
 
 void Scene::show()
 {
 	for (auto p : objects)
-		p->setVisibility(true);
-	for (auto p : systems)
 		p->setVisibility(true);
 	active = true;
 }
@@ -64,8 +67,6 @@ void Scene::show()
 void Scene::hide()
 {
 	for (auto p : objects)
-		p->setVisibility(false);
-	for (auto p : systems)
 		p->setVisibility(false);
 	active = false;
 }

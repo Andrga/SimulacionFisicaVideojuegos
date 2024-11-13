@@ -1,6 +1,7 @@
 #include "Niebla.h"
+#include "Scene.h"
 
-Niebla::Niebla(Vector3 org, int nparts, ParticleSystem* partsys) : ParticleGenerator(org, nparts, partsys)
+Niebla::Niebla(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn)
 {
 }
 
@@ -23,7 +24,7 @@ void Niebla::generateParticle()
 	Vector3 origen2;
 	// velocidad para la nueva particula
 	Vector3 velocity;
-	velocity.x = 1;
+	velocity.x = 0;
 	velocity.y = 0;
 	velocity.z = 0;
 	// tiempo de vida para la nueva particula
@@ -45,7 +46,8 @@ void Niebla::generateParticle()
 		aux->setStartLifeTime(lifetime);
 
 		// añadimos las particulas a la lista
-		particles.push_back(aux);
+		generatedParticles[aux] = true; // Aniaadir al mapa
+		scene->addParticle(aux, this); // Aniadir a la escena y pasar referencia del generador
 		nParticles++;
 
 	}

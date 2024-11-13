@@ -6,7 +6,7 @@
 class Sangre: public ParticleGenerator
 {
 public:
-	Sangre(Vector3 org, int nparts, ParticleSystem* partsys);
+	Sangre(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn);
 	~Sangre();
 
 	void generateParticle() override;

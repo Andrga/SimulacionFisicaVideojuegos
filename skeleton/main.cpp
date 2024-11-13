@@ -87,10 +87,6 @@ void initPhysics(bool interactive)
 	//scene->addObject(part);
 	////part->addForce({ 0,-9.8,0 });
 
-	//// --------- SISTEMA DE FUERZAS ------------
-	//ForceSystem fSys(scene->getParticles());
-
-	//VientoGenerador ventgen = VientoGenerador({ 0,0,0 }, { 10,0,0 });
 }
 
 

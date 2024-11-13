@@ -1,24 +1,26 @@
 #include "ForceSystem.h"
 #include "ForceGenerator.h"
 
-ForceSystem::ForceSystem(vector<Particle*>* parts): particles(parts)
-{
-}
+ForceSystem::ForceSystem() : System()
+{}
 
 ForceSystem::~ForceSystem()
 {
 }
 
-bool ForceSystem::update(double t)
+void ForceSystem::affectParticles(vector<Particle*>& particles)
 {
-	for (auto p : (*particles)) {
+	cout << "ha entrado" << endl;
+	for (auto p : particles) {
 		for (auto g : forceGenerators) {
 			if (g->onRadious(p->getPose().p))
+			{
 				p->addForce(g->generateForce(p->getPose().p, p->getVelocity()));
+			}
 		}
 	}
-	return false;
 }
+
 
 void ForceSystem::addForceGenerator(ForceGenerator* forcGen)
 {

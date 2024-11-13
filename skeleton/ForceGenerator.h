@@ -17,5 +17,7 @@ public:
 
 	virtual Vector3 generateForce(Vector3 pos, Vector3 velocity) = 0;
 	bool onRadious(Vector3 Pos);
+
+	void setRadious(float rad) { radious = rad; }
 };
 

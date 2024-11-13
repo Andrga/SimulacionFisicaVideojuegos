@@ -8,6 +8,8 @@
 #include "Sangre.h"
 #include "Disparo.h"
 
+#include "ForceSystem.h"
+#include "VientoGenerador.h"
 class SceneParticleSystem : public Scene
 {
 public:

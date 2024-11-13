@@ -13,9 +13,6 @@
     <ClCompile Include="callbacks.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
@@ -63,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="SceneNiebla.cpp">
       <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Head\basics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Resource\basics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

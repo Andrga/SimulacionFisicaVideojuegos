@@ -1,24 +1,20 @@
 #pragma once
 #include <vector>
-#include "Particle.h"
+#include "System.h"
 
 using namespace std;
 
 class ForceGenerator;
 
-class ForceSystem : public Object
+class ForceSystem : public System
 {
 private:
-
 	vector<ForceGenerator*> forceGenerators;
-
-	vector<Particle*>* particles;
 public:
-	ForceSystem(vector<Particle*>* parts);
+	ForceSystem();
 	~ForceSystem();
 
-	bool update(double t) override;
-	void setVisibility(bool visibility) override {}
+	void affectParticles(vector<Particle*>& particles) override;
 
 	void addForceGenerator(ForceGenerator* forcGen);
 };
