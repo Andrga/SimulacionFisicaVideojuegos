@@ -38,7 +38,11 @@ Vector3 VientoGenerador::generateForce(Particle& particle)
 	Vector3 force(0, 0, 0);
 	// calculo de la fuerza en un viento no turbulento
 	force = k1 * (vientoVel - particle.getVelocity()) + k2;
-	//cout << force.x << "/" << force.y << "/" << force.z << endl;
+	
+	/*cout << "Generated force: " << force.x << "/" << force.y << "/" << force.z << endl;
+	cout << "velocidad particle: " << particle.getVelocity().x << "/" << particle.getVelocity().y << "/" << particle.getVelocity().z << endl;
+	*/
+
 	return force;
 }
 

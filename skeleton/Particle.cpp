@@ -82,9 +82,14 @@ void Particle::setPosition(Vector3 pos)
 
 void Particle::applyForce()
 {
+	/*cout << "force: " << force.x << "/" << force.y << "/" << force.z << endl;
+	cout << "acceleration: " << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;*/
+	Vector3 totalForc = { 0,0,0 };
+	for (auto f : forces)
+		totalForc += f;
+	forces.clear();
 	// F=m*a
-	acceleration = force / mass;
-
+	acceleration = totalForc / mass;
 	// Aplica la gravedad si es un objeto con gravedad
 	if (gravitable)
 		acceleration += gravity;

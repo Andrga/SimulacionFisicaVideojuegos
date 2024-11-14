@@ -8,7 +8,7 @@ class SceneManager
 private:
 	vector<Scene*> scenes;
 
-	int actualScene = 0;
+	int actualScene = 1;
 public:
 	SceneManager();
 	~SceneManager();

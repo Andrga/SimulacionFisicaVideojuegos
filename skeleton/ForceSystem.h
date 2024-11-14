@@ -1,10 +1,9 @@
 #pragma once
 #include <vector>
 #include "System.h"
+#include "ForceGenerator.h"
 
 using namespace std;
-
-class ForceGenerator;
 
 class ForceSystem : public System
 {

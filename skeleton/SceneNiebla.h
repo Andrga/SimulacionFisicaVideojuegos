@@ -8,7 +8,7 @@
 #include "ForceSystem.h"
 #include "ForceGenerator.h"
 
-class SceneNiebla :    public Scene
+class SceneNiebla : public Scene
 {
 public:
 	SceneNiebla();

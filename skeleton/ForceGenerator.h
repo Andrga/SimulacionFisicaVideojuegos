@@ -1,8 +1,6 @@
 #pragma once
 #include "Particle.h"
 
-class ForceSystem;
-
 class ForceGenerator
 {
 protected:
@@ -31,7 +29,7 @@ protected:
 	//velocidad del viento
 	Vector3 vientoVel = { 0,0,0 };
 	//coheficientes de rozamiento
-	float k1 = 1;
+	float k1 = 10;
 	Vector3 k2 = { 0,0,0 };
 public:
 	VientoGenerador(Vector3 org, Vector3 vVel) :ForceGenerator(org), vientoVel(vVel) {};
@@ -39,3 +37,17 @@ public:
 
 	Vector3 generateForce(Particle& particle) override;
 };
+
+//class TorvellinoGenerator : public ForceGenerator
+//{
+//protected:
+//	//velocidad del viento
+//	Vector3 vientoVel = { 0,0,0 };
+//	//coheficientes de rozamiento
+//	float k = 1;
+//public:
+//	TorvellinoGenerator(Vector3 org, Vector3 vVel) :ForceGenerator(org), vientoVel(vVel) {};
+//	~TorvellinoGenerator() {};
+//
+//	Vector3 generateForce(Particle& particle) override;
+//};
