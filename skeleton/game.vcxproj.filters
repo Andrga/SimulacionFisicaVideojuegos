@@ -69,6 +69,9 @@
     <ClCompile Include="systems\ForceGenerator.cpp">
       <Filter>Resource\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\ScenaExplosion.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -141,6 +144,9 @@
     <ClInclude Include="systems\ParticleGenerator.h">
       <Filter>Head\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="scenes\ScenaExplosion.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -169,9 +175,6 @@
     </Filter>
     <Filter Include="Resource\Systems">
       <UniqueIdentifier>{8289dae3-feb5-49f1-9b3b-e28f99f2a4eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Sistemas de fuerzas">
-      <UniqueIdentifier>{edc2897a-a124-4716-86a1-18bf0f03ea88}</UniqueIdentifier>
     </Filter>
     <Filter Include="Head\Scenes">
       <UniqueIdentifier>{89b35705-d48d-4171-8475-d7743f1d68d9}</UniqueIdentifier>

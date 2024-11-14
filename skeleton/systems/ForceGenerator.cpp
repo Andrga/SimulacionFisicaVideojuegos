@@ -1,6 +1,8 @@
 #include "ForceGenerator.h"
 #include "../basics/Scene.h"
 
+#include <cmath>
+
 void ForceGenerator::generateRadiousSphere()
 {
 	if (radious <= 0)
@@ -9,6 +11,7 @@ void ForceGenerator::generateRadiousSphere()
 	if (!widget)
 	{
 		widget = new Widget(origen, radious);
+
 		scene->addObject(widget);
 	}
 
@@ -56,6 +59,26 @@ Vector3 TorvellinoGenerator::generateForce(Particle& particle)
 	force = k * Vector3(-(partPos.z - origen.z), 50 - (partPos.y - origen.y), partPos.x - origen.x);
 
 	force -= particle.getVelocity();
+
+	return force;
+}
+
+Vector3 ExplosionGenerator::generateForce(Particle& particle)
+{
+	Vector3 force(0, 0, 0);
+
+	float explosionTime = (4 * tau) - simuleTime;
+
+	if (explosionTime < 0) return force;
+
+	// distancia al centro de la explosion
+	float r = (particle.getPose().p - origen).magnitude();
+	// si la distancia es menor que el radio la fuerza es 0
+	if (r >= radious) return force; // creo que esto no hace falta, porque si entra al metodo es porque r<radious
+
+	force = ((k / r) * (particle.getPose().p - origen)) * exp(-explosionTime / tau);
+
+
 
 	return force;
 }

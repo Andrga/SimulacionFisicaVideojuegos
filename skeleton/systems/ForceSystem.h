@@ -13,7 +13,7 @@ public:
 	ForceSystem();
 	~ForceSystem();
 
-	void affectParticles(vector<Particle*>& particles) override;
+	void affectParticles(vector<Particle*>& particles, double t) override;
 
 	void addForceGenerator(ForceGenerator* forcGen);
 };

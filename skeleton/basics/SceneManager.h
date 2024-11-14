@@ -18,5 +18,7 @@ public:
 
 	void setScene(int id);
 
+	void keyPressed(unsigned char key, const physx::PxTransform& camera);
+
 };
 

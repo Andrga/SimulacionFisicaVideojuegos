@@ -8,7 +8,7 @@ ForceSystem::~ForceSystem()
 {
 }
 
-void ForceSystem::affectParticles(vector<Particle*>& particles)
+void ForceSystem::affectParticles(vector<Particle*>& particles, double t)
 {
 	for (auto p : particles) {
 		for (auto g : forceGenerators) {
@@ -17,6 +17,11 @@ void ForceSystem::affectParticles(vector<Particle*>& particles)
 				p->addForce(g->generateForce(*p));
 			}
 		}
+	}
+	
+	for (auto g : forceGenerators)
+	{
+		g->update(t);
 	}
 }
 

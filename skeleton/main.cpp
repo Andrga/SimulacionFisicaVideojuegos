@@ -14,6 +14,10 @@
 #include "scenes/SceneParticleSystem.h"
 #include "scenes/SceneNiebla.h"
 
+#include "scenes/ScenaViento.h"
+#include "scenes/ScenaTorvellino.h"
+#include "scenes/ScenaExplosion.h"
+
 
 std::string display_text = "This is a test";
 
@@ -78,9 +82,14 @@ void initPhysics(bool interactive)
 
 	// ------ creamos scena ------
 	sceneManager = new SceneManager();
-	sceneManager->addScene(new SceneParticleSystem());
-	sceneManager->addScene(new SceneNiebla());
-	sceneManager->setScene(1);
+	//sceneManager->addScene(new SceneParticleSystem());
+	//sceneManager->addScene(new SceneNiebla());
+	 
+	// ESCENAS DE FUERZAS
+	sceneManager->addScene(new ScenaViento());
+	sceneManager->addScene(new ScenaTorvellino());
+	sceneManager->addScene(new ScenaExplosion());
+	sceneManager->setScene(0);
 
 	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
 	//part->applyGravity();
@@ -128,31 +137,32 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 	
+	sceneManager->keyPressed(key, camera);
 
-	switch (toupper(key))
-	{
-		//case 'B': break;
-		//case ' ':	break;
-	case ' ':
-	{
-		break;
-	}
-	case '0':
-	{
-		sceneManager->setScene(0);
-		break;
-	}
-	case '1':
-	{
-		sceneManager->setScene(1);
-		break;
-	}
-	case 'K':
-		//scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25, { 0,0,0 }));
-		break;
-	default:
-		break;
-	}
+	//switch (toupper(key))
+	//{
+	//	//case 'B': break;
+	//	//case ' ':	break;
+	//case ' ':
+	//{
+	//	break;
+	//}
+	//case '0':
+	//{
+	//	sceneManager->setScene(0);
+	//	break;
+	//}
+	//case '1':
+	//{
+	//	sceneManager->setScene(1);
+	//	break;
+	//}
+	//case 'K':
+	//	//scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25, { 0,0,0 }));
+	//	break;
+	//default:
+	//	break;
+	//}
 }
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)

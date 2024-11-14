@@ -41,7 +41,7 @@ void Scene::update(double t)
 	for (auto s : systems)
 	{
 		s->update(t);
-		s->affectParticles(particles);
+		s->affectParticles(particles, t);
 	}
 
 	for (auto o : objects)

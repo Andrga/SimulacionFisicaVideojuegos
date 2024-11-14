@@ -35,5 +35,7 @@ public:
 	// activa y desactiva la escena
 	void show();
 	void hide();
+
+	virtual void keyPressed(unsigned char key, const physx::PxTransform& camera) {};
 };
 

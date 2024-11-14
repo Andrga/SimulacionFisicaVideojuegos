@@ -24,6 +24,8 @@ public:
 	virtual Vector3 generateForce(Particle& particle) = 0;
 	bool onRadious(Vector3 Pos);
 
+	virtual void update(double delta) {};
+
 	void setRadious(float rad);
 };
 
@@ -36,8 +38,10 @@ protected:
 	float k1 = 10;
 	Vector3 k2 = { 0,0,0 };
 public:
-	VientoGenerador(Vector3 org, Scene* scn, Vector3 vVel = {0,0,0}) :ForceGenerator(org, scn), vientoVel(vVel) {};
+	VientoGenerador(Vector3 org, Scene* scn, Vector3 vVel = { 0,0,0 }) :ForceGenerator(org, scn), vientoVel(vVel) {};
 	~VientoGenerador() {};
+
+	void update(double delta) {}
 
 	Vector3 generateForce(Particle& particle) override;
 };
@@ -50,6 +54,32 @@ protected:
 public:
 	TorvellinoGenerator(Vector3 org, Scene* scn) :ForceGenerator(org, scn) {};
 	~TorvellinoGenerator() {};
+
+	void update(double delta) {}
+
+	Vector3 generateForce(Particle& particle) override;
+};
+
+class ExplosionGenerator : public ForceGenerator
+{
+protected:
+	//potencia de la explosion
+	float k = 100;
+	float tau = 1;
+	float simuleTime = 0;
+	float startSimuleTime = 0;
+public:
+	ExplosionGenerator(Vector3 org, Scene* scn) :ForceGenerator(org, scn) { simuleTime = 0; };
+	~ExplosionGenerator() {};
+
+	// Settea la potencia de la explosion
+	void setPotencia(float p) { k = p; };
+	void startGenerate() {
+		simuleTime = 0;
+	};
+
+	void update(double delta) { 
+		simuleTime += delta; }
 
 	Vector3 generateForce(Particle& particle) override;
 };

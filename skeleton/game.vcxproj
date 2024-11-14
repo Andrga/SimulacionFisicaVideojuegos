@@ -265,6 +265,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="scenes\ScenaExplosion.cpp" />
     <ClCompile Include="scenes\ScenaTorvellino.cpp" />
     <ClCompile Include="scenes\ScenaViento.cpp" />
     <ClCompile Include="scenes\SceneNiebla.cpp" />
@@ -293,6 +294,7 @@
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="scenes\ScenaExplosion.h" />
     <ClInclude Include="scenes\ScenaTorvellino.h" />
     <ClInclude Include="scenes\ScenaViento.h" />
     <ClInclude Include="scenes\SceneNiebla.h" />
