@@ -53,7 +53,7 @@ protected:
 
 	// propiedades del movimiento e la particula
 	bool eulerSemiimplicito = true;
-	Vector3 velocity;
+	Vector3 velocity = {0,0,0};
 	Vector3 acceleration;
 	float damping;
 	//gravity

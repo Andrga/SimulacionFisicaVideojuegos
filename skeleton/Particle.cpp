@@ -54,6 +54,7 @@ bool Particle::update(double t)
 	// Aplicacion de las fuerzas:
 	if (forces.size() > 0)
 		applyForce();
+
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
 

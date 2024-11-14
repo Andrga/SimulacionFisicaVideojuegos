@@ -127,6 +127,7 @@ void cleanupPhysics(bool interactive)
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
+	
 
 	switch (toupper(key))
 	{
@@ -136,12 +137,12 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	{
 		break;
 	}
-	case 'P':
+	case '0':
 	{
 		sceneManager->setScene(0);
 		break;
 	}
-	case 'O':
+	case '1':
 	{
 		sceneManager->setScene(1);
 		break;

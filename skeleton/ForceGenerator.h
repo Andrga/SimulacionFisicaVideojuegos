@@ -7,8 +7,12 @@ class ForceGenerator
 {
 protected:
 	// Propiedades inicio
-	float radious = 0;
+	float radious = 1;
 	Vector3 origen = { 0,0,0 };
+	// Representacion de la zona de afectacion
+	RenderItem* renderItem = nullptr;
+
+	void generateRadiousSphere();
 
 public:
 	ForceGenerator(Vector3 org);
@@ -18,6 +22,6 @@ public:
 	virtual Vector3 generateForce(Vector3 pos, Vector3 velocity) = 0;
 	bool onRadious(Vector3 Pos);
 
-	void setRadious(float rad) { radious = rad; }
+	void setRadious(float rad);
 };
 

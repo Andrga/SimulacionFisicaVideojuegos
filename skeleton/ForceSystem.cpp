@@ -10,7 +10,6 @@ ForceSystem::~ForceSystem()
 
 void ForceSystem::affectParticles(vector<Particle*>& particles)
 {
-	cout << "ha entrado" << endl;
 	for (auto p : particles) {
 		for (auto g : forceGenerators) {
 			if (g->onRadious(p->getPose().p))
