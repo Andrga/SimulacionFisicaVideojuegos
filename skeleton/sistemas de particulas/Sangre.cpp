@@ -1,5 +1,5 @@
 #include "Sangre.h"
-#include "Scene.h"
+#include "../basics/Scene.h"
 
 Sangre::Sangre(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn)
 {

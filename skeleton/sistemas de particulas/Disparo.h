@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleGenerator.h"
+#include "../systems/ParticleGenerator.h"
 class Disparo :
     public ParticleGenerator
 {

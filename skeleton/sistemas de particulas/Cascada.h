@@ -1,6 +1,6 @@
 #pragma once
-#include "ParticleGenerator.h"
-#include "Proyectile.h"
+#include "../systems/ParticleGenerator.h"
+#include "../basics/Proyectile.h"
 
 class Cascada : public ParticleGenerator
 {

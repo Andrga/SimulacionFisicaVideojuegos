@@ -38,7 +38,7 @@ void SceneParticleSystem::setup()
 	addSystem(fSys);
 
 	// generador de viento
-	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, { 5,0,0 });
+	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, this, { 5,0,0 });
 	fSys->addForceGenerator(vgen);
 
 	vgen->setRadious(20);

@@ -1,5 +1,5 @@
 #include "Disparo.h"
-#include "Scene.h"
+#include "../basics/Scene.h"
 
 Disparo::Disparo(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn)
 {

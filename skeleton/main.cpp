@@ -10,9 +10,9 @@
 
 #include <iostream>
 
-#include "SceneManager.h"
-#include "SceneParticleSystem.h"
-#include "SceneNiebla.h"
+#include "basics/SceneManager.h"
+#include "scenes/SceneParticleSystem.h"
+#include "scenes/SceneNiebla.h"
 
 
 std::string display_text = "This is a test";
@@ -80,7 +80,7 @@ void initPhysics(bool interactive)
 	sceneManager = new SceneManager();
 	sceneManager->addScene(new SceneParticleSystem());
 	sceneManager->addScene(new SceneNiebla());
-
+	sceneManager->setScene(1);
 
 	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
 	//part->applyGravity();

@@ -1,14 +1,5 @@
 #include "SceneNiebla.h"
 
-
-SceneNiebla::SceneNiebla()
-{
-}
-
-SceneNiebla::~SceneNiebla()
-{
-}
-
 void SceneNiebla::setup()
 {
 	//// ------- SISTEMAS DE PARTICULAS ------
@@ -31,8 +22,14 @@ void SceneNiebla::setup()
 	addSystem(fSys);
 
 	// generador de viento
-	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, { 10,0,0 });
+	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, this, { 10,0,0 });
 	fSys->addForceGenerator(vgen);
 
-	vgen->setRadious(20);
+	vgen->setRadious(100);
+
+	// generador de torvellino
+	/*TorvellinoGenerator* tgen = new TorvellinoGenerator({ 0,0,0 });
+	fSys->addForceGenerator(tgen);
+
+	tgen->setRadious(30);*/
 }

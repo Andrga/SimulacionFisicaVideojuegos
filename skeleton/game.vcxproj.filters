@@ -7,62 +7,67 @@
     <ClCompile Include="Render\Render.cpp">
       <Filter>Render</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUtils.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="callbacks.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="Disparo.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
-    <ClCompile Include="Cascada.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
-    <ClCompile Include="Niebla.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
-    <ClCompile Include="Sangre.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyectile.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="ForceSystem.cpp">
-      <Filter>Resource\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Resource\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGenerator.cpp">
-      <Filter>Resource\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="ForceGenerator.cpp">
-      <Filter>Resource\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneParticleSystem.cpp">
-      <Filter>Resource\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneNiebla.cpp">
-      <Filter>Resource\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>Head\basics</Filter>
+    <ClCompile Include="RenderUtils.cpp" />
+    <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="basics\SceneManager.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Widget.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Generator.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Object.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Particle.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Proyectile.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\Scene.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\ScenaViento.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\SceneNiebla.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\SceneParticleSystem.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\ScenaTorvellino.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="sistemas de particulas\Disparo.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="sistemas de particulas\Niebla.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="sistemas de particulas\Sangre.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="sistemas de particulas\Cascada.cpp">
+      <Filter>Resource\Sistemas de particulas</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\ForceSystem.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\ParticleGenerator.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\ParticleSystem.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="systems\ForceGenerator.cpp">
+      <Filter>Resource\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,59 +80,66 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="callbacks.hpp" />
-    <ClInclude Include="Particle.h">
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="basics\Widget.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
+    <ClInclude Include="basics\Generator.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="basics\Object.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="basics\Particle.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="basics\Proyectile.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="Disparo.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
-    <ClInclude Include="Cascada.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
-    <ClInclude Include="Niebla.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
-    <ClInclude Include="Sangre.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyectile.h">
+    <ClInclude Include="basics\Scene.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Head\Systems</Filter>
+    <ClInclude Include="basics\SceneManager.h">
+      <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGenerator.h">
-      <Filter>Head\Systems</Filter>
+    <ClInclude Include="basics\System.h">
+      <Filter>Head\basics</Filter>
     </ClInclude>
-    <ClInclude Include="ForceSystem.h">
-      <Filter>Head\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="ForceGenerator.h">
-      <Filter>Head\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneNiebla.h">
+    <ClInclude Include="scenes\ScenaViento.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneParticleSystem.h">
+    <ClInclude Include="scenes\SceneNiebla.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Head\basics</Filter>
+    <ClInclude Include="scenes\SceneParticleSystem.h">
+      <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>Resource\basics</Filter>
+    <ClInclude Include="scenes\ScenaTorvellino.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="sistemas de particulas\Disparo.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="sistemas de particulas\Niebla.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="sistemas de particulas\Sangre.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="sistemas de particulas\Cascada.h">
+      <Filter>Head\Sistemas de particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\ParticleSystem.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\ForceGenerator.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\ForceSystem.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\ParticleGenerator.h">
+      <Filter>Head\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 #include "ParticleGenerator.h"
-#include "Scene.h"
+#include "../basics/Scene.h"
 
 ParticleGenerator::ParticleGenerator(Vector3 org, int stNpart, ParticleSystem* partsys, Scene* scn) : 
 	origen(org), startNParticles(stNpart), particleSystem(partsys), scene(scn)

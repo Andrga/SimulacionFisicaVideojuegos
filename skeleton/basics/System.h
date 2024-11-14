@@ -4,11 +4,12 @@
 
 using namespace std;
 
+
 class System
 {
 public:
-	System();
-	~System();
+	System() {};
+	~System() {};
 
 	virtual bool update(double t) { return false; };
 

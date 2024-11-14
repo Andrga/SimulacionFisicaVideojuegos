@@ -1,5 +1,5 @@
 #include "Niebla.h"
-#include "Scene.h"
+#include "../basics/Scene.h"
 
 Niebla::Niebla(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn)
 {
