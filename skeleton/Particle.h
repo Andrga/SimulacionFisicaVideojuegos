@@ -40,8 +40,8 @@ public:
 	void setMass(float mas) { mass = mas; }
 
 	// fuerzas:
-	void addForce(float x, float y, float z) { forces.push_back(Vector3(x, y, z)); }
-	void addForce(Vector3 force) { forces.push_back(force); }
+	void addForce(float x, float y, float z) { force += Vector3(x, y, z); }
+	void addForce(Vector3 fc) { force += fc; }
 	void applyForce();
 
 protected:
@@ -49,7 +49,7 @@ protected:
 	float size = 3;
 	float mass = 1;
 	physx::PxTransform pose;
-	vector<Vector3> forces;
+	Vector3 force = { 0,0,0 };
 
 	// propiedades del movimiento e la particula
 	bool eulerSemiimplicito = true;

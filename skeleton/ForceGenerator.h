@@ -19,9 +19,23 @@ public:
 	virtual~ForceGenerator() = 0;
 
 
-	virtual Vector3 generateForce(Vector3 pos, Vector3 velocity) = 0;
+	virtual Vector3 generateForce(Particle& particle) = 0;
 	bool onRadious(Vector3 Pos);
 
 	void setRadious(float rad);
 };
 
+class VientoGenerador : public ForceGenerator
+{
+protected:
+	//velocidad del viento
+	Vector3 vientoVel = { 0,0,0 };
+	//coheficientes de rozamiento
+	float k1 = 1;
+	Vector3 k2 = { 0,0,0 };
+public:
+	VientoGenerador(Vector3 org, Vector3 vVel) :ForceGenerator(org), vientoVel(vVel) {};
+	~VientoGenerador() {};
+
+	Vector3 generateForce(Particle& particle) override;
+};

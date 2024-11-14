@@ -6,7 +6,7 @@
 #include "Niebla.h"
 
 #include "ForceSystem.h"
-#include "VientoGenerador.h"
+#include "ForceGenerator.h"
 
 class SceneNiebla :    public Scene
 {

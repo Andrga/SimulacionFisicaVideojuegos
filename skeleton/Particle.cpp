@@ -52,8 +52,7 @@ bool Particle::update(double t)
 	else
 		lifeTime += t;
 	// Aplicacion de las fuerzas:
-	if (forces.size() > 0)
-		applyForce();
+	applyForce();
 
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
@@ -65,10 +64,6 @@ bool Particle::update(double t)
 void Particle::applyGravity()
 {
 	gravitable = !gravitable;
-
-	gravitable ?
-		acceleration += gravity :
-		acceleration -= gravity;
 }
 
 void Particle::setVisibility(bool visibility)
@@ -87,13 +82,10 @@ void Particle::setPosition(Vector3 pos)
 
 void Particle::applyForce()
 {
-	Vector3 totalForce = { 0, 0, 0 };
-	for (auto f : forces)
-	{
-		totalForce += f;
-	}
-
 	// F=m*a
-	acceleration += totalForce / mass;
-	forces.clear();
+	acceleration = force / mass;
+
+	// Aplica la gravedad si es un objeto con gravedad
+	if (gravitable)
+		acceleration += gravity;
 }

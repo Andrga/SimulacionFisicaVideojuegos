@@ -31,3 +31,14 @@ void ForceGenerator::setRadious(float rad)
 	radious = rad;
 	generateRadiousSphere();
 }
+
+// ------- GENERADOR DE VIENTO --------
+Vector3 VientoGenerador::generateForce(Particle& particle)
+{
+	Vector3 force(0, 0, 0);
+	// calculo de la fuerza en un viento no turbulento
+	force = k1 * (vientoVel - particle.getVelocity()) + k2;
+	//cout << force.x << "/" << force.y << "/" << force.z << endl;
+	return force;
+}
+

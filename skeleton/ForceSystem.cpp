@@ -14,7 +14,7 @@ void ForceSystem::affectParticles(vector<Particle*>& particles)
 		for (auto g : forceGenerators) {
 			if (g->onRadious(p->getPose().p))
 			{
-				p->addForce(g->generateForce(p->getPose().p, p->getVelocity()));
+				p->addForce(g->generateForce(*p));
 			}
 		}
 	}
