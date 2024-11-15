@@ -46,14 +46,14 @@ public:
 	Vector3 generateForce(Particle& particle) override;
 };
 
-class TorvellinoGenerator : public ForceGenerator
+class TorbellinoGenerator : public ForceGenerator
 {
 protected:
 	//coheficiente de rozamiento
 	float k = 1;
 public:
-	TorvellinoGenerator(Vector3 org, Scene* scn) :ForceGenerator(org, scn) {};
-	~TorvellinoGenerator() {};
+	TorbellinoGenerator(Vector3 org, Scene* scn) :ForceGenerator(org, scn) {};
+	~TorbellinoGenerator() {};
 
 	void update(double delta) {}
 
@@ -65,9 +65,9 @@ class ExplosionGenerator : public ForceGenerator
 protected:
 	//potencia de la explosion
 	float k = 100;
-	float tau = 1;
+	float tau = 0.05;
+	float ve = 125; // velocidad de expansion de la explosion
 	float simuleTime = 0;
-	float startSimuleTime = 0;
 public:
 	ExplosionGenerator(Vector3 org, Scene* scn) :ForceGenerator(org, scn) { simuleTime = 0; };
 	~ExplosionGenerator() {};
@@ -79,7 +79,11 @@ public:
 	};
 
 	void update(double delta) { 
-		simuleTime += delta; }
+		if (simuleTime <= 4 * tau) {
+		simuleTime += delta; 
+		setRadious(ve * simuleTime);
+		}
+	}
 
 	Vector3 generateForce(Particle& particle) override;
 };

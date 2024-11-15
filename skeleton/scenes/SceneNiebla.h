@@ -3,7 +3,6 @@
 
 #include "../basics/Proyectile.h"
 #include "../systems/ParticleSystem.h"
-#include "../sistemas de particulas/Niebla.h"
 
 #include "../systems/ForceSystem.h"
 #include "../systems/ForceGenerator.h"

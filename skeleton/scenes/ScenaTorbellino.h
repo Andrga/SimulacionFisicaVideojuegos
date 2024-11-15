@@ -3,16 +3,15 @@
 
 #include "../basics/Proyectile.h"
 #include "../systems/ParticleSystem.h"
-#include "../sistemas de particulas/Niebla.h"
 
 #include "../systems/ForceSystem.h"
 #include "../systems/ForceGenerator.h"
 
-class ScenaTorvellino : public Scene
+class ScenaTorbellino : public Scene
 {
 public:
-	ScenaTorvellino() : Scene()  {};
-	~ScenaTorvellino() {};
+	ScenaTorbellino() : Scene()  {};
+	~ScenaTorbellino() {};
 
 	void setup() override;
 };

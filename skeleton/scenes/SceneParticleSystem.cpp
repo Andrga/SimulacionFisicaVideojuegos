@@ -21,7 +21,7 @@ void SceneParticleSystem::setup()
 
 	//------ Sistema 4 ------
 	// sistema de particula cascada
-	partsyst->addParticleGenerator(new Cascada(Vector3(0, 50, 0), 10000, partsyst, this));
+	partsyst->addParticleGenerator(new CascadaGen(Vector3(0, 50, 0), 10000, partsyst, this));
 
 	//------ Sistema 2 ------
 	// sistema de particula niebla

@@ -7,7 +7,7 @@ void ScenaViento::setup()
 	addSystem(partsyst);
 
 	// denerador de particula niebla
-	partsyst->addParticleGenerator(new Niebla(Vector3(0, 0, 0), 1000, partsyst, this));
+	partsyst->addParticleGenerator(new RandomParticleGen(Vector3(0, 0, 0), 1000, partsyst, this));
 
 
 	// --------- SISTEMA DE FUERZAS ------------

@@ -50,7 +50,8 @@ Vector3 VientoGenerador::generateForce(Particle& particle)
 	return force;
 }
 
-Vector3 TorvellinoGenerator::generateForce(Particle& particle)
+// ------- GENERADOR DE TORVELLINO -------
+Vector3 TorbellinoGenerator::generateForce(Particle& particle)
 {
 	Vector3 force(0, 0, 0),
 		partPos = particle.getPose().p;
@@ -63,20 +64,21 @@ Vector3 TorvellinoGenerator::generateForce(Particle& particle)
 	return force;
 }
 
+// -------- GENERADOR DE EXPLOSION --------
 Vector3 ExplosionGenerator::generateForce(Particle& particle)
 {
 	Vector3 force(0, 0, 0);
+	simuleTime;
 
-	float explosionTime = (4 * tau) - simuleTime;
+	if (simuleTime < 0 || simuleTime >= 4 * tau) return force;
 
-	if (explosionTime < 0) return force;
 
 	// distancia al centro de la explosion
 	float r = (particle.getPose().p - origen).magnitude();
 	// si la distancia es menor que el radio la fuerza es 0
 	if (r >= radious) return force; // creo que esto no hace falta, porque si entra al metodo es porque r<radious
 
-	force = ((k / r) * (particle.getPose().p - origen)) * exp(-explosionTime / tau);
+	force = ((k / r * r) * (particle.getPose().p - origen)) * exp(-simuleTime / tau);
 
 
 

@@ -42,19 +42,13 @@
     <ClCompile Include="scenes\SceneParticleSystem.cpp">
       <Filter>Resource\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\ScenaTorvellino.cpp">
+    <ClCompile Include="scenes\ScenaTorbellino.cpp">
       <Filter>Resource\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sistemas de particulas\Disparo.cpp">
       <Filter>Resource\Sistemas de particulas</Filter>
     </ClCompile>
-    <ClCompile Include="sistemas de particulas\Niebla.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
     <ClCompile Include="sistemas de particulas\Sangre.cpp">
-      <Filter>Resource\Sistemas de particulas</Filter>
-    </ClCompile>
-    <ClCompile Include="sistemas de particulas\Cascada.cpp">
       <Filter>Resource\Sistemas de particulas</Filter>
     </ClCompile>
     <ClCompile Include="systems\ForceSystem.cpp">
@@ -117,19 +111,13 @@
     <ClInclude Include="scenes\SceneParticleSystem.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\ScenaTorvellino.h">
+    <ClInclude Include="scenes\ScenaTorbellino.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sistemas de particulas\Disparo.h">
       <Filter>Head\Sistemas de particulas</Filter>
     </ClInclude>
-    <ClInclude Include="sistemas de particulas\Niebla.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
     <ClInclude Include="sistemas de particulas\Sangre.h">
-      <Filter>Head\Sistemas de particulas</Filter>
-    </ClInclude>
-    <ClInclude Include="sistemas de particulas\Cascada.h">
       <Filter>Head\Sistemas de particulas</Filter>
     </ClInclude>
     <ClInclude Include="systems\ParticleSystem.h">

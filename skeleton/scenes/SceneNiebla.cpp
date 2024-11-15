@@ -8,7 +8,7 @@ void SceneNiebla::setup()
 
 	//------ Sistema 2 ------
 	// sistema de particula niebla
-	partsyst->addParticleGenerator(new Niebla(Vector3(0, 0, 0), 1000, partsyst, this));
+	partsyst->addParticleGenerator(new NieblaGen(Vector3(0, 0, 0), 1000, partsyst, this));
 	
 	
 	/*Particle* part = new Particle({ 0,0,0 }, { 0,0,0 }, 1);

@@ -1,20 +1,20 @@
-#include "ScenaTorvellino.h"
+#include "ScenaTorbellino.h"
 
-void ScenaTorvellino::setup()
+void ScenaTorbellino::setup()
 {
 	// ------- SISTEMAS DE PARTICULAS ------
 	ParticleSystem* partsyst = new ParticleSystem();
 	addSystem(partsyst);
 
 	// sistema de particula niebla
-	partsyst->addParticleGenerator(new Niebla(Vector3(0, 0, 0), 1000, partsyst, this));
+	partsyst->addParticleGenerator(new RandomParticleGen(Vector3(0, 0, 0), 1000, partsyst, this));
 
 	// --------- SISTEMA DE FUERZAS ------------
 	ForceSystem* fSys = new ForceSystem();
 	addSystem(fSys);
 
 	// generador de torvellino
-	TorvellinoGenerator* tgen = new TorvellinoGenerator({ 0,0,0 }, this);
+	TorbellinoGenerator* tgen = new TorbellinoGenerator({ 0,0,0 }, this);
 	fSys->addForceGenerator(tgen);
 
 	tgen->setRadious(100);

@@ -15,7 +15,7 @@
 #include "scenes/SceneNiebla.h"
 
 #include "scenes/ScenaViento.h"
-#include "scenes/ScenaTorvellino.h"
+#include "scenes/ScenaTorbellino.h"
 #include "scenes/ScenaExplosion.h"
 
 
@@ -87,7 +87,7 @@ void initPhysics(bool interactive)
 	 
 	// ESCENAS DE FUERZAS
 	sceneManager->addScene(new ScenaViento());
-	sceneManager->addScene(new ScenaTorvellino());
+	sceneManager->addScene(new ScenaTorbellino());
 	sceneManager->addScene(new ScenaExplosion());
 	sceneManager->setScene(0);
 

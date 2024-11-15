@@ -44,3 +44,33 @@ public:
 	void update(double t);
 };
 
+// --- GENERADOR DE CASCADA ---
+class CascadaGen : public ParticleGenerator
+{
+
+public:
+	CascadaGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn) {};
+	~CascadaGen() {};
+
+	void generateParticle() override;
+};
+
+// --- GENERADOR DE NIEBLA ---
+class NieblaGen : public ParticleGenerator
+{
+public:
+	NieblaGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn) {};
+	~NieblaGen() {};
+
+	void generateParticle() override;
+};
+
+// --- GENERADOR DE PARTICULAS DE VARIAS MASAS ---
+class RandomParticleGen : public ParticleGenerator
+{
+public:
+	RandomParticleGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn) {};
+	~RandomParticleGen() {};
+
+	void generateParticle() override;
+};
