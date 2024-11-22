@@ -18,9 +18,6 @@
     <ClCompile Include="basics\Widget.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
-    <ClCompile Include="basics\Generator.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
     <ClCompile Include="basics\Object.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
@@ -66,6 +63,12 @@
     <ClCompile Include="scenes\ScenaExplosion.cpp">
       <Filter>Resource\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="systems\DockSystem.cpp">
+      <Filter>Resource\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\DockScene.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -79,9 +82,6 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="basics\Widget.h">
-      <Filter>Head\basics</Filter>
-    </ClInclude>
-    <ClInclude Include="basics\Generator.h">
       <Filter>Head\basics</Filter>
     </ClInclude>
     <ClInclude Include="basics\Object.h">
@@ -133,6 +133,12 @@
       <Filter>Head\Systems</Filter>
     </ClInclude>
     <ClInclude Include="scenes\ScenaExplosion.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="systems\DockSystem.h">
+      <Filter>Head\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\DockScene.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

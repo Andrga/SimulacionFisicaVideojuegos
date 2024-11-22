@@ -29,6 +29,20 @@ public:
 	void setRadious(float rad);
 };
 
+// ------- GENERADOR DE GRAVEDAD --------
+class GravityGenerator : public ForceGenerator {
+protected:
+	//aceleracion de la gravedad
+	Vector3 gravity = { 0,-9.8,0 };
+public:
+	GravityGenerator(Vector3 org, Scene* scn, Vector3 grav) :ForceGenerator(org, scn), gravity(grav) {};
+	~GravityGenerator() {};
+
+	void update(double delta) {}
+
+	Vector3 generateForce(Particle& particle) override;
+};
+
 class VientoGenerador : public ForceGenerator
 {
 protected:
@@ -87,3 +101,4 @@ public:
 
 	Vector3 generateForce(Particle& particle) override;
 };
+

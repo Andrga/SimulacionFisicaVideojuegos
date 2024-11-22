@@ -39,6 +39,12 @@ void ForceGenerator::setRadious(float rad)
 	radious = rad;
 	generateRadiousSphere();
 }
+// ------- GENERADOR DE GRAVEDAD --------
+Vector3 GravityGenerator::generateForce(Particle& particle)
+{
+	return gravity * particle.getMass();
+}
+
 
 // ------- GENERADOR DE VIENTO --------
 Vector3 VientoGenerador::generateForce(Particle& particle)
@@ -84,3 +90,4 @@ Vector3 ExplosionGenerator::generateForce(Particle& particle)
 
 	return force;
 }
+

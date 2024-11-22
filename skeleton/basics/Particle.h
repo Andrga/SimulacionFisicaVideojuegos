@@ -11,9 +11,10 @@ class Particle : public Object
 public:
 	// constructoras:
 	Particle(const Particle& other);
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 });
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, float siz = 1);
-	Particle(Vector3 Pos = { 0,0,0 }, Vector3 Vel = { 0,0,0 }, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2, float mass = 1);
+	Particle(Vector3 Pos);
+	Particle(Vector3 Pos, Vector3 Vel);
+	Particle(Vector3 Pos, Vector3 Vel, float siz = 1);
+	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2, float mass = 1);
 	~Particle();
 
 	// metodos de actualizacion:
@@ -31,6 +32,7 @@ public:
 	float getLifeTime() const { return lifeTime; }
 	float getStartLifeTime() { return startlifeTime; }
 	bool getGravity() { return gravitable; }
+	float getMass() { return mass; }
 
 	// setters:
 	void setPosition(Vector3 pos);

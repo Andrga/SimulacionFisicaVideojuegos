@@ -4,6 +4,10 @@ Particle::Particle(const Particle& other) :
 	Particle(other.pose.p, other.velocity, other.acceleration, other.damping, other.size, other.startlifeTime)
 {}
 
+Particle::Particle(Vector3 Pos) : Particle(Pos, { 0,0,0 }, { 0,0,0 })
+{
+}
+
 Particle::Particle(Vector3 Pos, Vector3 Vel) : Particle(Pos, Vel, { 0,0,0 }, 1, 1, 2)
 {
 }

@@ -1,8 +1,6 @@
 #pragma once
 #include "../basics/Scene.h"
-
 #include "../systems/ParticleSystem.h"
-
 #include "../systems/ForceSystem.h"
 
 class ScenaExplosion : public Scene
