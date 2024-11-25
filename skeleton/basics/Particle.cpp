@@ -24,7 +24,7 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float siz, 
 
 Particle::~Particle()
 {
-	//cout << "-----PARTICULA ELIMINADA -----" << endl;
+	cout << "-----PARTICULA ELIMINADA -----" << endl;
 	DeregisterRenderItem(renderItem);
 }
 
@@ -55,6 +55,10 @@ bool Particle::update(double t)
 	}
 	else
 		lifeTime += t;
+
+	// para particulas que no se mueven
+	if (immovible) return true;
+
 	// Aplicacion de las fuerzas:
 	applyForce();
 

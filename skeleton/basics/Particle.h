@@ -40,6 +40,7 @@ public:
 	void setStartLifeTime(float life) { startlifeTime = life; }
 	void setColor(Vector4 color) { renderItem->color = color; }
 	void setMass(float mas) { mass = mas; }
+	void setImmovible(bool im) { immovible = im; }
 
 	// fuerzas:
 	void addForce(float x, float y, float z) { forces.push_back({ x,y,z }); }
@@ -61,6 +62,7 @@ protected:
 	//gravity
 	Vector3 gravity = { 0,-9.8,0 };
 	bool gravitable = false;
+	bool immovible = false;
 
 	// propiedades de vida por tiempo de la particula
 	float lifeTime = 0;

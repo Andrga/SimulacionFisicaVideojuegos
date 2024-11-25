@@ -19,6 +19,22 @@ void Scene::update(double t)
 
 		// Si el update devuelve false es que la particula ha muerto por lo que la elimina y la quita del vector
 		particles[i]->update(t);
+	}
+
+	//actualizacion de los sistemas
+	for (auto s : systems)
+	{
+		s->update(t);
+		s->affectParticles(particles, t);
+	}
+
+	for (auto o : objects)
+	{
+		o->update(t);
+	}
+
+	// borrado de particulas
+	for (int i = 0; i < particles.size(); i++) {
 
 		if (!particles[i]->getAlive()) {
 			Particle* deadParticle = particles[i];
@@ -37,20 +53,9 @@ void Scene::update(double t)
 		}
 	}
 
-	//actualizacion de los sistemas
-	for (auto s : systems)
-	{
-		s->update(t);
-		s->affectParticles(particles, t);
-	}
-
-	for (auto o : objects)
-	{
-		o->update(t);
-	}
 }
 
-void Scene::addParticle(Particle* prt, ParticleGenerator* gen)
+void Scene::addParticle(Particle* prt, ParticleGenerator* gen, DockSystem* dock)
 {
 	particles.push_back(prt);
 
@@ -58,6 +63,10 @@ void Scene::addParticle(Particle* prt, ParticleGenerator* gen)
 	if (gen) {
 		particleToGenerator[prt] = gen; // Asociar particula con su generador
 	}
+
+	// Si la particula viene de un Dock
+	if (dock)
+		particleToDock[prt] = dock; // asocia
 }
 
 void Scene::addSystem(System* sys)
