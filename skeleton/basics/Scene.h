@@ -3,7 +3,6 @@
 #include "Particle.h"
 #include "System.h"
 #include "../systems/ParticleGenerator.h"
-#include "../systems/DockSystem.h"
 
 class Scene
 {
@@ -12,8 +11,6 @@ protected:
 	vector<Particle*> particles;
 	// vector para particulas generadas por un generador (para llevar el conteo de estas)
 	std::unordered_map<Particle*, ParticleGenerator*> particleToGenerator; // Mapa para referencia opcional
-	// mapa referencia para docks
-	std::unordered_map<Particle*, DockSystem*> particleToDock; // Mapa para referencia opcional
 	// vector de sistema de particulas
 	vector<System*> systems;
 	// vector de objetos extra
@@ -30,7 +27,7 @@ public:
 	void update(double t);
 
 	// Aniade particula al vector
-	void addParticle(Particle* prt, ParticleGenerator* gen = nullptr, DockSystem* dock= nullptr);
+	void addParticle(Particle* prt, ParticleGenerator* gen = nullptr);
 	// Aniade sistema al vector
 	void addSystem(System* sys); 
 	// Aniade objeto al vector de objetos extra

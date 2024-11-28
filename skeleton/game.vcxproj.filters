@@ -63,10 +63,7 @@
     <ClCompile Include="scenes\ScenaExplosion.cpp">
       <Filter>Resource\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="systems\DockSystem.cpp">
-      <Filter>Resource\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="scenes\DockScene.cpp">
+    <ClCompile Include="scenes\ScenaMuelles.cpp">
       <Filter>Resource\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,10 +132,7 @@
     <ClInclude Include="scenes\ScenaExplosion.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="systems\DockSystem.h">
-      <Filter>Head\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="scenes\DockScene.h">
+    <ClInclude Include="scenes\ScenaMuelles.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,7 +22,7 @@ public:
 
 
 	virtual Vector3 generateForce(Particle& particle) = 0;
-	bool onRadious(Vector3 Pos);
+	virtual bool onRadious(Particle* part);
 
 	virtual void update(double delta) {};
 
@@ -92,13 +92,56 @@ public:
 		simuleTime = 0;
 	};
 
-	void update(double delta) { 
+	void update(double delta) {
 		if (simuleTime <= 4 * tau) {
-		simuleTime += delta; 
-		setRadious(ve * simuleTime);
+			simuleTime += delta;
+			setRadious(ve * simuleTime);
 		}
 	}
 
 	Vector3 generateForce(Particle& particle) override;
 };
 
+class SpringGenerator : public ForceGenerator
+{
+protected:
+	Particle* particle1 = nullptr;
+	Particle* particle2 = nullptr;
+
+	float k;
+	float restingLength;
+public:
+	/// <param name="org"> Ancla </param>
+	/// <param name="scn"> Scene</param>
+	/// <param name="K"> Constante de elasticidad</param>
+	/// <param name="restLength"> Largo muelle reposo</param>
+	/// <param name="part2">Particula afectada</param>
+	/// <param name="part1">Particula(ancla)</param>
+	SpringGenerator(Vector3 org, Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
+		ForceGenerator(org, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
+	~SpringGenerator() {};
+
+	bool onRadious(Particle* part) override;
+
+	Vector3 generateForce(Particle& particle) override;
+
+};
+
+class FlotationGenerator : public ForceGenerator
+{
+protected:
+	float k; // densidad del liquido
+
+public:
+	/// <param name="h"> superficie del liquido </param>
+	/// <param name="scn"> Scene</param>
+	/// <param name="K"> densidad del liquido</param>
+	FlotationGenerator(float h, Scene* scn, float K) :
+		ForceGenerator({ 0,h,0 }, scn), k(K) {};
+	~FlotationGenerator() {};
+
+	bool onRadious(Particle* part) override;
+
+	Vector3 generateForce(Particle& particle) override;
+
+};

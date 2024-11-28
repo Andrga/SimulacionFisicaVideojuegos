@@ -1,80 +1,79 @@
-#include "DockScene.h"
+#include "ScenaMuelles.h"
 
-void DockScene::setup()
+void ScenaMuelles::setup()
 {
-	// suelo
-	Particle* suelo = new Particle({ -20,0, -20 });
-	addParticle(suelo);
-	suelo->setImmovible(true);
-	suelo->setStartLifeTime(50);
-	suelo->setColor({ .5,.5,.5,0 });
-	suelo->changeShape(CreateShape(physx::PxBoxGeometry(50, 0.2, 50)));
+	// SYSTEMS
+	ForceSystem* fsys = new ForceSystem(this);
+	addSystem(fsys);
 
-	// --- MUELLES ---
-	DockSystem* dkSys = new DockSystem(this);
-	addSystem(dkSys);
-	
+	// --- MUELLES ---	
+	// explosion para probar
+	expls = new ExplosionGenerator({ -20,40,-10 }, this);
+	fsys->addForceGenerator(expls);
+	expls->setRadious(30);
+	expls->setPotencia(200);	
+
+	// suelo muelles
+	Particle* sueloM = new Particle({ -20,20,0 });
+	addParticle(sueloM);
+	sueloM->setImmovible(true);
+	sueloM->setStartLifeTime(50);
+	sueloM->setColor({ .5,.5,.5,0 });
+	sueloM->changeShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)));
+
 	// particula a un ancla
-	Particle* part1 = new Particle({ -20,50,0 });
+	Particle* part1 = new Particle({ -20,70,0 });
 	addParticle(part1);
 	part1->setStartLifeTime(50);
-	part1->setDamping(0.5);
 	part1->applyGravity();
 	part1->setColor({ 0.2,0.2,0.8,1 });
+	part1->setFloor(20.5);
 
 	// ancla
-	Particle* anch = new Particle({ -20,50,0 });
+	Particle* anch = new Particle({ -20,70,0 });
 	addParticle(anch);
 	anch->setImmovible(true);
 	anch->setStartLifeTime(50);
 	anch->setColor({ 0.2,0.2,0.8,0 });
 	anch->changeShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
 
-	dkSys->addDockAnch(anch->getPose().p, part1, 10, 10);
+	fsys->addForceGenerator(new SpringGenerator(anch->getPose().p, this, 10, 10, part1));
 
 	// cadena de particula
-	Particle* part2 = new Particle({ -20,30,0 });
+	Particle* part2 = new Particle({ -20,50,0 });
 	addParticle(part2);
 	part2->setStartLifeTime(50);
 	part2->applyGravity();
-	part2->setDamping(0.5);
-	part2->setMass(2);
-	part2->setColor({ 0.2,0.8,0.2,1 });
+	part2->setColor({ 0.2,0.6,0.8,1 });
+	part2->setFloor(20.5);
 
-	dkSys->addDock( part1, part2, 10, 10);
+	fsys->addForceGenerator(new SpringGenerator(part1->getPose().p, this, 10, 10, part2, part1));
 
 	// particula a otra particula
-	Particle* part3 = new Particle({ -20,30,0 });
+	Particle* part3 = new Particle({ -20,50,0 });
 	addParticle(part3);
 	part3->setStartLifeTime(50);
 	part3->applyGravity();
-	part3->setDamping(0.5);
 	part3->setMass(2);
-	part3->setColor({ 0.2,0.8,0.2,1 });
+	part3->setColor({ 0.8,0.6,0.2,1 });
+	part3->setFloor(20.5);
 
-	Particle* part4 = new Particle({ -20,30,-10 });
+	Particle* part4 = new Particle({ -20,50,-10 });
 	addParticle(part4);
 	part4->setStartLifeTime(50);
 	part4->applyGravity();
-	part4->setDamping(0.5);
 	part4->setColor({ 0.8,0.2,0.2,1 });
+	part4->setFloor(20.5);
 
-	dkSys->addDock(part3, part4, 1, 10);
+	fsys->addForceGenerator(new SpringGenerator(part1->getPose().p, this, 1, 10, part4, part3));
 
-	// explosion 
-	ForceSystem* fsys = new ForceSystem(this);
-	addSystem(fsys);
 
-	expls = new ExplosionGenerator({ -20,20,-10 }, this);
-
-	fsys->addForceGenerator(expls);
-	expls->setRadious(30);
-	expls->setPotencia(200);
 
 
 	// --- FLOTACION ---
-	FloatationSystem* fltSys = new FloatationSystem(this);
-	addSystem(fltSys);
+	// generador de fuerza
+	fsys->addForceGenerator(new FlotationGenerator(20, this, 1));
+
 
 	// particula encima del agua
 	Particle* partFlot = new Particle({ 0,10, -50 });
@@ -83,8 +82,6 @@ void DockScene::setup()
 	partFlot->applyGravity();
 	partFlot->setSize(1);
 	partFlot->setColor({ 0.2,0.8,0.2,1 });
-
-	fltSys->addDockFlot(20, partFlot, 1);
 
 	// particula suspendida en el liquido
 	Particle* partIntermedio = new Particle({ 10,15, -50 });
@@ -95,8 +92,6 @@ void DockScene::setup()
 	partIntermedio->setMass(8);
 	partIntermedio->setColor({ 0.8,0.8,0.2,1 });
 
-	fltSys->addDockFlot(20, partIntermedio, 1);
-
 	// particula hundiendose
 	Particle* partHundida = new Particle({ 20,10, -50 });
 	addParticle(partHundida);
@@ -106,17 +101,22 @@ void DockScene::setup()
 	partHundida->setMass(100);
 	partHundida->setColor({ 0.8,0.2,0.2,1 });
 
-	fltSys->addDockFlot(20, partHundida, 1);
-
 	// superficie del liquido
 	Particle* superficieLiquido = new Particle({ 10,20, -50 });
 	addParticle(superficieLiquido);
 	superficieLiquido->setImmovible(true);
 	superficieLiquido->setStartLifeTime(50);
-	superficieLiquido->setColor({ 0,0,1,0 });
+	superficieLiquido->setColor({ 0.2,0.2,0.8,0 });
 	superficieLiquido->changeShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
 
-	
+	// suelo flotacion
+	Particle* sueloF = new Particle({ 10,0, -50 });
+	addParticle(sueloF);
+	sueloF->setImmovible(true);
+	sueloF->setStartLifeTime(50);
+	sueloF->setColor({ .5,.5,.5,0 });
+	sueloF->changeShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
+
 
 
 
@@ -237,7 +237,7 @@ void DockScene::setup()
 	addSystem(dkSys);*/
 }
 
-void DockScene::keyPressed(unsigned char key, const physx::PxTransform& camera)
+void ScenaMuelles::keyPressed(unsigned char key, const physx::PxTransform& camera)
 {
 	switch (key)
 	{

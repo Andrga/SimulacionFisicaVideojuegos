@@ -55,7 +55,7 @@ void Scene::update(double t)
 
 }
 
-void Scene::addParticle(Particle* prt, ParticleGenerator* gen, DockSystem* dock)
+void Scene::addParticle(Particle* prt, ParticleGenerator* gen)
 {
 	particles.push_back(prt);
 
@@ -63,10 +63,6 @@ void Scene::addParticle(Particle* prt, ParticleGenerator* gen, DockSystem* dock)
 	if (gen) {
 		particleToGenerator[prt] = gen; // Asociar particula con su generador
 	}
-
-	// Si la particula viene de un Dock
-	if (dock)
-		particleToDock[prt] = dock; // asocia
 }
 
 void Scene::addSystem(System* sys)

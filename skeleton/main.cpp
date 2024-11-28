@@ -17,7 +17,7 @@
 #include "scenes/ScenaViento.h"
 #include "scenes/ScenaTorbellino.h"
 #include "scenes/ScenaExplosion.h"
-#include "scenes/DockScene.h"
+#include "scenes/ScenaMuelles.h"
 
 
 std::string display_text = "This is a test";
@@ -90,7 +90,7 @@ void initPhysics(bool interactive)
 	sceneManager->addScene(new ScenaViento());
 	sceneManager->addScene(new ScenaTorbellino());
 	sceneManager->addScene(new ScenaExplosion());
-	sceneManager->addScene(new DockScene());
+	sceneManager->addScene(new ScenaMuelles());
 	sceneManager->setScene(0);
 
 	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));

@@ -2,15 +2,14 @@
 #include "../basics/Scene.h"
 #include "../systems/ParticleSystem.h"
 #include "../systems/ForceSystem.h"
-#include "../systems/DockSystem.h"
 
-class DockScene : public Scene
+class ScenaMuelles : public Scene
 {
 private:
 	ExplosionGenerator* expls = nullptr;
 public:
-	DockScene() : Scene() {};
-	~DockScene() {};
+	ScenaMuelles() : Scene() {};
+	~ScenaMuelles() {};
 
 	void setup() override;
 

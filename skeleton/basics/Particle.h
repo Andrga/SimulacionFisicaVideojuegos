@@ -14,7 +14,7 @@ public:
 	Particle(Vector3 Pos);
 	Particle(Vector3 Pos, Vector3 Vel);
 	Particle(Vector3 Pos, Vector3 Vel, float siz = 1);
-	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc = { 0,0,0 }, float Dmp = 0.5, float siz = 3, float lifet = 2, float mass = 1);
+	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc = { 0,0,0 }, float Dmp = 0.8, float siz = 3, float lifet = 2, float mass = 1);
 	~Particle();
 	void changeShape(physx::PxShape* shap); 
 	// metodos de actualizacion:

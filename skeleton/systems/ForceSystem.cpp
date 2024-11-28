@@ -12,7 +12,7 @@ void ForceSystem::affectParticles(vector<Particle*>& particles, double t)
 {
 	for (auto p : particles) {
 		for (auto g : forceGenerators) {
-			if (g->onRadious(p->getPose().p))
+			if (g->onRadious(p))
 			{
 				p->addForce(g->generateForce(*p));
 			}
