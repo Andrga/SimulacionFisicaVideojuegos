@@ -4,7 +4,7 @@ void ScenaExplosion::setup()
 {
 
 	// ------- SISTEMAS DE PARTICULAS ------
-	ParticleSystem* partsyst = new ParticleSystem();
+	ParticleSystem* partsyst = new ParticleSystem(this);
 	addSystem(partsyst);
 
 	// denerador de particula niebla
@@ -12,7 +12,7 @@ void ScenaExplosion::setup()
 
 
 	// --------- SISTEMA DE FUERZAS ------------
-	ForceSystem* fSys = new ForceSystem();
+	ForceSystem* fSys = new ForceSystem(this);
 	addSystem(fSys);
 
 	// generador de viento

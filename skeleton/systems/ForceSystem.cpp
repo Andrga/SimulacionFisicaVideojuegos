@@ -1,7 +1,7 @@
 #include "ForceSystem.h"
 #include "ForceGenerator.h"
 
-ForceSystem::ForceSystem() : System()
+ForceSystem::ForceSystem(Scene* scn) : System(scn)
 {}
 
 ForceSystem::~ForceSystem()

@@ -18,7 +18,8 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, float mass) : Particle(Pos, Vel, { 
 Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float siz, float lifet, float mas) :
 	pose(physx::PxTransform(Pos)), velocity(Vel), acceleration(Acc), damping(Dmp), size(siz), startlifeTime(lifet), mass(mas)
 {
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), &pose, { 0.5, 1, 1, 1.0 });
+	color = { 0.5, 1, 1, 1.0 };
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), &pose, color);
 
 }
 
@@ -27,6 +28,15 @@ Particle::~Particle()
 	cout << "-----PARTICULA ELIMINADA -----" << endl;
 	DeregisterRenderItem(renderItem);
 }
+
+void Particle::changeShape(physx::PxShape* shap)
+{
+	if (renderItem == nullptr)
+		renderItem = new RenderItem(shap, &pose, color);
+	else
+		renderItem->shape = shap;
+}
+
 
 void Particle::integrate(double t)
 {
@@ -64,6 +74,10 @@ bool Particle::update(double t)
 
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
+
+	if (pose.p.y <= floor)
+		pose.p.y = floor;
+
 
 	//cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;
 	return true;

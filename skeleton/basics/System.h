@@ -1,16 +1,18 @@
 #pragma once
 #include "Particle.h"
+#include "Widget.h"
 #include <vector>
 
 using namespace std;
-
+class Scene;
 
 class System
 {
-private:
+protected:
 	double delta = 0;
+	Scene* scene = nullptr;
 public:
-	System() {};
+	System(Scene* scn):scene(scn) {};
 	~System() {};
 
 	virtual bool update(double t) {

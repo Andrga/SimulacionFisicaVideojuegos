@@ -11,7 +11,7 @@ private:
 	vector<ParticleGenerator*> particleGenerators;
 
 public:
-	ParticleSystem();
+	ParticleSystem(Scene* scn);
 	~ParticleSystem();
 
 	bool update(double t) override;

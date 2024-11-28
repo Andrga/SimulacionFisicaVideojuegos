@@ -10,7 +10,7 @@ class ForceSystem : public System
 private:
 	vector<ForceGenerator*> forceGenerators;
 public:
-	ForceSystem();
+	ForceSystem(Scene* scn);
 	~ForceSystem();
 
 	void affectParticles(vector<Particle*>& particles, double t) override;

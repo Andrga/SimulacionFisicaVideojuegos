@@ -14,9 +14,9 @@ public:
 	Particle(Vector3 Pos);
 	Particle(Vector3 Pos, Vector3 Vel);
 	Particle(Vector3 Pos, Vector3 Vel, float siz = 1);
-	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc = { 0,0,0 }, float Dmp = 1, float siz = 3, float lifet = 2, float mass = 1);
+	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc = { 0,0,0 }, float Dmp = 0.5, float siz = 3, float lifet = 2, float mass = 1);
 	~Particle();
-
+	void changeShape(physx::PxShape* shap); 
 	// metodos de actualizacion:
 	void integrate(double t);
 	// Metodo que actualiza la particula( Return "TRUE" Viva || "FALSE" A eliminar)
@@ -33,14 +33,18 @@ public:
 	float getStartLifeTime() { return startlifeTime; }
 	bool getGravity() { return gravitable; }
 	float getMass() { return mass; }
+	float getSize() { return size; }
 
 	// setters:
 	void setPosition(Vector3 pos);
 	void setAcceleration(Vector3 acc) { acceleration = acc; }
 	void setStartLifeTime(float life) { startlifeTime = life; }
-	void setColor(Vector4 color) { renderItem->color = color; }
+	void setColor(Vector4 col) { renderItem->color = col; color = col; }
 	void setMass(float mas) { mass = mas; }
 	void setImmovible(bool im) { immovible = im; }
+	void setDamping(float dmp) { damping = dmp; }
+	void setSize(float siz) { size = siz; }
+	void setFloor(float h) { floor = h; }
 
 	// fuerzas:
 	void addForce(float x, float y, float z) { forces.push_back({ x,y,z }); }
@@ -56,9 +60,14 @@ protected:
 
 	// propiedades del movimiento e la particula
 	bool eulerSemiimplicito = true;
-	Vector3 velocity = {0,0,0};
+	Vector3 velocity = { 0,0,0 };
 	Vector3 acceleration;
 	float damping;
+
+	// propiedades visuales de la particula
+	Vector4 color;
+	float floor = 0;
+
 	//gravity
 	Vector3 gravity = { 0,-9.8,0 };
 	bool gravitable = false;

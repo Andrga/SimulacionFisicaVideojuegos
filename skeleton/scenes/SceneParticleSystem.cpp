@@ -15,7 +15,7 @@ void SceneParticleSystem::setup()
 
 
 	// ------- SISTEMAS DE PARTICULAS ------
-	ParticleSystem* partsyst = new ParticleSystem();
+	ParticleSystem* partsyst = new ParticleSystem(this);
 	addSystem(partsyst);
 
 
@@ -34,7 +34,7 @@ void SceneParticleSystem::setup()
 	//partsyst->addParticleGenerator(new Sangre(Vector3(0, 10, 50), 15, partsyst));
 	
 	// --------- SISTEMA DE FUERZAS ------------
-	ForceSystem* fSys = new ForceSystem();
+	ForceSystem* fSys = new ForceSystem(this);
 	addSystem(fSys);
 
 	// generador de viento

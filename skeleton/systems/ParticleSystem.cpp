@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(): System()
+ParticleSystem::ParticleSystem(Scene* scn): System(scn)
 {
 
 }
