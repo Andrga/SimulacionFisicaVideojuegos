@@ -37,7 +37,7 @@ void ScenaMuelles::setup()
 	anch->setColor({ 0.2,0.2,0.8,0 });
 	anch->changeShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
 
-	fsys->addForceGenerator(new SpringGenerator(anch->getPose().p, this, 10, 10, part1));
+	fsys->addForceGenerator(new SpringGenerator(anch->getPose().p, this, 10, 7, part1));
 
 	// cadena de particula
 	Particle* part2 = new Particle({ -20,50,2 });
@@ -47,7 +47,7 @@ void ScenaMuelles::setup()
 	part2->setColor({ 0.2,0.6,0.8,1 });
 	part2->setFloor(20.5);
 
-	fsys->addForceGenerator(new GomaGenerator({0,0,0}, this, 10, 10, part2, part1));
+	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part2, part1));
 
 	// particula a otra particula
 	Particle* part3 = new Particle({ -20,50,0 });
@@ -58,14 +58,17 @@ void ScenaMuelles::setup()
 	part3->setColor({ 0.8,0.6,0.2,1 });
 	part3->setFloor(20.5);
 
+	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part3, part2));
+
 	Particle* part4 = new Particle({ -20,50,-10 });
 	addParticle(part4);
 	part4->setStartLifeTime(50);
 	part4->applyGravity();
 	part4->setColor({ 0.8,0.2,0.2,1 });
 	part4->setFloor(20.5);
+	part4->setMass(50);
 
-	fsys->addForceGenerator(new GomaGenerator({0,0,0}, this, 1, 10, part4, part3));
+	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part4, part3));
 
 
 	// --- ANCLA K PERSONALIZABLE ---
@@ -85,9 +88,9 @@ void ScenaMuelles::setup()
 	partD->applyGravity();
 	partD->setColor({ 0.2,0.8,0.2,1 });
 	partD->setFloor(20.5);
+
 	sprngGen = new SpringGenerator(anch2->getPose().p, this, 10, 10, partD);
 	fsys->addForceGenerator(sprngGen);
-
 
 
 	// --- FLOTACION ---

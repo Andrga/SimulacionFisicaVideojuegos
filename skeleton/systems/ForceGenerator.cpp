@@ -92,7 +92,6 @@ Vector3 ExplosionGenerator::generateForce(Particle& particle)
 }
 
 // ------- MUELLES -------
-
 Vector3 SpringGenerator::generateForce(Particle& particle)
 {
 	Vector3 force{ 0,0,0 };
@@ -110,7 +109,7 @@ Vector3 SpringGenerator::generateForce(Particle& particle)
 	return force;
 }
 
-
+// ------ GOMA ELASTICA ------
 Vector3 GomaGenerator::generateForce(Particle& particle)
 {
 	Vector3 position1 = particle1->getPose().p;

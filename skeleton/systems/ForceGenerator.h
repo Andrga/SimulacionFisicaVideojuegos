@@ -105,24 +105,20 @@ public:
 class SpringGenerator : public ForceGenerator
 {
 protected:
-	Particle* particle1 = nullptr;
-	Particle* particle2 = nullptr;
+	Particle* particle = nullptr;
 
 	float k;
 	float restingLength;
 public:
-	/// <param name="org"> Ancla </param>
-	/// <param name="scn"> Scene</param>
 	/// <param name="K"> Constante de elasticidad</param>
 	/// <param name="restLength"> Largo muelle reposo</param>
-	/// <param name="part2">Particula afectada</param>
-	/// <param name="part1">Particula(ancla)</param>
-	SpringGenerator(Vector3 org, Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
-		ForceGenerator(org, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
+	/// <param name="part">Particula afectada</param>
+	SpringGenerator(Vector3 anch, Scene* scn, float K, float restLength, Particle* part) :
+		ForceGenerator(anch, scn), k(K), restingLength(restLength), particle(part) {};
 	~SpringGenerator() {};
 
 	void setK(float K) { k = K; }
-	bool onRadious(Particle* part) override { return part == particle2; };
+	bool onRadious(Particle* part) override { return part == particle; };
 
 	virtual Vector3 generateForce(Particle& particle) override;
 
@@ -137,14 +133,12 @@ protected:
 	float k;
 	float restingLength;
 public:
-	/// <param name="org"> Ancla </param>
-	/// <param name="scn"> Scene</param>
 	/// <param name="K"> Constante de elasticidad</param>
 	/// <param name="restLength"> Largo muelle reposo</param>
 	/// <param name="part2">Particula afectada</param>
 	/// <param name="part1">Particula(ancla)</param>
-	GomaGenerator(Vector3 org, Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
-		ForceGenerator(org, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
+	GomaGenerator(Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
+		ForceGenerator({0,0,0}, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
 	~GomaGenerator() {};
 
 	bool onRadious(Particle* part) override { return part == particle2; };
