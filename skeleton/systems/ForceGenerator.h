@@ -121,7 +121,33 @@ public:
 		ForceGenerator(org, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
 	~SpringGenerator() {};
 
-	bool onRadious(Particle* part) override;
+	void setK(float K) { k = K; }
+	bool onRadious(Particle* part) override { return part == particle2; };
+
+	virtual Vector3 generateForce(Particle& particle) override;
+
+};
+
+class GomaGenerator : public ForceGenerator
+{
+protected:
+	Particle* particle1 = nullptr;
+	Particle* particle2 = nullptr;
+
+	float k;
+	float restingLength;
+public:
+	/// <param name="org"> Ancla </param>
+	/// <param name="scn"> Scene</param>
+	/// <param name="K"> Constante de elasticidad</param>
+	/// <param name="restLength"> Largo muelle reposo</param>
+	/// <param name="part2">Particula afectada</param>
+	/// <param name="part1">Particula(ancla)</param>
+	GomaGenerator(Vector3 org, Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
+		ForceGenerator(org, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
+	~GomaGenerator() {};
+
+	bool onRadious(Particle* part) override { return part == particle2; };
 
 	Vector3 generateForce(Particle& particle) override;
 
@@ -140,8 +166,9 @@ public:
 		ForceGenerator({ 0,h,0 }, scn), k(K) {};
 	~FlotationGenerator() {};
 
-	bool onRadious(Particle* part) override;
+	bool onRadious(Particle* part) override { return part->getPose().p.y <= origen.y; };
 
 	Vector3 generateForce(Particle& particle) override;
 
+	void setDamping(Particle* part);
 };

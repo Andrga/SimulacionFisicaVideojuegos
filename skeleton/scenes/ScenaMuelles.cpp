@@ -8,10 +8,10 @@ void ScenaMuelles::setup()
 
 	// --- MUELLES ---	
 	// explosion para probar
-	expls = new ExplosionGenerator({ -20,40,-10 }, this);
+	expls = new ExplosionGenerator({ -20,50,-10 }, this);
 	fsys->addForceGenerator(expls);
 	expls->setRadious(30);
-	expls->setPotencia(200);	
+	expls->setPotencia(100);
 
 	// suelo muelles
 	Particle* sueloM = new Particle({ -20,20,0 });
@@ -40,14 +40,14 @@ void ScenaMuelles::setup()
 	fsys->addForceGenerator(new SpringGenerator(anch->getPose().p, this, 10, 10, part1));
 
 	// cadena de particula
-	Particle* part2 = new Particle({ -20,50,0 });
+	Particle* part2 = new Particle({ -20,50,2 });
 	addParticle(part2);
 	part2->setStartLifeTime(50);
 	part2->applyGravity();
 	part2->setColor({ 0.2,0.6,0.8,1 });
 	part2->setFloor(20.5);
 
-	fsys->addForceGenerator(new SpringGenerator(part1->getPose().p, this, 10, 10, part2, part1));
+	fsys->addForceGenerator(new GomaGenerator({0,0,0}, this, 10, 10, part2, part1));
 
 	// particula a otra particula
 	Particle* part3 = new Particle({ -20,50,0 });
@@ -65,8 +65,28 @@ void ScenaMuelles::setup()
 	part4->setColor({ 0.8,0.2,0.2,1 });
 	part4->setFloor(20.5);
 
-	fsys->addForceGenerator(new SpringGenerator(part1->getPose().p, this, 1, 10, part4, part3));
+	fsys->addForceGenerator(new GomaGenerator({0,0,0}, this, 1, 10, part4, part3));
 
+
+	// --- ANCLA K PERSONALIZABLE ---
+	// ancla
+	Particle* anch2 = new Particle({ -20,70,-20 });
+	addParticle(anch2);
+	anch2->setImmovible(true);
+	anch2->setStartLifeTime(50);
+	anch2->setColor({ 0.2,0.8,0.2,0 });
+	anch2->changeShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
+
+
+	// cadena de particula
+	Particle* partD = new Particle({ -20,70,-20 });
+	addParticle(partD);
+	partD->setStartLifeTime(50);
+	partD->applyGravity();
+	partD->setColor({ 0.2,0.8,0.2,1 });
+	partD->setFloor(20.5);
+	sprngGen = new SpringGenerator(anch2->getPose().p, this, 10, 10, partD);
+	fsys->addForceGenerator(sprngGen);
 
 
 
@@ -76,7 +96,7 @@ void ScenaMuelles::setup()
 
 
 	// particula encima del agua
-	Particle* partFlot = new Particle({ 0,10, -50 });
+	Particle* partFlot = new Particle({ 0,20, -50 });
 	addParticle(partFlot);
 	partFlot->setStartLifeTime(50);
 	partFlot->applyGravity();
@@ -84,7 +104,7 @@ void ScenaMuelles::setup()
 	partFlot->setColor({ 0.2,0.8,0.2,1 });
 
 	// particula suspendida en el liquido
-	Particle* partIntermedio = new Particle({ 10,15, -50 });
+	Particle* partIntermedio = new Particle({ 10,20, -50 });
 	addParticle(partIntermedio);
 	partIntermedio->setStartLifeTime(50);
 	partIntermedio->applyGravity();
@@ -93,7 +113,7 @@ void ScenaMuelles::setup()
 	partIntermedio->setColor({ 0.8,0.8,0.2,1 });
 
 	// particula hundiendose
-	Particle* partHundida = new Particle({ 20,10, -50 });
+	Particle* partHundida = new Particle({ 20,20, -50 });
 	addParticle(partHundida);
 	partHundida->setStartLifeTime(50);
 	partHundida->applyGravity();
@@ -243,6 +263,19 @@ void ScenaMuelles::keyPressed(unsigned char key, const physx::PxTransform& camer
 	{
 	case 'e':
 		expls->startGenerate();
+		break;
+	case 'z':
+		sprngGen->setK(1);
+		break;
+	case 'x':
+		sprngGen->setK(10);
+		break;
+	case 'c':
+		sprngGen->setK(100);
+		break;
+	case 'v':
+		sprngGen->setK(1000);
+		break;
 	default:
 		break;
 	}

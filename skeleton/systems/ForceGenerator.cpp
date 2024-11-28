@@ -93,20 +93,27 @@ Vector3 ExplosionGenerator::generateForce(Particle& particle)
 
 // ------- MUELLES -------
 
-bool SpringGenerator::onRadious(Particle* part)
-{
-	return part == particle2;
-}
-
 Vector3 SpringGenerator::generateForce(Particle& particle)
 {
-	Vector3 position1;
-	if (particle1 != nullptr)
-		position1 = particle1->getPose().p;
-	else
-		position1 = origen;
+	Vector3 force{ 0,0,0 };
+
+	// largura actual del muelle
+	Vector3 dir = origen - particle.getPose().p;
+	float actuallenth = dir.magnitude();
+	dir.normalize();
+
+	// deformacion del muelle
+	float difflenth = actuallenth - restingLength;
+
+	// calculo de la fuerza
+	force = dir * k * difflenth;
+	return force;
+}
 
 
+Vector3 GomaGenerator::generateForce(Particle& particle)
+{
+	Vector3 position1 = particle1->getPose().p;
 	Vector3 force{ 0,0,0 };
 
 	// largura actual del muelle
@@ -116,27 +123,21 @@ Vector3 SpringGenerator::generateForce(Particle& particle)
 
 	// deformacion del muelle
 	float difflenth = actuallenth - restingLength;
-
+	if (difflenth <= 0) difflenth = 0;
 	// calculo de la fuerza
 	force = dir * k * difflenth;
 
 	// aplica la fueza a ambos extremos del muelle
-	if (particle1)
-		particle1->addForce(-force);
+	particle1->addForce(-force);
 	return force;
 }
 
 // ------ FLOTACION -----
-bool FlotationGenerator::onRadious(Particle* part)
-{
-	return part->getPose().p.y <= origen.y;
-}
-
 Vector3 FlotationGenerator::generateForce(Particle& particle)
 {
-	float height = 0,
-		h = particle.getPose().p.y - height,
-		h0 = origen.y - height,
+	float height = particle.getSize() * 2,
+		h = particle.getPose().p.y,
+		h0 = origen.y,
 		immersed = 0,
 		liquidDensity = k,
 		volume = pow(particle.getSize() * 2, 3);
@@ -161,3 +162,4 @@ Vector3 FlotationGenerator::generateForce(Particle& particle)
 	// aplica la fueza a ambos extremos del muelle
 	return force;
 }
+

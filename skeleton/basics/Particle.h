@@ -34,6 +34,7 @@ public:
 	bool getGravity() { return gravitable; }
 	float getMass() { return mass; }
 	float getSize() { return size; }
+	float getBaseDamping() { return baseDamping; }
 
 	// setters:
 	void setPosition(Vector3 pos);
@@ -63,6 +64,7 @@ protected:
 	Vector3 velocity = { 0,0,0 };
 	Vector3 acceleration;
 	float damping;
+	float baseDamping = 0.8f;
 
 	// propiedades visuales de la particula
 	Vector4 color;

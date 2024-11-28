@@ -7,6 +7,7 @@ class ScenaMuelles : public Scene
 {
 private:
 	ExplosionGenerator* expls = nullptr;
+	SpringGenerator* sprngGen = nullptr;
 public:
 	ScenaMuelles() : Scene() {};
 	~ScenaMuelles() {};
