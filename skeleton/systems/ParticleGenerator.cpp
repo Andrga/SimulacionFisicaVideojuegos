@@ -149,7 +149,7 @@ void RandomParticleGen::generateParticle()
 	std::uniform_int_distribution<int> posYUniform(0, 80); // numero de 0 a 80
 
 	std::uniform_real_distribution<double> lifeTimeUdistribution(5, 10); // numero de 0 a restParticles
-	std::normal_distribution<double> massUdistribution(1, 0.2); // numero de 0 a restParticles
+	std::normal_distribution<double> massUdistribution(10, 0.2); // numero de 0 a restParticles
 
 	// origen de la nueva particula
 	Vector3 origen2;

@@ -106,6 +106,8 @@ Vector3 SpringGenerator::generateForce(Particle& particle)
 
 	// calculo de la fuerza
 	force = dir * k * difflenth;
+
+	//cout << force.y << endl;
 	return force;
 }
 

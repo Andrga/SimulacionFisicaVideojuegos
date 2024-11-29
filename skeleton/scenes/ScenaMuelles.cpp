@@ -95,15 +95,16 @@ void ScenaMuelles::setup()
 
 	// --- FLOTACION ---
 	// generador de fuerza
-	fsys->addForceGenerator(new FlotationGenerator(20, this, 1));
+	fsys->addForceGenerator(new FlotationGenerator(20, this, 1000));
 
 
 	// particula encima del agua
-	Particle* partFlot = new Particle({ 0,20, -50 });
+	Particle* partFlot = new Particle({ 0,30, -50 });
 	addParticle(partFlot);
 	partFlot->setStartLifeTime(50);
 	partFlot->applyGravity();
 	partFlot->setSize(1);
+	partFlot->setMass(100);
 	partFlot->setColor({ 0.2,0.8,0.2,1 });
 
 	// particula suspendida en el liquido
@@ -111,17 +112,17 @@ void ScenaMuelles::setup()
 	addParticle(partIntermedio);
 	partIntermedio->setStartLifeTime(50);
 	partIntermedio->applyGravity();
-	partIntermedio->setSize(1);
-	partIntermedio->setMass(8);
+	partIntermedio->setSize(0.5);
+	partIntermedio->setMass(1000);
 	partIntermedio->setColor({ 0.8,0.8,0.2,1 });
 
 	// particula hundiendose
-	Particle* partHundida = new Particle({ 20,20, -50 });
+	Particle* partHundida = new Particle({ 20,30, -50 });
 	addParticle(partHundida);
 	partHundida->setStartLifeTime(50);
 	partHundida->applyGravity();
 	partHundida->setSize(1);
-	partHundida->setMass(100);
+	partHundida->setMass(10000);
 	partHundida->setColor({ 0.8,0.2,0.2,1 });
 
 	// superficie del liquido
