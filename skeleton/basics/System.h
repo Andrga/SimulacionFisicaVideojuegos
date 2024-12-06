@@ -1,6 +1,7 @@
 #pragma once
 #include "Particle.h"
 #include "Widget.h"
+#include <PxPhysicsAPI.h>
 #include <vector>
 
 using namespace std;

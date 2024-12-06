@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene()
+Scene::Scene(physx::PxPhysics* gPhycs, physx::PxScene* gScn): gPhysics(gPhycs), gScene(gScn)
 {
 	setup();
 }

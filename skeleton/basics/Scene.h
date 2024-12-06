@@ -3,6 +3,8 @@
 #include "Particle.h"
 #include "System.h"
 #include "../systems/ParticleGenerator.h"
+#include "../basics/RBDynamic.h"
+#include "../basics/RBStatic.h"
 
 class Scene
 {
@@ -18,8 +20,12 @@ protected:
 
 	bool active = false;
 
+	// escena fisica
+	physx::PxPhysics* gPhysics = nullptr;
+	physx::PxScene* gScene = nullptr;
+
 public:
-	Scene();
+	Scene(physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr);
 	~Scene();
 
 	virtual void setup() {};
@@ -29,7 +35,7 @@ public:
 	// Aniade particula al vector
 	void addParticle(Particle* prt, ParticleGenerator* gen = nullptr);
 	// Aniade sistema al vector
-	void addSystem(System* sys); 
+	void addSystem(System* sys);
 	// Aniade objeto al vector de objetos extra
 	void addObject(Object* obj);
 	// activa y desactiva la escena

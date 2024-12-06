@@ -19,6 +19,7 @@
 #include "scenes/ScenaExplosion.h"
 #include "scenes/ScenaMuelles.h"
 
+#include "scenes/ScenaSolidoRigido.h"
 
 std::string display_text = "This is a test";
 
@@ -85,13 +86,14 @@ void initPhysics(bool interactive)
 	sceneManager = new SceneManager();
 	//sceneManager->addScene(new SceneParticleSystem());
 	//sceneManager->addScene(new SceneNiebla());
-	 
+
 	// ESCENAS DE FUERZAS
 	sceneManager->addScene(new ScenaViento());
 	sceneManager->addScene(new ScenaTorbellino());
 	sceneManager->addScene(new ScenaExplosion());
 	sceneManager->addScene(new ScenaMuelles());
-	sceneManager->setScene(0);
+	sceneManager->addScene(new ScenaSolidoRigido(gPhysics, gScene));
+	sceneManager->setScene(4);
 
 	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
 	//part->applyGravity();
@@ -138,7 +140,7 @@ void cleanupPhysics(bool interactive)
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
-	
+
 	sceneManager->keyPressed(key, camera);
 
 	//switch (toupper(key))

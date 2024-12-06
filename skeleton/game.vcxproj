@@ -268,6 +268,7 @@
     <ClCompile Include="Render\Render.cpp" />
     <ClCompile Include="scenes\ScenaMuelles.cpp" />
     <ClCompile Include="scenes\ScenaExplosion.cpp" />
+    <ClCompile Include="scenes\ScenaSolidoRigido.cpp" />
     <ClCompile Include="scenes\ScenaTorbellino.cpp" />
     <ClCompile Include="scenes\ScenaViento.cpp" />
     <ClCompile Include="scenes\SceneNiebla.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="scenes\ScenaMuelles.h" />
     <ClInclude Include="scenes\ScenaExplosion.h" />
+    <ClInclude Include="scenes\ScenaSolidoRigido.h" />
     <ClInclude Include="scenes\ScenaTorbellino.h" />
     <ClInclude Include="scenes\ScenaViento.h" />
     <ClInclude Include="scenes\SceneNiebla.h" />

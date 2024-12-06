@@ -2,20 +2,21 @@
 #include "../RenderUtils.hpp"
 #include <PxPhysicsAPI.h>
 #include "iostream"
+#include "../basics/Object.h"
 
 using namespace std;
 using namespace physx;
 
-class RBActor
+class RBActor : public Object
 {
 public:
 	RBActor(PxPhysics* gPhysics) {};
 	virtual ~RBActor() = default;
 
-	void update(float t) { cout << pose.p.x << "/" << pose.p.y << "/" << pose.p.z << endl; }
+	virtual bool update(double t) override { return true; }
 
 	// visibilidad
-	void setVisible(bool vis) {
+	void setVisibility(bool vis) override {
 		vis ?
 			RegisterRenderItem(renderItem) :
 			DeregisterRenderItem(renderItem);
@@ -29,7 +30,7 @@ public:
 	// setters
 	void setPosition(PxVec3 pos) { pose.p = pos; };
 	void setRotation(PxQuat rot) { pose.q = rot; };
-	virtual void setShape(PxShape* shp) {renderItem->shape = shape; }
+	virtual void setShape(PxShape* shp) { renderItem->shape = shape; }
 
 protected:
 	PxTransform pose;
