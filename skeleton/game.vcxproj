@@ -256,6 +256,8 @@
     <ClCompile Include="basics\Object.cpp" />
     <ClCompile Include="basics\Particle.cpp" />
     <ClCompile Include="basics\Proyectile.cpp" />
+    <ClCompile Include="basics\RBDynamic.cpp" />
+    <ClCompile Include="basics\RBStatic.cpp" />
     <ClCompile Include="basics\Scene.cpp" />
     <ClCompile Include="basics\SceneManager.cpp" />
     <ClCompile Include="basics\Widget.cpp" />
@@ -281,6 +283,9 @@
     <ClInclude Include="basics\Object.h" />
     <ClInclude Include="basics\Particle.h" />
     <ClInclude Include="basics\Proyectile.h" />
+    <ClInclude Include="basics\RBActor.h" />
+    <ClInclude Include="basics\RBDynamic.h" />
+    <ClInclude Include="basics\RBStatic.h" />
     <ClInclude Include="basics\Scene.h" />
     <ClInclude Include="basics\SceneManager.h" />
     <ClInclude Include="basics\System.h" />
