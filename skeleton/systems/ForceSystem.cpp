@@ -8,17 +8,17 @@ ForceSystem::~ForceSystem()
 {
 }
 
-void ForceSystem::affectParticles(vector<Particle*>& particles, double t)
+void ForceSystem::affectParticles(unordered_map<string, GameObjectInfo> gameObjects, double t)
 {
-	for (auto p : particles) {
+	for (auto p : gameObjects) {
 		for (auto g : forceGenerators) {
-			if (g->onRadious(p))
+			if (g->onRadious(p.second.gameObject))
 			{
-				p->addForce(g->generateForce(*p));
+				p.second.gameObject->addForce(g->generateForce(*p.second.gameObject));
 			}
 		}
 	}
-	
+
 	for (auto g : forceGenerators)
 	{
 		g->update(t);

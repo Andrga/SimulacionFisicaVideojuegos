@@ -14,7 +14,7 @@ protected:
 	ParticleSystem* particleSystem;
 
 	// Propiedades inicio
-	int startNParticles;
+	int startNGameObjects;
 	Vector3 origen;
 	Vector3 startVel;
 	float startLifetime;
@@ -25,8 +25,8 @@ protected:
 
 	// Current particles
 	Scene* scene = nullptr;
-	int nParticles = 0;
-	std::unordered_map<Particle*, bool> generatedParticles; // Partículas generadas por este generador
+	int nGameObjects = 0;
+	std::unordered_map<GameObject*, bool> generatedGameObjects; // Partículas generadas por este generador
 
 
 public:
@@ -34,10 +34,10 @@ public:
 	~ParticleGenerator();
 
 
-	virtual void generateParticle();
+	virtual void generateParticle() = 0;
 	bool mayGenerate();
-	int getNParticles() { return nParticles; }
-	void onParticleDeath(Particle* p); // Método para actualizar el conteo
+	int getNParticles() { return nGameObjects; }
+	void onGameObjectDeath(GameObject* p); // Método para actualizar el conteo
 
 	//void setVisibility(bool visibility);
 

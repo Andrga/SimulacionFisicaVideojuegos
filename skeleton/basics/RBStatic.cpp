@@ -1,6 +1,6 @@
 #include "RBStatic.h"
 
-RBStatic::RBStatic(PxPhysics* gPhysics): RBActor(gPhysics)
+RBStatic::RBStatic(string nam, Scene* scn, PxPhysics* gPhysics): RBActor(nam, scn, gPhysics)
 {
 
 	//pose = PxTransform({ 0,0,0 });

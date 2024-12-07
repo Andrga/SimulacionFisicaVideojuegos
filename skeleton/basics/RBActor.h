@@ -10,7 +10,7 @@ using namespace physx;
 class RBActor : public GameObject
 {
 public:
-	RBActor(PxPhysics* gPhysics) {};
+	RBActor(string nam, Scene* scn, PxPhysics* gPhysics): GameObject(nam, scn) {};
 	virtual ~RBActor() = default;
 
 	virtual bool update(double t) override { return true; }

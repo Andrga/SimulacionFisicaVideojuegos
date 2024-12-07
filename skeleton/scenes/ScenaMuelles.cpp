@@ -14,24 +14,24 @@ void ScenaMuelles::setup()
 	expls->setPotencia(100);
 
 	// suelo muelles
-	Particle* sueloM = new Particle({ -20,20,0 });
-	addParticle(sueloM);
+	Particle* sueloM = new Particle("sueloM", this, { -20, 20, 0 });
+	addGameObject(sueloM);
 	sueloM->setImmovible(true);
 	sueloM->setStartLifeTime(50);
 	sueloM->setColor({ .5,.5,.5,0 });
 	sueloM->setShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)));
 
 	// particula a un ancla
-	Particle* part1 = new Particle({ -20,70,0 });
-	addParticle(part1);
+	Particle* part1 = new Particle("part1", this, { -20, 70, 0 });
+	addGameObject(part1);
 	part1->setStartLifeTime(50);
 	part1->applyGravity();
 	part1->setColor({ 0.2,0.2,0.8,1 });
 	part1->setFloor(20.5);
 
 	// ancla
-	Particle* anch = new Particle({ -20,70,0 });
-	addParticle(anch);
+	Particle* anch = new Particle("anch", this, { -20, 70, 0 });
+	addGameObject(anch);
 	anch->setImmovible(true);
 	anch->setStartLifeTime(50);
 	anch->setColor({ 0.2,0.2,0.8,0 });
@@ -40,8 +40,8 @@ void ScenaMuelles::setup()
 	fsys->addForceGenerator(new SpringGenerator(anch->getPosition(), this, 10, 7, part1));
 
 	// cadena de particula
-	Particle* part2 = new Particle({ -20,50,2 });
-	addParticle(part2);
+	Particle* part2 = new Particle("part2", this, { -20, 50, 2 });
+	addGameObject(part2);
 	part2->setStartLifeTime(50);
 	part2->applyGravity();
 	part2->setColor({ 0.2,0.6,0.8,1 });
@@ -50,8 +50,8 @@ void ScenaMuelles::setup()
 	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part2, part1));
 
 	// particula a otra particula
-	Particle* part3 = new Particle({ -20,50,0 });
-	addParticle(part3);
+	Particle* part3 = new Particle("part3", this, { -20, 50, 0 });
+	addGameObject(part3);
 	part3->setStartLifeTime(50);
 	part3->applyGravity();
 	part3->setMass(2);
@@ -60,8 +60,8 @@ void ScenaMuelles::setup()
 
 	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part3, part2));
 
-	Particle* part4 = new Particle({ -20,50,-10 });
-	addParticle(part4);
+	Particle* part4 = new Particle("part4", this, { -20, 50, -10 });
+	addGameObject(part4);
 	part4->setStartLifeTime(50);
 	part4->applyGravity();
 	part4->setColor({ 0.8,0.2,0.2,1 });
@@ -73,8 +73,8 @@ void ScenaMuelles::setup()
 
 	// --- ANCLA K PERSONALIZABLE ---
 	// ancla
-	Particle* anch2 = new Particle({ -20,70,-20 });
-	addParticle(anch2);
+	Particle* anch2 = new Particle("anch2", this, { -20, 70, -20 });
+	addGameObject(anch2);
 	anch2->setImmovible(true);
 	anch2->setStartLifeTime(50);
 	anch2->setColor({ 0.2,0.8,0.2,0 });
@@ -82,8 +82,8 @@ void ScenaMuelles::setup()
 
 
 	// cadena de particula
-	Particle* partD = new Particle({ -20,70,-20 });
-	addParticle(partD);
+	Particle* partD = new Particle("partD", this, { -20, 70, -20 });
+	addGameObject(partD);
 	partD->setStartLifeTime(50);
 	partD->applyGravity();
 	partD->setColor({ 0.2,0.8,0.2,1 });
@@ -99,8 +99,8 @@ void ScenaMuelles::setup()
 
 
 	// particula encima del agua
-	Particle* partFlot = new Particle({ 0,30, -50 });
-	addParticle(partFlot);
+	Particle* partFlot = new Particle("partFlot", this, { 0, 30, -50 });
+	addGameObject(partFlot);
 	partFlot->setStartLifeTime(50);
 	partFlot->applyGravity();
 	partFlot->setSize(1);
@@ -108,8 +108,8 @@ void ScenaMuelles::setup()
 	partFlot->setColor({ 0.2,0.8,0.2,1 });
 
 	// particula suspendida en el liquido
-	Particle* partIntermedio = new Particle({ 10,20, -50 });
-	addParticle(partIntermedio);
+	Particle* partIntermedio = new Particle("partIntermedio", this, { 10, 20, -50 });
+	addGameObject(partIntermedio);
 	partIntermedio->setStartLifeTime(50);
 	partIntermedio->applyGravity();
 	partIntermedio->setSize(0.5);
@@ -117,8 +117,8 @@ void ScenaMuelles::setup()
 	partIntermedio->setColor({ 0.8,0.8,0.2,1 });
 
 	// particula hundiendose
-	Particle* partHundida = new Particle({ 20,30, -50 });
-	addParticle(partHundida);
+	Particle* partHundida = new Particle("partHundida", this, { 20, 30, -50 });
+	addGameObject(partHundida);
 	partHundida->setStartLifeTime(50);
 	partHundida->applyGravity();
 	partHundida->setSize(1);
@@ -126,16 +126,16 @@ void ScenaMuelles::setup()
 	partHundida->setColor({ 0.8,0.2,0.2,1 });
 
 	// superficie del liquido
-	Particle* superficieLiquido = new Particle({ 10,20, -50 });
-	addParticle(superficieLiquido);
+	Particle* superficieLiquido = new Particle("superficieLiquido", this, { 10, 20, -50 });
+	addGameObject(superficieLiquido);
 	superficieLiquido->setImmovible(true);
 	superficieLiquido->setStartLifeTime(50);
 	superficieLiquido->setColor({ 0.2,0.2,0.8,0 });
 	superficieLiquido->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
 
 	// suelo flotacion
-	Particle* sueloF = new Particle({ 10,0, -50 });
-	addParticle(sueloF);
+	Particle* sueloF = new Particle("SueloF", this, { 10, 0, -50 });
+	addGameObject(sueloF);
 	sueloF->setImmovible(true);
 	sueloF->setStartLifeTime(50);
 	sueloF->setColor({ .5,.5,.5,0 });

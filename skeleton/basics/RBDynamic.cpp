@@ -1,6 +1,6 @@
 #include "RBDynamic.h"
 
-RBDynamic::RBDynamic(PxPhysics* gPhysics): RBActor(gPhysics)
+RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics): RBActor(nam, scn, gPhysics)
 {
 	density = 10.0f;
 	actor = gPhysics->createRigidDynamic(PxTransform({ 0,20,0 }));

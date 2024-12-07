@@ -3,6 +3,8 @@
 #include "Widget.h"
 #include <PxPhysicsAPI.h>
 #include <vector>
+#include <unordered_map>
+#include "../Global.h"
 
 using namespace std;
 class Scene;
@@ -23,6 +25,6 @@ public:
 
 	double getDelta() { return delta; }
 	// Método virtual para afectar partículas (opcional para sistemas que no lo necesiten)
-	virtual void affectParticles(vector<Particle*>& particles, double t) {}
+	virtual void affectParticles(unordered_map<string, GameObjectInfo> gameObjects, double t) {}
 };
 

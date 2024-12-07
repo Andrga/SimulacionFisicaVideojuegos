@@ -21,8 +21,8 @@ public:
 	virtual~ForceGenerator() = 0;
 
 
-	virtual Vector3 generateForce(Particle& particle) = 0;
-	virtual bool onRadious(Particle* part);
+	virtual Vector3 generateForce(GameObject& object) = 0;
+	virtual bool onRadious(GameObject* obj);
 
 	virtual void update(double delta) {};
 
@@ -40,7 +40,7 @@ public:
 
 	void update(double delta) {}
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 };
 
 class VientoGenerador : public ForceGenerator
@@ -57,7 +57,7 @@ public:
 
 	void update(double delta) {}
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 };
 
 class TorbellinoGenerator : public ForceGenerator
@@ -71,7 +71,7 @@ public:
 
 	void update(double delta) {}
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 };
 
 class ExplosionGenerator : public ForceGenerator
@@ -99,13 +99,13 @@ public:
 		}
 	}
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 };
 
 class SpringGenerator : public ForceGenerator
 {
 protected:
-	Particle* particle = nullptr;
+	GameObject* object = nullptr;
 
 	float k;
 	float restingLength;
@@ -113,22 +113,23 @@ public:
 	/// <param name="K"> Constante de elasticidad</param>
 	/// <param name="restLength"> Largo muelle reposo</param>
 	/// <param name="part">Particula afectada</param>
-	SpringGenerator(Vector3 anch, Scene* scn, float K, float restLength, Particle* part) :
-		ForceGenerator(anch, scn), k(K), restingLength(restLength), particle(part) {};
+	SpringGenerator(Vector3 anch, Scene* scn, float K, float restLength, GameObject* obj) :
+		ForceGenerator(anch, scn), k(K), restingLength(restLength), object(obj) {
+	};
 	~SpringGenerator() {};
 
 	void setK(float K) { k = K; }
-	bool onRadious(Particle* part) override { return part == particle; };
+	bool onRadious(GameObject* obj) override { return obj == object; };
 
-	virtual Vector3 generateForce(Particle& particle) override;
+	virtual Vector3 generateForce(GameObject& object) override;
 
 };
 
 class GomaGenerator : public ForceGenerator
 {
 protected:
-	Particle* particle1 = nullptr;
-	Particle* particle2 = nullptr;
+	GameObject* object1 = nullptr;
+	GameObject* object2 = nullptr;
 
 	float k;
 	float restingLength;
@@ -137,13 +138,14 @@ public:
 	/// <param name="restLength"> Largo muelle reposo</param>
 	/// <param name="part2">Particula afectada</param>
 	/// <param name="part1">Particula(ancla)</param>
-	GomaGenerator(Scene* scn, float K, float restLength, Particle* part2, Particle* part1 = nullptr) :
-		ForceGenerator({0,0,0}, scn), k(K), restingLength(restLength), particle1(part1), particle2(part2) {};
+	GomaGenerator(Scene* scn, float K, float restLength, GameObject* obj2, GameObject* obj1 = nullptr) :
+		ForceGenerator({ 0,0,0 }, scn), k(K), restingLength(restLength), object1(obj1), object2(obj2) {
+	};
 	~GomaGenerator() {};
 
-	bool onRadious(Particle* part) override { return part == particle2; };
+	bool onRadious(GameObject* part) override { return part == object2; };
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 
 };
 
@@ -157,12 +159,13 @@ public:
 	/// <param name="scn"> Scene</param>
 	/// <param name="K"> densidad del liquido</param>
 	FlotationGenerator(float h, Scene* scn, float K) :
-		ForceGenerator({ 0,h,0 }, scn), k(K) {};
+		ForceGenerator({ 0,h,0 }, scn), k(K) {
+	};
 	~FlotationGenerator() {};
 
-	bool onRadious(Particle* part) override { return part->getPosition().y <= origen.y; };
+	bool onRadious(GameObject* obj) override { if (obj) return obj->getPosition().y <= origen.y; };
 
-	Vector3 generateForce(Particle& particle) override;
+	Vector3 generateForce(GameObject& object) override;
 
-	void setDamping(Particle* part);
+	void setDamping(GameObject* obj);
 };

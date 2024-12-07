@@ -12,7 +12,7 @@ Sangre::~Sangre()
 void Sangre::generateParticle()
 {
 	// cantidad de particulas no generadas
-	int restParticles = (startNParticles  - nParticles)/2;
+	int restParticles = (startNGameObjects  - nGameObjects)/2;
 
 	// Generamos una cantidad de particulas, cuya cantidad entra en el rango de la capacidad de particulas maxima,
 	// es decir restParticles
@@ -28,18 +28,20 @@ void Sangre::generateParticle()
 	// tiempo de vida para la nueva particula
 	float lifetime;
 
-	for (int i = 0; i < startNParticles; i++) {
+	for (int i = 0; i < startNGameObjects; i++) {
 		velocity.y = YnormalDistribution(generator);
 		velocity.x = XnormalDistribution(generator);
 		velocity.z = ZnormalDistribution(generator);
 		lifetime = LFEnormalDistribution(generator);
 
-		Particle* aux = new Proyectile(origen, velocity, 1);
+		Particle* aux = new Proyectile("Object" + scene->getGameObjectsCount(), scene, origen, velocity, 1);
+		aux->setVelocity(velocity);
+		aux->setSize(1);
 		aux->setStartLifeTime(lifetime);
-		generatedParticles[aux] = true; // Aniaadir al mapa
-		scene->addParticle(aux, this); // Aniaadir a la escena y pasar referencia del generador
+		generatedGameObjects[aux] = true; // Aniaadir al mapa
+		scene->addGameObject(aux, this); // Aniaadir a la escena y pasar referencia del generador
 
-		nParticles++;
+		nGameObjects++;
 	}
 
 

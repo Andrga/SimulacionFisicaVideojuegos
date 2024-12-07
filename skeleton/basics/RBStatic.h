@@ -4,7 +4,7 @@
 class RBStatic : public RBActor
 {
 public:
-	RBStatic(PxPhysics* gPhysics);
+	RBStatic(string nam, Scene* scn, PxPhysics* gPhysics);
 	~RBStatic();
 
 	bool update(double t) override { return RBActor::update(t); }

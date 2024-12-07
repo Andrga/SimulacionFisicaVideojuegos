@@ -1,31 +1,31 @@
 #include "Particle.h"
+#include "Scene.h"
 
-Particle::Particle(const Particle& other) :
-	Particle(other.pose.p, other.velocity, other.acceleration, other.damping, other.size, other.startlifeTime)
-{}
-
-Particle::Particle(Vector3 Pos) : Particle(Pos, { 0,0,0 }, { 0,0,0 })
+Particle::Particle(const Particle& other) : GameObject(other.name, other.scene)
 {
-}
-
-Particle::Particle(Vector3 Pos, Vector3 Vel) : Particle(Pos, Vel, { 0,0,0 }, 1, 1, 2)
-{
-}
-Particle::Particle(Vector3 Pos, Vector3 Vel, float mass) : Particle(Pos, Vel, { 0,0,0 }, 1, 1, 2, mass)
-{
-}
-
-Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float siz, float lifet, float mas) :
-	velocity(Vel), acceleration(Acc), damping(Dmp), mass(mas)
-{
-	pose = physx::PxTransform(Pos);
-	size = siz;
-	startlifeTime = lifet;
+	pose = physx::PxTransform(other.pose.p);
+	velocity = other.velocity;
+	acceleration = other.acceleration;
+	damping = other.damping;
+	size = other.size;
+	startlifeTime = other.startlifeTime;
 
 	color = { 0.5, 1, 1, 1.0 };
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), &pose, color);
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), &pose, color);
 
 }
+
+Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
+{
+	pose = physx::PxTransform(Pos);
+	size = 5;
+	startlifeTime = 10;
+
+	color = { 0.5, 1, 1, 1.0 };
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), &pose, color);
+
+}
+
 
 Particle::~Particle()
 {
@@ -33,13 +33,6 @@ Particle::~Particle()
 	DeregisterRenderItem(renderItem);
 }
 
-//void Particle::changeShape(physx::PxShape* shap)
-//{
-//	if (renderItem == nullptr)
-//		renderItem = new RenderItem(shap, &pose, color);
-//	else
-//		renderItem->shape = shap;
-//}
 
 
 void Particle::integrate(double t)
@@ -69,6 +62,8 @@ bool Particle::update(double t)
 	}
 	else
 		lifeTime += t;
+
+	cout << pose.p.x << "/" << pose.p.y << "/" << pose.p.x << (renderItem == nullptr ? "no esiste" : "esiste") << endl;
 
 	// para particulas que no se mueven
 	if (immovible) return true;

@@ -1,19 +1,21 @@
 #include "Widget.h"
 
-Widget::Widget(Vector3 Pos, float siz) : position(Pos), size(siz)
+
+Widget::Widget(string nam, Scene* scn, Vector3 Pos, float siz) : GameObject(nam, scn)
 {
-	pose = new physx::PxTransform();
-	pose->p = Pos;
+	pose = PxTransform(Pos);
+	size = siz;
+
 	if (siz > 0)
-		renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), pose, { 1, 0.0, 0.0, 0.01 });
+		renderItem = new RenderItem(CreateShape(PxSphereGeometry(siz)), &pose, { 1, 0.0, 0.0, 0.01 });
 }
 
-Widget::Widget(Vector3 Pos, physx::PxShape* shap) : position(Pos)
+Widget::Widget(string nam, Scene* scn, Vector3 Pos, physx::PxShape* shap) : GameObject(nam, scn)
 {
-	pose = new physx::PxTransform();
-	pose->p = Pos;
+	pose = PxTransform(Pos);
+
 	if (shap != nullptr)
-		renderItem = new RenderItem(shap, pose, { 1, 0.0, 0.0, 0.01 });
+		renderItem = new RenderItem(shap, &pose, { 1, 0.0, 0.0, 0.01 });
 	else
 		std::cout << "ERROR AL CREAR WIDGET" << std::endl;
 }
@@ -21,7 +23,7 @@ Widget::Widget(Vector3 Pos, physx::PxShape* shap) : position(Pos)
 void Widget::changeShape(physx::PxShape* shap)
 {
 	if (renderItem == nullptr)
-		renderItem = new RenderItem(shap, pose, { 1, 0.0, 0.0, 0.01 });
+		renderItem = new RenderItem(shap, &pose, { 1, 0.0, 0.0, 0.01 });
 	else
 		renderItem->shape = shap;
 }

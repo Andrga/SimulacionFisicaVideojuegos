@@ -4,14 +4,17 @@
 class RBDynamic : public RBActor
 {
 public:
-	RBDynamic(PxPhysics* gPhysics);
+	RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics);
 	~RBDynamic();
 
 	bool update(double t) override { return RBActor::update(t); }
 
-	PxRigidActor* getActor() override { return actor; }
+	//setters
+	void setPosition(PxVec3 pos) override { actor->setGlobalPose(PxTransform(pos)); };
 	void setShape(PxShape* shp) override;
 	void setDensity(float d) { density = d; };
+	// getters
+	PxRigidActor* getActor() override { return actor; }
 private:
 	PxRigidDynamic* actor = nullptr;
 	float density = 1.5;

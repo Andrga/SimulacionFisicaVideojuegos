@@ -253,6 +253,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="basics\GameObject.cpp" />
     <ClCompile Include="basics\Particle.cpp" />
     <ClCompile Include="basics\Proyectile.cpp" />
     <ClCompile Include="basics\RBDynamic.cpp" />
@@ -261,6 +262,7 @@
     <ClCompile Include="basics\SceneManager.cpp" />
     <ClCompile Include="basics\Widget.cpp" />
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
@@ -293,6 +295,7 @@
     <ClInclude Include="basics\Widget.h" />
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
