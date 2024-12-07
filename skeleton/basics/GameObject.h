@@ -16,7 +16,7 @@ protected:
 	// propiedades fisicas de los objetos
 	RenderItem* renderItem;
 	Vector4 color;
-	physx::PxTransform pose;
+	physx::PxTransform* pose;
 	float size = 3;
 	float mass = 1;
 	Vector3 velocity = { 0,0,0 };
@@ -34,16 +34,16 @@ public:
 	virtual void setVisibility(bool visibility) {};
 
 	//getters
-	virtual Vector3 getPosition() { return pose.p; };
-	virtual PxQuat getRotation() { return pose.q; };
+	virtual Vector3 getPosition() { return pose->p; };
+	virtual PxQuat getRotation() { return pose->q; };
 	float getSize() { return size; };
 	string getName() { return name; };
 	float getMass() { return mass; };
 	Vector3 getVelocity() { return velocity; };
 
 	// setters
-	virtual void setPosition(Vector3 pos) {};
-	virtual void setRotation(PxQuat rot) { pose.q = rot; };
+	virtual void setPosition(Vector3 pos) { pose->p = pos; };
+	virtual void setRotation(PxQuat rot) { pose->q = rot; };
 	virtual void setShape(PxShape* shp) { renderItem->shape = shp; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
 	void setSize(float siz) noexcept { size = siz; };

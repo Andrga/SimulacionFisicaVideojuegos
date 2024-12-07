@@ -2,7 +2,7 @@
 #include "../basics/Scene.h"
 #include "../systems/ParticleSystem.h"
 
-ParticleGenerator::ParticleGenerator(Vector3 org, int stNpart, ParticleSystem* partsys, Scene* scn) : 
+ParticleGenerator::ParticleGenerator(Vector3 org, int stNpart, ParticleSystem* partsys, Scene* scn) :
 	origen(org), startNGameObjects(stNpart), particleSystem(partsys), scene(scn)
 {
 }
@@ -69,7 +69,7 @@ void CascadaGen::generateParticle()
 		lifetime = LFEnormalDistribution(generator);
 
 		// creamos la nueva particula
-		Particle* aux = new Particle("Object"+scene->getGameObjectsCount(), scene, origen2);
+		Particle* aux = new Particle("Object" + to_string(nGameObjectsTotal), scene, origen2);
 		aux->setVelocity(velocity);
 		aux->setSize(0.5);
 		aux->setStartLifeTime(lifetime);
@@ -82,6 +82,7 @@ void CascadaGen::generateParticle()
 
 		//particles.push_back(aux);
 		nGameObjects++;
+		nGameObjectsTotal++;
 
 	}
 
@@ -124,7 +125,7 @@ void NieblaGen::generateParticle()
 		lifetime = Bdistribution(generator);
 
 		// creamos la nueva particula
-		Particle* aux = new Particle("Object" + scene->getGameObjectsCount(), scene, origen2);
+		Particle* aux = new Particle("Object" + to_string(nGameObjectsTotal), scene, origen2);
 		aux->setVelocity(velocity);
 		aux->setSize(0.25);
 		aux->setStartLifeTime(lifetime);
@@ -134,6 +135,7 @@ void NieblaGen::generateParticle()
 		scene->addGameObject(aux, this); // Aniadir a la escena y pasar referencia del generador
 		aux->applyGravity();
 		nGameObjects++;
+		nGameObjectsTotal++;
 
 	}
 
@@ -146,7 +148,7 @@ void RandomParticleGen::generateParticle()
 {
 
 	// cantidad de particulas no generadas
-	int restParticles = (startNGameObjects/2) - nGameObjects ;
+	int restParticles = (startNGameObjects / 2) - nGameObjects;
 
 	std::uniform_int_distribution<int> numPartsUniform(0, restParticles); // numero de 0 a restParticles
 	std::uniform_int_distribution<int> posXZUniform(-40, 40); // numero de -40 a 40
@@ -177,7 +179,7 @@ void RandomParticleGen::generateParticle()
 		lifetime = lifeTimeUdistribution(generator);
 
 		// creamos la nueva particula
-		Particle* aux = new Particle("Object" + to_string(scene->getGameObjectsCount()), scene, origen2);
+		Particle* aux = new Particle("Object" + to_string(nGameObjectsTotal), scene, origen2);
 		aux->setVelocity(velocity);
 		//aux->setSize(0.25);
 		aux->setStartLifeTime(lifetime);
@@ -188,6 +190,7 @@ void RandomParticleGen::generateParticle()
 		generatedGameObjects[aux] = true; // Aniaadir al mapa
 		scene->addGameObject(aux, this); // Aniadir a la escena y pasar referencia del generador
 		nGameObjects++;
+		nGameObjectsTotal++;
 
 	}
 

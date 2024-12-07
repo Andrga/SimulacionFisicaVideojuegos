@@ -10,16 +10,10 @@
 class Scene
 {
 protected:
-	// ANDRES AQUI JUNTAR TODOS LAS LISTAS EN UN MAPA UNORDERER CON UNA KEY DE NOMBRE
+	// Mapa objetos de juego 
 	unordered_map<string, GameObjectInfo> gameObjects;
-	// vector de particulas
-	//vector<Particle*> particles;
-	// vector para particulas generadas por un generador (para llevar el conteo de estas)
-	//std::unordered_map<Particle*, ParticleGenerator*> particleToGenerator; // Mapa para referencia opcional
-	// vector de sistema de particulas
+	// vector de sistemas
 	vector<System*> systems;
-	// vector de objetos extra
-	//vector<GameObject*> objects;
 
 	bool active = false;
 

@@ -19,7 +19,7 @@ Proyectile::Proyectile(string nam, Scene* scn, Vector3 Pos, Vector3 Vel, Vector3
 bool Proyectile::update(double t)
 {
 	// si esta por debajo de una posicion, marca la particula para eliminar
-	if (pose.p.y <= -10)
+	if (pose->p.y <= -10)
 		alive = false;
 	// Update base
 	return Particle::update(t);

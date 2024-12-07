@@ -3,7 +3,7 @@
 
 Particle::Particle(const Particle& other) : GameObject(other.name, other.scene)
 {
-	pose = physx::PxTransform(other.pose.p);
+	pose = new physx::PxTransform(other.pose->p);
 	velocity = other.velocity;
 	acceleration = other.acceleration;
 	damping = other.damping;
@@ -11,18 +11,18 @@ Particle::Particle(const Particle& other) : GameObject(other.name, other.scene)
 	startlifeTime = other.startlifeTime;
 
 	color = { 0.5, 1, 1, 1.0 };
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), &pose, color);
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), pose, color);
 
 }
 
 Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 {
-	pose = physx::PxTransform(Pos);
+	pose = new physx::PxTransform(Pos);
 	size = 5;
 	startlifeTime = 10;
 
 	color = { 0.5, 1, 1, 1.0 };
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), &pose, color);
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), pose, color);
 
 }
 
@@ -40,11 +40,11 @@ void Particle::integrate(double t)
 	// selecciona si euler semi-implicito
 	if (eulerSemiimplicito) {
 		velocity = velocity + t * acceleration;
-		pose.p = pose.p + t * velocity;
+		pose->p = pose->p + t * velocity;
 		velocity = velocity * pow(damping, t);
 	}
 	else {
-		pose.p = pose.p + t * velocity;
+		pose->p = pose->p + t * velocity;
 		velocity = velocity + t * acceleration;
 		velocity = velocity * pow(damping, t);
 	}
@@ -52,6 +52,8 @@ void Particle::integrate(double t)
 
 bool Particle::update(double t)
 {
+	// ANDRES AQUI LAS PARTICULAS QUE SE MUEVEN NO TIENEN BIEN PUESTAS LAS COORDENADAS (NAN) o el transform hace cosas raras en algun punto
+	cout << velocity.x << "/" << velocity.y << "/" << velocity.x << name << endl;
 	if (!alive)
 		return false;
 
@@ -63,7 +65,6 @@ bool Particle::update(double t)
 	else
 		lifeTime += t;
 
-	cout << pose.p.x << "/" << pose.p.y << "/" << pose.p.x << (renderItem == nullptr ? "no esiste" : "esiste") << endl;
 
 	// para particulas que no se mueven
 	if (immovible) return true;
@@ -74,8 +75,8 @@ bool Particle::update(double t)
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
 
-	if (pose.p.y <= floor)
-		pose.p.y = floor;
+	if (pose->p.y <= floor)
+		pose->p.y = floor;
 
 
 	//cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;

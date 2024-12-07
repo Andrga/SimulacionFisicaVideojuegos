@@ -26,6 +26,7 @@ protected:
 	// Current particles
 	Scene* scene = nullptr;
 	int nGameObjects = 0;
+	int nGameObjectsTotal = 0;
 	std::unordered_map<GameObject*, bool> generatedGameObjects; // Partículas generadas por este generador
 
 

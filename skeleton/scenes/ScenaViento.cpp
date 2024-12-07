@@ -15,7 +15,7 @@ void ScenaViento::setup()
 	addSystem(fSys);
 
 	// generador de viento
-	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, this, { 10,0,0 });
+	VientoGenerador* vgen = new VientoGenerador({ 0,0,0 }, this, { 0,0,0 });
 	fSys->addForceGenerator(vgen);
 
 	vgen->setRadious(100);
