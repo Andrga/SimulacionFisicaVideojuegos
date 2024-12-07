@@ -11,7 +11,9 @@ public:
 
 	PxRigidActor* getActor() override { return actor; }
 	void setShape(PxShape* shp) override;
+	void setDensity(float d) { density = d; };
 private:
 	PxRigidDynamic* actor = nullptr;
+	float density = 1.5;
 };
 

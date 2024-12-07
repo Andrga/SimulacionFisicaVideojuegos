@@ -16,5 +16,8 @@ void ScenaSolidoRigido::setup()
 
 
 	RBDynamic* caja = new RBDynamic(gPhysics);
+	caja->setPosition({ 0,100,0 });
+	caja->setDensity(100); 
 	gScene->addActor(*caja->getActor());
+
 }

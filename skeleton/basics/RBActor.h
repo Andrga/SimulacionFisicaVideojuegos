@@ -24,16 +24,16 @@ public:
 
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
-	PxVec3 getPosition() { return pose.p; };
-	PxQuat getRotation() { return pose.q; };
+	virtual PxVec3 getPosition() {};
+	virtual PxQuat getRotation() {};
 
 	// setters
-	void setPosition(PxVec3 pos) { pose.p = pos; };
-	void setRotation(PxQuat rot) { pose.q = rot; };
+	virtual void setPosition(PxVec3 pos) {};
+	//virtual void setRotation(PxQuat rot) { pose.q = rot; };
 	virtual void setShape(PxShape* shp) { renderItem->shape = shape; }
 
 protected:
-	PxTransform pose;
+	//PxTransform* pose;
 	PxShape* shape;
 	RenderItem* renderItem;
 };
