@@ -160,7 +160,7 @@ public:
 		ForceGenerator({ 0,h,0 }, scn), k(K) {};
 	~FlotationGenerator() {};
 
-	bool onRadious(Particle* part) override { return part->getPose().p.y <= origen.y; };
+	bool onRadious(Particle* part) override { return part->getPosition().y <= origen.y; };
 
 	Vector3 generateForce(Particle& particle) override;
 

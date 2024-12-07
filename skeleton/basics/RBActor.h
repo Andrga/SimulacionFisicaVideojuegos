@@ -2,12 +2,12 @@
 #include "../RenderUtils.hpp"
 #include <PxPhysicsAPI.h>
 #include "iostream"
-#include "../basics/Object.h"
+#include "GameObject.h"
 
 using namespace std;
 using namespace physx;
 
-class RBActor : public Object
+class RBActor : public GameObject
 {
 public:
 	RBActor(PxPhysics* gPhysics) {};
@@ -24,17 +24,10 @@ public:
 
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
-	virtual PxVec3 getPosition() {};
-	virtual PxQuat getRotation() {};
 
-	// setters
-	virtual void setPosition(PxVec3 pos) {};
-	//virtual void setRotation(PxQuat rot) { pose.q = rot; };
-	virtual void setShape(PxShape* shp) { renderItem->shape = shape; }
 
 protected:
 	//PxTransform* pose;
 	PxShape* shape;
-	RenderItem* renderItem;
 };
 

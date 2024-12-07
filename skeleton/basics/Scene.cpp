@@ -70,7 +70,7 @@ void Scene::addSystem(System* sys)
 	systems.push_back(sys);
 }
 
-void Scene::addObject(Object* obj)
+void Scene::addObject(GameObject* obj)
 {
 	objects.push_back(obj);
 }

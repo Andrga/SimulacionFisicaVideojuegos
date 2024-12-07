@@ -10,15 +10,11 @@
     <ClCompile Include="main.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="basics\SceneManager.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="basics\Widget.cpp">
-      <Filter>Resource\basics</Filter>
-    </ClCompile>
-    <ClCompile Include="basics\Object.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
     <ClCompile Include="basics\Particle.cpp">
@@ -65,6 +61,18 @@
     </ClCompile>
     <ClCompile Include="scenes\ScenaMuelles.cpp">
       <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\ScenaSolidoRigido.cpp">
+      <Filter>Resource\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\RBDynamic.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\RBStatic.cpp">
+      <Filter>Resource\basics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +141,21 @@
       <Filter>Head\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="scenes\ScenaMuelles.h">
+      <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="basics\GameObject.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="basics\RBActor.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="basics\RBDynamic.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="basics\RBStatic.h">
+      <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\ScenaSolidoRigido.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

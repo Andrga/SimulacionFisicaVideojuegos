@@ -1,10 +1,8 @@
 #pragma once
-#include "Object.h"
+#include "GameObject.h"
 #include "../RenderUtils.hpp"
-#include <PxPhysicsAPI.h>
-#include "iostream"
 
-class Widget : public Object
+class Widget : public GameObject
 {
 public:
 	Widget(Vector3 Pos = { 0,0,0 }, float siz = 1);

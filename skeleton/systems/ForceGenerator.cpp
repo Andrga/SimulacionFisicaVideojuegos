@@ -31,7 +31,7 @@ bool ForceGenerator::onRadious(Particle* part)
 {
 	if (radious == 0)
 		return true;
-	return (part->getPose().p - origen).magnitude() <= radious;
+	return (part->getPosition() - origen).magnitude() <= radious;
 }
 
 void ForceGenerator::setRadious(float rad)
@@ -60,7 +60,7 @@ Vector3 VientoGenerador::generateForce(Particle& particle)
 Vector3 TorbellinoGenerator::generateForce(Particle& particle)
 {
 	Vector3 force(0, 0, 0),
-		partPos = particle.getPose().p;
+		partPos = particle.getPosition();
 
 	//calculo de la fuerza en torvellino
 	force = k * Vector3(-(partPos.z - origen.z), 50 - (partPos.y - origen.y), partPos.x - origen.x);
@@ -80,11 +80,11 @@ Vector3 ExplosionGenerator::generateForce(Particle& particle)
 
 
 	// distancia al centro de la explosion
-	float r = (particle.getPose().p - origen).magnitude();
+	float r = (particle.getPosition() - origen).magnitude();
 	// si la distancia es menor que el radio la fuerza es 0
 	if (r >= radious) return force; // creo que esto no hace falta, porque si entra al metodo es porque r<radious
 
-	force = ((k / r * r) * (particle.getPose().p - origen)) * exp(-simuleTime / tau);
+	force = ((k / r * r) * (particle.getPosition() - origen)) * exp(-simuleTime / tau);
 
 
 
@@ -97,7 +97,7 @@ Vector3 SpringGenerator::generateForce(Particle& particle)
 	Vector3 force{ 0,0,0 };
 
 	// largura actual del muelle
-	Vector3 dir = origen - particle.getPose().p;
+	Vector3 dir = origen - particle.getPosition();
 	float actuallenth = dir.magnitude();
 	dir.normalize();
 
@@ -114,11 +114,11 @@ Vector3 SpringGenerator::generateForce(Particle& particle)
 // ------ GOMA ELASTICA ------
 Vector3 GomaGenerator::generateForce(Particle& particle)
 {
-	Vector3 position1 = particle1->getPose().p;
+	Vector3 position1 = particle1->getPosition();
 	Vector3 force{ 0,0,0 };
 
 	// largura actual del muelle
-	Vector3 dir = position1 - particle.getPose().p;
+	Vector3 dir = position1 - particle.getPosition();
 	float actuallenth = dir.magnitude();
 	dir.normalize();
 
@@ -137,7 +137,7 @@ Vector3 GomaGenerator::generateForce(Particle& particle)
 Vector3 FlotationGenerator::generateForce(Particle& particle)
 {
 	float height = particle.getSize() * 2,
-		h = particle.getPose().p.y,
+		h = particle.getPosition().y,
 		h0 = origen.y,
 		immersed = 0,
 		liquidDensity = k,

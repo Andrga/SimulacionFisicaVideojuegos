@@ -9,6 +9,7 @@
 class Scene
 {
 protected:
+	// ANDRES AQUI JUNTAR TODOS LAS LISTAS EN UN MAPA UNORDERER CON UNA KEY DE NOMBRE
 	// vector de particulas
 	vector<Particle*> particles;
 	// vector para particulas generadas por un generador (para llevar el conteo de estas)
@@ -16,7 +17,7 @@ protected:
 	// vector de sistema de particulas
 	vector<System*> systems;
 	// vector de objetos extra
-	vector<Object*> objects;
+	vector<GameObject*> objects;
 
 	bool active = false;
 
@@ -37,7 +38,7 @@ public:
 	// Aniade sistema al vector
 	void addSystem(System* sys);
 	// Aniade objeto al vector de objetos extra
-	void addObject(Object* obj);
+	void addObject(GameObject* obj);
 	// activa y desactiva la escena
 	void show();
 	void hide();

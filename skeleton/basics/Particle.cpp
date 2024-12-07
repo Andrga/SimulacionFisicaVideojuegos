@@ -16,8 +16,12 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, float mass) : Particle(Pos, Vel, { 
 }
 
 Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float siz, float lifet, float mas) :
-	pose(physx::PxTransform(Pos)), velocity(Vel), acceleration(Acc), damping(Dmp), size(siz), startlifeTime(lifet), mass(mas)
+	velocity(Vel), acceleration(Acc), damping(Dmp), mass(mas)
 {
+	pose = physx::PxTransform(Pos);
+	size = siz;
+	startlifeTime = lifet;
+
 	color = { 0.5, 1, 1, 1.0 };
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(siz)), &pose, color);
 
@@ -29,13 +33,13 @@ Particle::~Particle()
 	DeregisterRenderItem(renderItem);
 }
 
-void Particle::changeShape(physx::PxShape* shap)
-{
-	if (renderItem == nullptr)
-		renderItem = new RenderItem(shap, &pose, color);
-	else
-		renderItem->shape = shap;
-}
+//void Particle::changeShape(physx::PxShape* shap)
+//{
+//	if (renderItem == nullptr)
+//		renderItem = new RenderItem(shap, &pose, color);
+//	else
+//		renderItem->shape = shap;
+//}
 
 
 void Particle::integrate(double t)
@@ -95,10 +99,7 @@ void Particle::setVisibility(bool visibility)
 		DeregisterRenderItem(renderItem);
 }
 
-void Particle::setPosition(Vector3 pos)
-{
-	pose.p = pos;
-}
+
 
 void Particle::applyForce()
 {

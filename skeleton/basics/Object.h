@@ -1,17 +1,27 @@
 #pragma once
+#include <PxPhysicsAPI.h>
+#include <string>
+#include "iostream"
+
+using namespace std;
+using namespace physx;
+
 class Object
 {
 protected:
 	bool alive = true;
-
+	string name;
 public:
-	Object();
-	virtual ~Object();
+	Object() {};
+	Object(string nam) :name(nam) {};
+	virtual ~Object() {};
 
 	virtual bool update(double t) = 0;
 
-	bool getAlive() const { return alive; }
-
-	virtual void setVisibility(bool visibility){}
+	// getters
+	void setName(string nam) { name = nam; }
+	// setters
+	bool getAlive() const noexcept { return alive; }
+	string getName() { return name; }
 };
 

@@ -19,7 +19,7 @@ void ScenaMuelles::setup()
 	sueloM->setImmovible(true);
 	sueloM->setStartLifeTime(50);
 	sueloM->setColor({ .5,.5,.5,0 });
-	sueloM->changeShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)));
+	sueloM->setShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)));
 
 	// particula a un ancla
 	Particle* part1 = new Particle({ -20,70,0 });
@@ -35,9 +35,9 @@ void ScenaMuelles::setup()
 	anch->setImmovible(true);
 	anch->setStartLifeTime(50);
 	anch->setColor({ 0.2,0.2,0.8,0 });
-	anch->changeShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
+	anch->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
 
-	fsys->addForceGenerator(new SpringGenerator(anch->getPose().p, this, 10, 7, part1));
+	fsys->addForceGenerator(new SpringGenerator(anch->getPosition(), this, 10, 7, part1));
 
 	// cadena de particula
 	Particle* part2 = new Particle({ -20,50,2 });
@@ -78,7 +78,7 @@ void ScenaMuelles::setup()
 	anch2->setImmovible(true);
 	anch2->setStartLifeTime(50);
 	anch2->setColor({ 0.2,0.8,0.2,0 });
-	anch2->changeShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
+	anch2->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
 
 
 	// cadena de particula
@@ -89,7 +89,7 @@ void ScenaMuelles::setup()
 	partD->setColor({ 0.2,0.8,0.2,1 });
 	partD->setFloor(20.5);
 
-	sprngGen = new SpringGenerator(anch2->getPose().p, this, 10, 10, partD);
+	sprngGen = new SpringGenerator(anch2->getPosition(), this, 10, 10, partD);
 	fsys->addForceGenerator(sprngGen);
 
 
@@ -131,7 +131,7 @@ void ScenaMuelles::setup()
 	superficieLiquido->setImmovible(true);
 	superficieLiquido->setStartLifeTime(50);
 	superficieLiquido->setColor({ 0.2,0.2,0.8,0 });
-	superficieLiquido->changeShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
+	superficieLiquido->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
 
 	// suelo flotacion
 	Particle* sueloF = new Particle({ 10,0, -50 });
@@ -139,7 +139,7 @@ void ScenaMuelles::setup()
 	sueloF->setImmovible(true);
 	sueloF->setStartLifeTime(50);
 	sueloF->setColor({ .5,.5,.5,0 });
-	sueloF->changeShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
+	sueloF->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
 
 
 
