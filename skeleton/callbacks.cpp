@@ -1,4 +1,5 @@
 #include "callbacks.hpp"
+#include "../skeleton/basics/RBActor.h"
 
 extern void onCollision(physx::PxActor* actor1, physx::PxActor* actor2);
 

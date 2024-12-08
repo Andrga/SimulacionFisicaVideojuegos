@@ -21,6 +21,7 @@ public:
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
 
+	virtual void onCollision(PxActor* otro) {};
 
 protected:
 	//PxTransform* pose;

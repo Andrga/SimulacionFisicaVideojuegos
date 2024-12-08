@@ -1,5 +1,7 @@
 #pragma once
 #include "../../basics/Scene.h"
+#include "../Basics/Button.h"
+#include "../../basics/RBDynamic.h"
 class ScenaIntro : public Scene
 {
 public:

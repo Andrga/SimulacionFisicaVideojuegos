@@ -11,9 +11,11 @@ public:
 
 	PxRigidActor* getActor() override { return actor; }
 	void setShape(PxShape* shp) override;
+	void setPosition(PxVec3 pos) override { actor->setGlobalPose(PxTransform(pos)); };
 
 	void setVisibility(bool vis) override;
-private:
+
+protected:
 	PxRigidStatic* actor;
 
 };
