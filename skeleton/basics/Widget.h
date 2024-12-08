@@ -13,6 +13,7 @@ public:
 
 	bool update(double t) override { return true; }
 
+
 private:
 };
 

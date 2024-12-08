@@ -15,6 +15,7 @@ protected:
 
 	// propiedades fisicas de los objetos
 	RenderItem* renderItem;
+	PxShape* shape;
 	Vector4 color;
 	physx::PxTransform* pose;
 	float size = 3;
@@ -48,7 +49,7 @@ public:
 	// setters
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
 	virtual void setRotation(PxQuat rot) { pose->q = rot; };
-	virtual void setShape(PxShape* shp) { renderItem->shape = shp; };
+	virtual void setShape(PxShape* shp, float siz);
 	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
 	void setSize(float siz) noexcept { size = siz; };
@@ -58,5 +59,7 @@ public:
 	// fuerzas 
 	virtual void addForce(float x, float y, float z) {}
 	virtual void addForce(Vector3 fc) {}
+
+	virtual void onCollision(GameObject* other) {};
 };
 

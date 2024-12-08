@@ -10,8 +10,9 @@ public:
 	bool update(double t) override { return RBActor::update(t); }
 
 	PxRigidActor* getActor() override { return actor; }
-	void setShape(PxShape* shp) override;
-
+	Vector3 getPosition() override { return actor->getGlobalPose().p; };
+	void setShape(PxShape* shp, float siz) override;
+	void setPosition(PxVec3 pos) override { GameObject::setPosition(pos); actor->setGlobalPose(*pose); };
 	void setVisibility(bool vis) override;
 private:
 	PxRigidStatic* actor;

@@ -42,6 +42,9 @@ public:
 	void pxSceneVisivility(PxRigidActor* actor, bool vis);
 
 
+	bool checkColisions(GameObject* gb1, GameObject* gb2);
+
+
 	int getGameObjectsCount() { return gameObjects.size(); }
 	void show();
 	void hide();

@@ -21,9 +21,6 @@ public:
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
 
-
-protected:
-	//PxTransform* pose;
-	PxShape* shape;
+	virtual void setShape(PxShape* shp, float siz) override { GameObject::setShape(shp, siz); }
 };
 

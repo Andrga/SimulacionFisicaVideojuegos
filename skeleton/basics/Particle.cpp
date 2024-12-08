@@ -9,9 +9,9 @@ Particle::Particle(const Particle& other) : GameObject(other.name, other.scene)
 	damping = other.damping;
 	size = other.size;
 	startlifeTime = other.startlifeTime;
-
+	shape = other.shape;
 	color = { 0.5, 1, 1, 1.0 };
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), pose, color);
+	renderItem = new RenderItem(shape, pose, color);
 
 }
 
@@ -23,9 +23,9 @@ Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 	damping = 0.8;
 	size = 5;
 	startlifeTime = 10;
-
+	shape = CreateShape(physx::PxSphereGeometry(size));
 	color = { 0.5, 1, 1, 1.0 };
-	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(size)), pose, color);
+	renderItem = new RenderItem(shape, pose, color);
 
 }
 
