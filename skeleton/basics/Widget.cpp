@@ -27,12 +27,3 @@ void Widget::changeShape(physx::PxShape* shap)
 	else
 		renderItem->shape = shap;
 }
-
-void Widget::setVisibility(bool visibility)
-{
-	if (renderItem == nullptr) return;
-	if (visibility)
-		RegisterRenderItem(renderItem);
-	else
-		DeregisterRenderItem(renderItem);
-}

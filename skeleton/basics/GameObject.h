@@ -31,7 +31,11 @@ public:
 	virtual bool update(double t) override;
 
 	// cambiar la visibilidad del objeto
-	virtual void setVisibility(bool visibility) {};
+	virtual void setVisibility(bool visibility) {
+		visibility ?
+			RegisterRenderItem(renderItem) :
+			DeregisterRenderItem(renderItem);
+	};
 
 	//getters
 	virtual Vector3 getPosition() { return pose->p; };

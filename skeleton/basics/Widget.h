@@ -11,8 +11,7 @@ public:
 
 	void changeShape(physx::PxShape* shap);
 
-	bool update(double t) override { return true; };
-	void setVisibility(bool visibility) override;
+	bool update(double t) override { return true; }
 
 private:
 };

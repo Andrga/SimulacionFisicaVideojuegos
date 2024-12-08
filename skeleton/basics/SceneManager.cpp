@@ -8,7 +8,7 @@ SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn): gPhysics(gphys), gS
 	addScene(new ScenaExplosion());
 	addScene(new ScenaMuelles());
 	addScene(new ScenaSolidoRigido(gPhysics, gScene));
-	setScene(4);
+	setScene(2);
 }
 
 SceneManager::~SceneManager()

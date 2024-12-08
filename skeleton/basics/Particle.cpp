@@ -20,7 +20,7 @@ Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 	pose = new physx::PxTransform(Pos);
 	velocity = { 0,0,0 };
 	acceleration = { 0,0,0 };
-	damping = 0.5;
+	damping = 0.8;
 	size = 5;
 	startlifeTime = 10;
 
@@ -92,9 +92,7 @@ void Particle::applyGravity()
 
 void Particle::setVisibility(bool visibility)
 {
-	visibility ?
-		RegisterRenderItem(renderItem) :
-		DeregisterRenderItem(renderItem);
+	GameObject::setVisibility(visibility);
 }
 
 

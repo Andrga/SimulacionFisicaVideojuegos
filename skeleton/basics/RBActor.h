@@ -10,17 +10,13 @@ using namespace physx;
 class RBActor : public GameObject
 {
 public:
-	RBActor(string nam, Scene* scn, PxPhysics* gPhysics): GameObject(nam, scn) {};
+	RBActor(string nam, Scene* scn, PxPhysics* gPhysics) : GameObject(nam, scn) {};
 	virtual ~RBActor() = default;
 
 	virtual bool update(double t) override { return true; }
 
 	// visibilidad
-	virtual void setVisibility(bool vis) override {
-		vis ?
-			RegisterRenderItem(renderItem) :
-			DeregisterRenderItem(renderItem);
-	};
+	virtual void setVisibility(bool vis) override { GameObject::setVisibility(vis); };
 
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
