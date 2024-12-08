@@ -10,7 +10,7 @@
 class SceneNiebla : public Scene
 {
 public:
-	SceneNiebla() : Scene() {};
+	SceneNiebla(Camera* cam) : Scene(cam) {};
 	~SceneNiebla() {};
 
 	void setup() override;

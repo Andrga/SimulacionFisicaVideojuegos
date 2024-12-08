@@ -9,7 +9,7 @@ private:
 	ExplosionGenerator* expls = nullptr;
 	SpringGenerator* sprngGen = nullptr;
 public:
-	ScenaMuelles() : Scene() {};
+	ScenaMuelles(Camera* cam) : Scene(cam) {};
 	~ScenaMuelles() {};
 
 	void setup() override;

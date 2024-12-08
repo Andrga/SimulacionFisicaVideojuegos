@@ -1,6 +1,6 @@
 #include "SceneParticleSystem.h"
 
-SceneParticleSystem::SceneParticleSystem(): Scene()
+SceneParticleSystem::SceneParticleSystem(Camera* cam): Scene(cam)
 {}
 
 SceneParticleSystem::~SceneParticleSystem()

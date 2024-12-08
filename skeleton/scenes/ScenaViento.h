@@ -10,7 +10,7 @@
 class ScenaViento : public Scene
 {
 public:
-	ScenaViento() : Scene() {};
+	ScenaViento(Camera* cam) : Scene(cam) {};
 	~ScenaViento() {};
 
 	void setup() override;

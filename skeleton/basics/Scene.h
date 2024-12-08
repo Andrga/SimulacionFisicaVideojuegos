@@ -14,7 +14,7 @@ protected:
 	unordered_map<string, GameObjectInfo> gameObjects;
 	// vector de sistemas
 	vector<System*> systems;
-
+	Camera* camera = nullptr;
 	bool active = false;
 
 	// escena fisica
@@ -22,7 +22,7 @@ protected:
 	physx::PxScene* gScene = nullptr;
 
 public:
-	Scene(physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr);
+	Scene(Camera* cam, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr);
 	~Scene();
 
 	virtual void setup() {};

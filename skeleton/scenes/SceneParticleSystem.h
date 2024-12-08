@@ -9,7 +9,7 @@
 class SceneParticleSystem : public Scene
 {
 public:
-	SceneParticleSystem();
+	SceneParticleSystem(Camera* cam);
 	~SceneParticleSystem();
 
 	void setup() override;

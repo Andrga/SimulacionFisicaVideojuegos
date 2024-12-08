@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene(physx::PxPhysics* gPhycs, physx::PxScene* gScn) : gPhysics(gPhycs), gScene(gScn)
+Scene::Scene(Camera* cam, physx::PxPhysics* gPhycs, physx::PxScene* gScn ) : gPhysics(gPhycs), gScene(gScn), camera(cam)
 {
 	setup();
 }

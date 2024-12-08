@@ -74,10 +74,17 @@
     <ClCompile Include="basics\RBStatic.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
-    <ClCompile Include="basics\GameObject.cpp" />
-    <ClCompile Include="Global.cpp" />
     <ClCompile Include="basics\Input.cpp">
       <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="basics\GameObject.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto final\Scenes\ScenaIntro.cpp">
+      <Filter>Proyecto final\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +170,14 @@
     <ClInclude Include="scenes\ScenaSolidoRigido.h">
       <Filter>Head\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h" />
     <ClInclude Include="basics\Input.h">
       <Filter>Head\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto final\Scenes\ScenaIntro.h">
+      <Filter>Proyecto final\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +213,12 @@
     </Filter>
     <Filter Include="Resource\Scenes">
       <UniqueIdentifier>{e59d36d3-b914-40d9-b348-033b66715327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proyecto final">
+      <UniqueIdentifier>{95acd552-e806-40a5-8569-b9faf244f44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proyecto final\Scenes">
+      <UniqueIdentifier>{565b89be-1539-4a9e-871e-46c817352168}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

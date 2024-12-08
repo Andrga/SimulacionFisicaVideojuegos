@@ -1,6 +1,6 @@
 #include "ScenaSolidoRigido.h"
 
-ScenaSolidoRigido::ScenaSolidoRigido(physx::PxPhysics* gPhycs, physx::PxScene* gScn) :Scene(gPhycs, gScn)
+ScenaSolidoRigido::ScenaSolidoRigido(Camera* cam, physx::PxPhysics* gPhycs, physx::PxScene* gScn) :Scene(cam, gPhycs, gScn)
 {
 }
 
