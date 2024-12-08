@@ -36,8 +36,11 @@ public:
 	// Aniade objeto al vector de objetos extra
 	//void addObject(GameObject* obj);
 	void addGameObject(GameObject* gob, ParticleGenerator* partGen = nullptr);
-	// activa y desactiva la escena
+	// elimina un objeto
 	void deleteGameObject(string name);
+	// elimina un objeto de la escena
+	void pxSceneVisivility(PxRigidActor* actor, bool vis);
+
 
 	int getGameObjectsCount() { return gameObjects.size(); }
 	void show();

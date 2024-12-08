@@ -8,7 +8,7 @@ ForceSystem::~ForceSystem()
 {
 }
 
-void ForceSystem::affectParticles(unordered_map<string, GameObjectInfo> gameObjects, double t)
+void ForceSystem::affectParticles(unordered_map<string, GameObjectInfo>const& gameObjects, double t)
 {
 	for (auto p : gameObjects) {
 		for (auto g : forceGenerators) {

@@ -16,6 +16,8 @@ public:
 	// getters
 	PxRigidActor* getActor() override { return actor; }
 
+	void setVisibility(bool vis) override;
+
 	void addForce(float x, float y, float z) override { actor->addForce({ x,y,z }); }
 	void addForce(Vector3 fc) override { actor->addForce(fc); }
 

@@ -18,6 +18,9 @@ Particle::Particle(const Particle& other) : GameObject(other.name, other.scene)
 Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 {
 	pose = new physx::PxTransform(Pos);
+	velocity = { 0,0,0 };
+	acceleration = { 0,0,0 };
+	damping = 0.5;
 	size = 5;
 	startlifeTime = 10;
 
@@ -29,8 +32,7 @@ Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 
 Particle::~Particle()
 {
-	cout << "-----PARTICULA ELIMINADA -----" << endl;
-	DeregisterRenderItem(renderItem);
+	cout << "-----PARTICULA ELIMINADA -----" << endl;;
 }
 
 
@@ -53,7 +55,7 @@ void Particle::integrate(double t)
 bool Particle::update(double t)
 {
 	// ANDRES AQUI LAS PARTICULAS QUE SE MUEVEN NO TIENEN BIEN PUESTAS LAS COORDENADAS (NAN) o el transform hace cosas raras en algun punto
-	cout << velocity.x << "/" << velocity.y << "/" << velocity.x << name << endl;
+	//cout << velocity.x << "/" << velocity.y << "/" << velocity.x << name << endl;
 	if (!alive)
 		return false;
 

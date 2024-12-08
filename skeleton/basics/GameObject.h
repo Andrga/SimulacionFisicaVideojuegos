@@ -26,7 +26,7 @@ protected:
 	float startlifeTime = 10;
 public:
 	GameObject(string nam, Scene* scn) :name(nam), scene(scn), Object() {};
-	~GameObject() {};
+	virtual ~GameObject() { DeregisterRenderItem(renderItem); };
 
 	virtual bool update(double t) override;
 
@@ -45,6 +45,7 @@ public:
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
 	virtual void setRotation(PxQuat rot) { pose->q = rot; };
 	virtual void setShape(PxShape* shp) { renderItem->shape = shp; };
+	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
 	void setSize(float siz) noexcept { size = siz; };
 	void setMass(float mas) noexcept { mass = mas; };

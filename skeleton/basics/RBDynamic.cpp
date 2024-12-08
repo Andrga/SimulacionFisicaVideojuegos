@@ -1,4 +1,5 @@
 #include "RBDynamic.h"
+#include "Scene.h"
 
 RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics): RBActor(nam, scn, gPhysics)
 {
@@ -25,4 +26,10 @@ void RBDynamic::setShape(PxShape* shp)
 	shape = shp;
 	RBActor::setShape(shp);
 	actor->attachShape(*shape);
+}
+
+void RBDynamic::setVisibility(bool vis)
+{
+	RBActor::setVisibility(vis);
+	scene->pxSceneVisivility(actor, vis);
 }

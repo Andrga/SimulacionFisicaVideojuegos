@@ -1,5 +1,14 @@
 #pragma once
-#include "Scene.h"
+#include "../scenes/SceneParticleSystem.h"
+#include "../scenes/SceneNiebla.h"
+
+#include "../scenes/ScenaViento.h"
+#include "../scenes/ScenaTorbellino.h"
+#include "../scenes/ScenaExplosion.h"
+#include "../scenes/ScenaMuelles.h"
+
+#include "../scenes/ScenaSolidoRigido.h"
+
 #include <vector>
 using namespace std;
 
@@ -7,10 +16,11 @@ class SceneManager
 {
 private:
 	vector<Scene*> scenes;
-
+	PxPhysics* gPhysics;
+	PxScene* gScene;
 	int actualScene = 0;
 public:
-	SceneManager();
+	SceneManager(PxPhysics* gphys, PxScene* gscn);
 	~SceneManager();
 	
 	void addScene(Scene* scn);

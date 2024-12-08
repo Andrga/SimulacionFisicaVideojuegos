@@ -7,19 +7,9 @@
 #include "core.hpp"
 #include "RenderUtils.hpp"
 #include "callbacks.hpp"
-
+#include "basics/SceneManager.h"
 #include <iostream>
 
-#include "basics/SceneManager.h"
-#include "scenes/SceneParticleSystem.h"
-#include "scenes/SceneNiebla.h"
-
-#include "scenes/ScenaViento.h"
-#include "scenes/ScenaTorbellino.h"
-#include "scenes/ScenaExplosion.h"
-#include "scenes/ScenaMuelles.h"
-
-#include "scenes/ScenaSolidoRigido.h"
 
 std::string display_text = "This is a test";
 
@@ -44,7 +34,7 @@ ContactReportCallback gContactReportCallback;
 SceneManager* sceneManager = nullptr;
 
 RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL;
-PxTransform x, y, z, t;
+PxTransform x, y, z;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -74,31 +64,16 @@ void initPhysics(bool interactive)
 	x = { 10.0,0.0,0.0 };
 	y = { 0.0,10.0,0.0 };
 	z = { 0.0,0.0,10.0 };
-	t = { 0.0,0.0,0.0 };
 
 	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &x, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &y, { 0.0, 1.0, 0.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
-	//zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &t, { 1.0, 1.0, 1.0, 1.0 });
 
 
-	// ------ creamos scena ------
-	sceneManager = new SceneManager();
-	//sceneManager->addScene(new SceneParticleSystem());
-	//sceneManager->addScene(new SceneNiebla());
+	// ------ creamos el scene manager ------
+	sceneManager = new SceneManager(gPhysics, gScene);
 
-	// ESCENAS DE FUERZAS
-	sceneManager->addScene(new ScenaViento());
-	sceneManager->addScene(new ScenaTorbellino());
-	sceneManager->addScene(new ScenaExplosion());
-	sceneManager->addScene(new ScenaMuelles());
-	sceneManager->addScene(new ScenaSolidoRigido(gPhysics, gScene));
-	sceneManager->setScene(4);
 
-	//Particle* part = new Particle(Particle({ 0,10,0 }, { 0,0,0 }, 3));
-	//part->applyGravity();
-	//scene->addObject(part);
-	////part->addForce({ 0,-9.8,0 });
 
 }
 
@@ -142,31 +117,6 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	PX_UNUSED(camera);
 
 	sceneManager->keyPressed(key, camera);
-
-	//switch (toupper(key))
-	//{
-	//	//case 'B': break;
-	//	//case ' ':	break;
-	//case ' ':
-	//{
-	//	break;
-	//}
-	//case '0':
-	//{
-	//	sceneManager->setScene(0);
-	//	break;
-	//}
-	//case '1':
-	//{
-	//	sceneManager->setScene(1);
-	//	break;
-	//}
-	//case 'K':
-	//	//scene->addObject(new Proyectile(camera.p, camera.q.getBasisVector2() * -25, { 0,0,0 }));
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)

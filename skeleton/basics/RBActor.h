@@ -16,7 +16,7 @@ public:
 	virtual bool update(double t) override { return true; }
 
 	// visibilidad
-	void setVisibility(bool vis) override {
+	virtual void setVisibility(bool vis) override {
 		vis ?
 			RegisterRenderItem(renderItem) :
 			DeregisterRenderItem(renderItem);

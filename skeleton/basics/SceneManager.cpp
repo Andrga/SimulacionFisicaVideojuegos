@@ -1,7 +1,14 @@
 #include "SceneManager.h"
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn): gPhysics(gphys), gScene(gscn)
 {
+	// ESCENAS DE FUERZAS
+	addScene(new ScenaViento());
+	addScene(new ScenaTorbellino());
+	addScene(new ScenaExplosion());
+	addScene(new ScenaMuelles());
+	addScene(new ScenaSolidoRigido(gPhysics, gScene));
+	setScene(4);
 }
 
 SceneManager::~SceneManager()
@@ -52,6 +59,10 @@ void SceneManager::keyPressed(unsigned char key, const physx::PxTransform& camer
 	case'3':
 		cout << "-- ESCENA 3 --" << endl;
 		setScene(3);
+		break;
+	case'4':
+		cout << "-- ESCENA 4 --" << endl;
+		setScene(4);
 		break;
 
 	default:

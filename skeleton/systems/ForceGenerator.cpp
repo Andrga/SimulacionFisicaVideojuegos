@@ -29,6 +29,7 @@ ForceGenerator::~ForceGenerator()
 
 bool ForceGenerator::onRadious(GameObject* obj)
 {
+	if (obj == nullptr) return false;
 	if (radious == 0)
 		return true;
 	return (obj->getPosition() - origen).magnitude() <= radious;

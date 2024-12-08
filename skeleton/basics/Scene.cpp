@@ -13,42 +13,16 @@ void Scene::update(double t)
 {
 	// si no esta activa la escena no updatea
 	if (!active) return;
-	/*
-	// Actualiza todas las particulas
-	for (int i = 0; i < particles.size(); i++) {
-
-		// Si el update devuelve false es que la particula ha muerto por lo que la elimina y la quita del vector
-		particles[i]->update(t);
-	}
 
 
-	for (auto o : objects)
-	{
-		o->update(t);
-	}
-
-	// borrado de particulas
-	for (int i = 0; i < particles.size(); i++) {
-
-		if (!particles[i]->getAlive()) {
-			Particle* deadParticle = particles[i];
-
-			// Notificar al generador, si existe
-			if (particleToGenerator.find(deadParticle) != particleToGenerator.end()) {
-				ParticleGenerator* generator = particleToGenerator[deadParticle];
-				generator->onGameObjectDeath(deadParticle);
-				particleToGenerator.erase(deadParticle);
-			}
-
-			// Eliminar la particula
-			delete deadParticle;
-			particles.erase(particles.begin() + i);
-			i--;
-		}
-	}*/
-
+	//cout << "TIEMPO ENTRE UPDATES: " << t << endl;
 	vector<string> objetosEliminar;
 	for (auto ob : gameObjects) {
+		if (ob.second.gameObject == nullptr) {
+			objetosEliminar.push_back(ob.second.gameObject->getName());
+			continue;
+		}
+
 		ob.second.gameObject->update(t);
 
 		if (!ob.second.gameObject->getAlive())
@@ -65,21 +39,6 @@ void Scene::update(double t)
 		s->affectParticles(gameObjects, t);
 	}
 }
-/*
-void Scene::addParticle(Particle* prt, ParticleGenerator* gen)
-{
-	particles.push_back(prt);
-
-	// Si la particula viene de un generador
-	if (gen) {
-		particleToGenerator[prt] = gen; // Asociar particula con su generador
-	}
-}
-void Scene::addObject(GameObject* obj)
-{
-	objects.push_back(obj);
-}
-*/
 
 void Scene::addSystem(System* sys)
 {
@@ -89,9 +48,9 @@ void Scene::addSystem(System* sys)
 
 void Scene::addGameObject(GameObject* gob, ParticleGenerator* partGen)
 {
-	if (gameObjects.count(gob->getName())){
+	if (gameObjects.count(gob->getName())) {
 		std::cout << "YA EXISTE ESTE OBJETO" << std::endl;
-		return;
+		gob->setName(gob->getName() + "(1)");
 	}
 	GameObjectInfo infogb;
 
@@ -109,17 +68,21 @@ void Scene::deleteGameObject(string name)
 		gbInfo->second.partGen->onGameObjectDeath(gbInfo->second.gameObject);
 		gbInfo->second.partGen = nullptr; // para que no elimine el generador de particulas
 	}
-	gameObjects.erase(gbInfo);
+	delete gbInfo->second.gameObject;
+	gameObjects.erase(name);
 	std::cout << "objeto eliminado: " << name << endl;
+}
+
+void Scene::pxSceneVisivility(PxRigidActor* actor, bool vis)
+{
+	vis ?
+		gScene->addActor(*actor) :
+		gScene->removeActor(*actor);
 }
 
 void Scene::show()
 {
 	update(0);
-	/*for (auto p : particles)
-		p->setVisibility(true);
-	for (auto o : objects)
-		o->setVisibility(true);*/
 
 	for (auto go : gameObjects)
 		go.second.gameObject->setVisibility(true);
@@ -129,11 +92,6 @@ void Scene::show()
 
 void Scene::hide()
 {
-	/*for (auto p : particles)
-		p->setVisibility(false);
-	for (auto o : objects)
-		o->setVisibility(false);*/
-
 	for (auto go : gameObjects)
 		go.second.gameObject->setVisibility(false);
 
