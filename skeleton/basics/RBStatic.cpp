@@ -1,4 +1,5 @@
 #include "RBStatic.h"
+#include "Scene.h"
 
 RBStatic::RBStatic(string nam, Scene* scn, PxPhysics* gPhysics): RBActor(nam, scn, gPhysics)
 {
@@ -26,4 +27,10 @@ void RBStatic::setShape(PxShape* shp)
 	shape = shp;
 	RBActor::setShape(shp);
 	actor->attachShape(*shape);
+}
+
+void RBStatic::setVisibility(bool vis)
+{
+	RBActor::setVisibility(vis);
+	scene->pxSceneVisivility(actor, vis);
 }

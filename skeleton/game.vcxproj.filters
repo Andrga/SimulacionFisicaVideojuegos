@@ -74,6 +74,11 @@
     <ClCompile Include="basics\RBStatic.cpp">
       <Filter>Resource\basics</Filter>
     </ClCompile>
+    <ClCompile Include="basics\GameObject.cpp" />
+    <ClCompile Include="Global.cpp" />
+    <ClCompile Include="basics\Input.cpp">
+      <Filter>Resource\basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -157,6 +162,10 @@
     </ClInclude>
     <ClInclude Include="scenes\ScenaSolidoRigido.h">
       <Filter>Head\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="basics\Input.h">
+      <Filter>Head\basics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

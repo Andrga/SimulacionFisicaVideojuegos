@@ -12,6 +12,7 @@ public:
 	PxRigidActor* getActor() override { return actor; }
 	void setShape(PxShape* shp) override;
 
+	void setVisibility(bool vis) override;
 private:
 	PxRigidStatic* actor;
 

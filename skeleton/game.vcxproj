@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="basics\GameObject.cpp" />
+    <ClCompile Include="basics\Input.cpp" />
     <ClCompile Include="basics\Particle.cpp" />
     <ClCompile Include="basics\Proyectile.cpp" />
     <ClCompile Include="basics\RBDynamic.cpp" />
@@ -283,6 +284,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basics\GameObject.h" />
+    <ClInclude Include="basics\Input.h" />
     <ClInclude Include="basics\Object.h" />
     <ClInclude Include="basics\Particle.h" />
     <ClInclude Include="basics\Proyectile.h" />
