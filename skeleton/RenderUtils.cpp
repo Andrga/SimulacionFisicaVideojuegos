@@ -1,7 +1,7 @@
 #include <vector>
 
 #include "PxPhysicsAPI.h"
-
+#include "iostream"
 #include "core.hpp"
 #include "RenderUtils.hpp"
 
@@ -162,6 +162,8 @@ void RegisterRenderItem(const RenderItem* _item)
 
 void DeregisterRenderItem(const RenderItem* _item)
 {
+
+	std::cout << "Desregistrando renderItem..." << std::endl;
 	auto it = find(gRenderItems.begin(), gRenderItems.end(), _item);
 	if (it == gRenderItems.end()) return;
 	gRenderItems.erase(it);

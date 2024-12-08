@@ -63,6 +63,9 @@ void Scene::deleteGameObject(string name)
 {
 	auto gbInfo = gameObjects.find(name);
 
+	// en caso de que ya se hubiera eliminado
+	if (gbInfo == gameObjects.end()) return;
+
 	// si esta atacchado a un sistema de particulas lo notifica para que elimine el gameobject
 	if (gbInfo->second.partGen) {
 		gbInfo->second.partGen->onGameObjectDeath(gbInfo->second.gameObject);
