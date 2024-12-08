@@ -19,7 +19,7 @@ void ScenaMuelles::setup()
 	sueloM->setImmovible(true);
 	sueloM->setStartLifeTime(50);
 	sueloM->setColor({ .5,.5,.5,0 });
-	sueloM->setShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)));
+	sueloM->setShape(CreateShape(physx::PxBoxGeometry(30, 0.2, 40)), 40);
 
 	// particula a un ancla
 	Particle* part1 = new Particle("part1", this, { -20, 70, 0 });
@@ -35,7 +35,7 @@ void ScenaMuelles::setup()
 	anch->setImmovible(true);
 	anch->setStartLifeTime(50);
 	anch->setColor({ 0.2,0.2,0.8,0 });
-	anch->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
+	anch->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)), 1);
 
 	fsys->addForceGenerator(new SpringGenerator(anch->getPosition(), this, 10, 7, part1));
 
@@ -78,7 +78,7 @@ void ScenaMuelles::setup()
 	anch2->setImmovible(true);
 	anch2->setStartLifeTime(50);
 	anch2->setColor({ 0.2,0.8,0.2,0 });
-	anch2->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)));
+	anch2->setShape(CreateShape(physx::PxBoxGeometry(1, 1, 1)), 1);
 
 
 	// cadena de particula
@@ -131,7 +131,7 @@ void ScenaMuelles::setup()
 	superficieLiquido->setImmovible(true);
 	superficieLiquido->setStartLifeTime(50);
 	superficieLiquido->setColor({ 0.2,0.2,0.8,0 });
-	superficieLiquido->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
+	superficieLiquido->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)), 20);
 
 	// suelo flotacion
 	Particle* sueloF = new Particle("SueloF", this, { 10, 0, -50 });
@@ -139,7 +139,7 @@ void ScenaMuelles::setup()
 	sueloF->setImmovible(true);
 	sueloF->setStartLifeTime(50);
 	sueloF->setColor({ .5,.5,.5,0 });
-	sueloF->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)));
+	sueloF->setShape(CreateShape(physx::PxBoxGeometry(20, 0.2, 10)), 20);
 
 
 
