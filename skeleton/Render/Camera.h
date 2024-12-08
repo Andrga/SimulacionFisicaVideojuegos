@@ -45,14 +45,19 @@ public:
 	void				handleMotion(int x, int y);
 	void				handleAnalogMove(float x, float y);
 
+	void                moveTo(const physx::PxVec3& newEye);
+	void                lookAt(const physx::PxVec3& target);
+
 	physx::PxVec3		getEye()	const;
 	physx::PxVec3		getDir()	const;
 	physx::PxTransform	getTransform() const;
+	void				setMovible(bool mov) noexcept;
 private:
 	physx::PxVec3	mEye;
 	physx::PxVec3	mDir;
 	int				mMouseX;
 	int				mMouseY;
+	bool			movible = false; // la camara no se puede mover por defecto
 };
 
 

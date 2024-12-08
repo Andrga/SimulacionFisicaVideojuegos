@@ -2,13 +2,14 @@
 
 SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn): gPhysics(gphys), gScene(gscn)
 {
-	// ESCENAS DE FUERZAS
-	addScene(new ScenaViento(GetCamera()));
-	addScene(new ScenaTorbellino(GetCamera()));
-	addScene(new ScenaExplosion(GetCamera()));
-	addScene(new ScenaMuelles(GetCamera()));
-	addScene(new ScenaSolidoRigido(GetCamera(), gPhysics, gScene));
-	setScene(2);
+	//// ESCENAS DE FUERZAS
+	//addScene(new ScenaViento(GetCamera()));
+	//addScene(new ScenaTorbellino(GetCamera()));
+	//addScene(new ScenaExplosion(GetCamera()));
+	//addScene(new ScenaMuelles(GetCamera()));
+	//addScene(new ScenaSolidoRigido(GetCamera(), gPhysics, gScene));
+	addScene(new ScenaIntro(gPhysics, gScene));
+	setScene(0);
 }
 
 SceneManager::~SceneManager()

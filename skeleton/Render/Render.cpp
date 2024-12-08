@@ -254,6 +254,9 @@ void setupDefaultWindow(const char *name)
 	int mainHandle = glutCreateWindow(name);
 	glutSetWindow(mainHandle);
 	glutReshapeFunc(reshapeCallback);
+
+	// ventana completa
+	glutFullScreen();
 	
 	delete[] namestr;
 }
@@ -293,7 +296,7 @@ void startRender(const PxVec3& cameraEye, const PxVec3& cameraDir, PxReal clipNe
 	// Setup camera
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, GLdouble(glutGet(GLUT_WINDOW_WIDTH)) / GLdouble(glutGet(GLUT_WINDOW_HEIGHT)), GLdouble(clipNear), GLdouble(clipFar));
+	gluPerspective(60, GLdouble(glutGet(GLUT_WINDOW_WIDTH)) / GLdouble(glutGet(GLUT_WINDOW_HEIGHT)), GLdouble(clipNear), GLdouble(clipFar));
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

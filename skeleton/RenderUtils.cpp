@@ -49,7 +49,7 @@ namespace
 
 void motionCallback(int x, int y)
 {
-	sCamera->handleMotion(x, y);
+	//sCamera->handleMotion(x, y);
 }
 
 void keyboardCallback(unsigned char key, int x, int y)

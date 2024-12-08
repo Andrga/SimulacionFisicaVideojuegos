@@ -254,7 +254,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="basics\GameObject.cpp" />
-    <ClCompile Include="basics\Input.cpp" />
     <ClCompile Include="basics\Particle.cpp" />
     <ClCompile Include="basics\Proyectile.cpp" />
     <ClCompile Include="basics\RBDynamic.cpp" />
@@ -265,7 +264,8 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Proyecto final\Scenes\ScenaIntro.cpp" />
+    <ClCompile Include="ProyectoFinal\Basics\Button.cpp" />
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
@@ -285,7 +285,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basics\GameObject.h" />
-    <ClInclude Include="basics\Input.h" />
     <ClInclude Include="basics\Object.h" />
     <ClInclude Include="basics\Particle.h" />
     <ClInclude Include="basics\Proyectile.h" />
@@ -299,7 +298,8 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Global.h" />
-    <ClInclude Include="Proyecto final\Scenes\ScenaIntro.h" />
+    <ClInclude Include="ProyectoFinal\Basics\Button.h" />
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />

@@ -8,6 +8,7 @@
 #include "../scenes/ScenaMuelles.h"
 
 #include "../scenes/ScenaSolidoRigido.h"
+#include "../ProyectoFinal/scenes/ScenaIntro.h"
 
 #include <vector>
 using namespace std;
