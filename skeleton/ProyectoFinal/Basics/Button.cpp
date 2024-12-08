@@ -9,7 +9,7 @@ Button::~Button()
 {
 }
 
-void Button::onCollision(PxActor* other)
+void Button::onCollision(GameObject* other)
 {
 	cout << "colision con boton" << endl;
 }

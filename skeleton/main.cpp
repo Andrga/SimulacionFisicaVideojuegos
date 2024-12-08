@@ -121,19 +121,19 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
-	/*
+	
 	PX_UNUSED(actor1);
-	PX_UNUSED(actor2);*/
+	PX_UNUSED(actor2);
 
 	// gestion de colisiones propia
-	if (actor1->userData) {
+	/*if (actor1->userData) {
 		auto* actor = static_cast<RBActor*>(actor1->userData);
 		actor->onCollision(actor2);
 	}
 	if (actor2->userData) {
 		auto* actor = static_cast<RBActor*>(actor2->userData);
 		actor->onCollision(actor1);
-	}
+	}*/
 
 	cout << "COLISION" << endl;
 }

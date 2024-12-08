@@ -8,6 +8,6 @@ public:
 	Button(string nam, Scene* scn, PxPhysics* gPhysics);
 	~Button();
 
-	void onCollision(PxActor* other) override;
+	void onCollision(GameObject* other) override;
 };
 
