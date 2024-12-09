@@ -34,7 +34,7 @@ ContactReportCallback gContactReportCallback;
 SceneManager* sceneManager = nullptr;
 
 RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL;
-PxTransform x, y, z;
+PxTransform ejX, ejY, ejZ;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -61,13 +61,13 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	// ------ Creamos los ejes ------
-	x = { 10.0,0.0,0.0 };
-	y = { 0.0,10.0,0.0 };
-	z = { 0.0,0.0,10.0 };
+	ejX = { 10.0,0.0,0.0 };
+	ejY = { 0.0,10.0,0.0 };
+	ejZ = { 0.0,0.0,10.0 };
 
-	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &x, { 1.0, 0.0, 0.0, 1.0 });
-	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &y, { 0.0, 1.0, 0.0, 1.0 });
-	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &z, { 0.0, 0.0, 1.0, 1.0 });
+	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejX, { 1.0, 0.0, 0.0, 1.0 });
+	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejY, { 0.0, 1.0, 0.0, 1.0 });
+	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejZ, { 0.0, 0.0, 1.0, 1.0 });
 
 
 	// ------ creamos el scene manager ------
@@ -119,21 +119,16 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	sceneManager->keyPressed(key, camera);
 }
 
+void mouseInput(int button, int state, int x, int y)
+{
+	sceneManager->mouseInput(button, state, x, y);
+}
+
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
 	
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
-
-	// gestion de colisiones propia
-	/*if (actor1->userData) {
-		auto* actor = static_cast<RBActor*>(actor1->userData);
-		actor->onCollision(actor2);
-	}
-	if (actor2->userData) {
-		auto* actor = static_cast<RBActor*>(actor2->userData);
-		actor->onCollision(actor1);
-	}*/
 
 	cout << "COLISION" << endl;
 }

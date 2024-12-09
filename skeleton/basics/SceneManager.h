@@ -30,6 +30,7 @@ public:
 	void setScene(int id);
 
 	void keyPressed(unsigned char key, const physx::PxTransform& camera);
+	void mouseInput(int button, int state, int x, int y);
 
 };
 

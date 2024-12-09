@@ -73,3 +73,8 @@ void SceneManager::keyPressed(unsigned char key, const physx::PxTransform& camer
 		break;
 	}
 }
+
+void SceneManager::mouseInput(int button, int state, int x, int y)
+{
+	scenes[actualScene]->mouseInput(button, state, x, y);
+}

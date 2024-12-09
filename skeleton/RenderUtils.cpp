@@ -12,6 +12,7 @@ extern void initPhysics(bool interactive);
 extern void stepPhysics(bool interactive, double t);	
 extern void cleanupPhysics(bool interactive);
 extern void keyPress(unsigned char key, const PxTransform& camera);
+extern void mouseInput(int button, int state, int x, int y);
 extern PxPhysics* gPhysics;
 extern PxMaterial* gMaterial;
 
@@ -64,6 +65,7 @@ void keyboardCallback(unsigned char key, int x, int y)
 void mouseCallback(int button, int state, int x, int y)
 {
 	sCamera->handleMouse(button, state, x, y);
+	mouseInput(button, state, x, y);
 }
 
 void idleCallback()

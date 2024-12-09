@@ -126,16 +126,16 @@ namespace Snippets
 		return mDir;
 	}
 
-	// Nuevo método: mover la cámara a una nueva posición
+	// Mover la camara a una nueva posicion
 	void Camera::moveTo(const PxVec3& newEye)
 	{
 		mEye = newEye;
 	}
 
-	// Nuevo método: hacer que la cámara mire a un punto específico
+	// Hacer que la camara mire a un punto especifico
 	void Camera::lookAt(const PxVec3& target)
 	{
-		// Calculamos el vector de dirección desde la posición de la cámara hacia el objetivo
+		// Calculamos el vector de direccion desde la posicion de la camara hacia el objetivo
 		PxVec3 dir = target - mEye;
 		mDir = dir.getNormalized();
 	}

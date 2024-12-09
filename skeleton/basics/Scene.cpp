@@ -145,7 +145,14 @@ void Scene::keyPressed(unsigned char key, const physx::PxTransform& camera)
 
 }
 
+void Scene::mouseInput(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) rayCast(x, y);
+}
+
 GameObject* Scene::rayCast(float mPosX, float mPosY)
 {
+	cout << "X: " << mPosX << " Y: " << mPosY << endl;
+
 	return nullptr;
 }

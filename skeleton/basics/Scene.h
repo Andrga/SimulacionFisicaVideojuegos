@@ -56,6 +56,7 @@ public:
 	void hide();
 
 	virtual void keyPressed(unsigned char key, const physx::PxTransform& camera);
+	virtual void mouseInput(int button, int state, int x, int y);
 	// lanza una particula desde la camara hacia delante y devuelve el gameobject con el que ha chocado
 	GameObject* rayCast(float mPosX, float mPosY);
 };
