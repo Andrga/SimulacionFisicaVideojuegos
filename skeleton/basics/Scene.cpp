@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene(Camera* cam, physx::PxPhysics* gPhycs, physx::PxScene* gScn) : gPhysics(gPhycs), gScene(gScn), camera(cam)
+Scene::Scene(SceneManager* scnMang, physx::PxPhysics* gPhycs, physx::PxScene* gScn) : gPhysics(gPhycs), gScene(gScn), camera(GetCamera()), sceneManager(scnMang)
 {
 	setup();
 }
@@ -138,4 +138,14 @@ void Scene::hide()
 		go.second.gameObject->setVisibility(false);
 
 	active = false;
+}
+
+void Scene::keyPressed(unsigned char key, const physx::PxTransform& camera)
+{
+
+}
+
+GameObject* Scene::rayCast(float mPosX, float mPosY)
+{
+	return nullptr;
 }

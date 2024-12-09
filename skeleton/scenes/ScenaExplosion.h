@@ -8,7 +8,7 @@ class ScenaExplosion : public Scene
 private:
 	ExplosionGenerator* explosionGen = nullptr;
 public:
-	ScenaExplosion(Camera* cam) : Scene(cam) {};
+	ScenaExplosion(SceneManager* scnMang) : Scene(scnMang) {};
 	~ScenaExplosion() {};
 
 	void setup() override;

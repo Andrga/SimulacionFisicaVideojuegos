@@ -3,6 +3,7 @@
 #include "../RenderUtils.hpp"
 #include <string>
 #include <PxPhysicsAPI.h> 
+#include <functional>
 
 class Scene;
 
@@ -39,14 +40,17 @@ public:
 	};
 
 	//getters
+#pragma region Getters
 	virtual Vector3 getPosition() { return pose->p; };
 	virtual PxQuat getRotation() { return pose->q; };
 	Vector3 getSize() { return size; };
 	string getName() { return name; };
 	float getMass() { return mass; };
 	Vector3 getVelocity() { return velocity; };
+#pragma endregion
 
 	// setters
+#pragma region Setters
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
 	virtual void setRotation(PxQuat rot) { pose->q = rot; };
 	virtual void setShape(PxShape* shp, Vector3 siz);
@@ -55,11 +59,25 @@ public:
 	void setSize(Vector3 siz) noexcept { size = siz; };
 	void setMass(float mas) noexcept { mass = mas; };
 	void setVelocity(Vector3 vel) noexcept { velocity = vel; }
+#pragma endregion
 
-	// fuerzas 
+	//gestion de fuerzas
+protected:
+public:
+	// Aniade fuerza
 	virtual void addForce(float x, float y, float z) {}
+	// Aniade fuerza
 	virtual void addForce(Vector3 fc) {}
 
-	virtual void onCollision(GameObject* other) {};
+
+	// gestion de colisiones (llamado a callbacks)
+protected:
+	using ColCallback = std::function<void()>;
+	vector<ColCallback> callbacks;
+public:
+	// aniade callback a la lista
+	void addCallback(const ColCallback& cb) { callbacks.push_back(cb); }
+	// ejecuta los callbacks del objeto
+	virtual void onCollision(GameObject* other) { for (auto c : callbacks) c(); };
 };
 

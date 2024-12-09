@@ -13,7 +13,7 @@ public:
 	Vector3 getPosition() override { return actor->getGlobalPose().p; };
 	void setShape(PxShape* shp, Vector3 siz) override;
 	void setPosition(PxVec3 pos) override { GameObject::setPosition(pos); actor->setGlobalPose(*pose); };
-	void setVisibility(bool vis) override;
+	virtual void setVisibility(bool vis) override;
 
 protected:
 	PxRigidStatic* actor;

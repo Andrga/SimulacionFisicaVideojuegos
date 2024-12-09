@@ -10,7 +10,7 @@
 class ScenaTorbellino : public Scene
 {
 public:
-	ScenaTorbellino(Camera* cam) : Scene(cam)  {};
+	ScenaTorbellino(SceneManager* scnMang) : Scene(scnMang)  {};
 	~ScenaTorbellino() {};
 
 	void setup() override;

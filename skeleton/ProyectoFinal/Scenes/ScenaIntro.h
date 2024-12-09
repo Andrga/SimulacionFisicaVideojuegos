@@ -5,9 +5,14 @@
 class ScenaIntro : public Scene
 {
 public:
-	ScenaIntro(PxPhysics* gphys, PxScene* gscn) :Scene(GetCamera(), gphys, gscn) {};
+	ScenaIntro(SceneManager* scnMang, PxPhysics* gphys, PxScene* gscn) :Scene(scnMang, gphys, gscn) {};
 	~ScenaIntro() {}
 
 	void setup()override;
+
+	// metodos de los botones
+	void Start();
+	void Quit();
+
 };
 
