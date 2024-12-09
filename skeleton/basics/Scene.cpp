@@ -19,11 +19,15 @@ void Scene::update(double t)
 
 	for (auto& o1 : gameObjects)
 	{
+		// si el objeto1 es un widget ( no le afectan las colisiones) salta al sigiente
+		if (typeid(o1.second.gameObject) == typeid(Widget*)) continue;
 		for (auto& o2 : gameObjects)
 		{
-			if (o1.first == o2.first) continue;
+			// si el objeto 1 y el objeto 2 son el mismo, o si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
+			if (o1.first == o2.first || typeid(o2.second.gameObject) == typeid(Widget*)) continue;
 			if (checkColisions(o1.second.gameObject, o2.second.gameObject))
 			{
+				// llama a los metodos de colision de ambos objetos
 				o1.second.gameObject->onCollision(o2.second.gameObject);
 				o2.second.gameObject->onCollision(o1.second.gameObject);
 			}
@@ -103,18 +107,18 @@ bool Scene::checkColisions(GameObject* gb1, GameObject* gb2)
 	if (gb1 == nullptr || gb2 == nullptr)
 		return false;
 	// mitad del lado del bounding box
-	float halfSide1 = gb1->getSize() / 2;
-	float halfSide2 = gb2->getSize() / 2;
+	Vector3 halfSide1 = gb1->getSize();
+	Vector3 halfSide2 = gb2->getSize();
 
 	Vector3 posObj1 = gb1->getPosition();
 	Vector3 posObj2 = gb2->getPosition();
 
-	bool col =  (posObj1.x + halfSide1 >= posObj2.x && posObj1.x - halfSide1 <= posObj2.x + halfSide2) &&
-		(posObj1.y + halfSide1 >= posObj2.y - halfSide2 && posObj1.y - halfSide1 <= posObj2.y + halfSide2) &&
-		(posObj1.z + halfSide1 >= posObj2.z - halfSide2 && posObj1.z - halfSide1 <= posObj2.z + halfSide2);
+	bool col = (posObj1.x + halfSide1.x >= posObj2.x && posObj1.x - halfSide1.x <= posObj2.x + halfSide2.x) &&
+		(posObj1.y + halfSide1.y >= posObj2.y - halfSide2.y && posObj1.y - halfSide1.y <= posObj2.y + halfSide2.y) &&
+		(posObj1.z + halfSide1.z >= posObj2.z - halfSide2.y && posObj1.z - halfSide1.z <= posObj2.z + halfSide2.z);
 
-	if (col)
-		cout << "HA OLISIONADO " << gb1->getName() << " con " << gb2->getName() << endl;
+	/*if (col)
+		cout << "HA OLISIONADO " << gb1->getName() << " con " << gb2->getName() << endl;*/
 	return col;
 }
 

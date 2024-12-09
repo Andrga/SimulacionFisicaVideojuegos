@@ -34,9 +34,9 @@ void Sangre::generateParticle()
 		velocity.z = ZnormalDistribution(generator);
 		lifetime = LFEnormalDistribution(generator);
 
-		Particle* aux = new Proyectile("Object" + scene->getGameObjectsCount(), scene, origen, velocity, 1);
+		Particle* aux = new Proyectile("Object" + scene->getGameObjectsCount(), scene, origen, velocity, {1,1,1});
 		aux->setVelocity(velocity);
-		aux->setSize(1);
+		aux->setSize({1,1,1});
 		aux->setStartLifeTime(lifetime);
 		generatedGameObjects[aux] = true; // Aniaadir al mapa
 		scene->addGameObject(aux, this); // Aniaadir a la escena y pasar referencia del generador

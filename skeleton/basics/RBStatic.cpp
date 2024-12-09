@@ -6,8 +6,8 @@ RBStatic::RBStatic(string nam, Scene* scn, PxPhysics* gPhysics): RBActor(nam, sc
 
 	pose = new PxTransform({ 0,0,0 });
 	actor = gPhysics->createRigidStatic(*pose);
-	size = 5;
-	shape = CreateShape(PxBoxGeometry(size,size,size));
+	size = { 5,5,5 };
+	shape = CreateShape(PxBoxGeometry(size));
 	actor->attachShape(*shape);
 	//_scene->addActor(*estatico);
 
@@ -23,7 +23,7 @@ RBStatic::~RBStatic()
 {
 }
 
-void RBStatic::setShape(PxShape* shp, float siz)
+void RBStatic::setShape(PxShape* shp, Vector3 siz)
 {
 	RBActor::setShape(shp, siz);
 	actor->attachShape(*shape);

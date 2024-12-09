@@ -4,7 +4,7 @@
 Widget::Widget(string nam, Scene* scn, Vector3 Pos, float siz) : GameObject(nam, scn)
 {
 	pose = new PxTransform(Pos);
-	size = siz;
+	size = { siz,siz,siz };
 
 	if (siz > 0)
 		renderItem = new RenderItem(CreateShape(PxSphereGeometry(siz)), pose, { 1, 0.0, 0.0, 0.01 });

@@ -71,7 +71,7 @@ void CascadaGen::generateParticle()
 		// creamos la nueva particula
 		Particle* aux = new Particle("Object" + to_string(nGameObjectsTotal), scene, origen2);
 		aux->setVelocity(velocity);
-		aux->setSize(0.5);
+		aux->setSize({ 0.5 ,0.5 ,0.5 });
 		aux->setStartLifeTime(lifetime);
 		aux->applyGravity();
 
@@ -127,7 +127,7 @@ void NieblaGen::generateParticle()
 		// creamos la nueva particula
 		Particle* aux = new Particle("Object" + to_string(nGameObjectsTotal), scene, origen2);
 		aux->setVelocity(velocity);
-		aux->setSize(0.25);
+		aux->setSize({ 0.25 ,0.25 ,0.25 });
 		aux->setStartLifeTime(lifetime);
 
 		// añadimos las particulas a la lista

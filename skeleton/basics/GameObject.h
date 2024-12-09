@@ -18,7 +18,7 @@ protected:
 	PxShape* shape;
 	Vector4 color;
 	physx::PxTransform* pose;
-	float size = 3;
+	Vector3 size = { 3,3,3 };
 	float mass = 1;
 	Vector3 velocity = { 0,0,0 };
 
@@ -41,7 +41,7 @@ public:
 	//getters
 	virtual Vector3 getPosition() { return pose->p; };
 	virtual PxQuat getRotation() { return pose->q; };
-	float getSize() { return size; };
+	Vector3 getSize() { return size; };
 	string getName() { return name; };
 	float getMass() { return mass; };
 	Vector3 getVelocity() { return velocity; };
@@ -49,10 +49,10 @@ public:
 	// setters
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
 	virtual void setRotation(PxQuat rot) { pose->q = rot; };
-	virtual void setShape(PxShape* shp, float siz);
+	virtual void setShape(PxShape* shp, Vector3 siz);
 	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
-	void setSize(float siz) noexcept { size = siz; };
+	void setSize(Vector3 siz) noexcept { size = siz; };
 	void setMass(float mas) noexcept { mass = mas; };
 	void setVelocity(Vector3 vel) noexcept { velocity = vel; }
 

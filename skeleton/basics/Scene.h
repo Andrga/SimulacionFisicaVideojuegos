@@ -5,6 +5,7 @@
 #include "Particle.h"
 #include "System.h"
 #include <unordered_map>
+#include <typeinfo>
 #include "../Global.h"
 
 class Scene

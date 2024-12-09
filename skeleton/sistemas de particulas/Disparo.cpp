@@ -22,7 +22,7 @@ void Disparo::generateParticle()
 		// creamos la nueva particula
 		Particle* aux = new Particle("Object" + scene->getGameObjectsCount(), scene, origen);
 		aux->setVelocity({ 0,0,50 });
-		aux->setSize(0.5);
+		aux->setSize({ 0.5 ,0.5 ,0.5 });
 		aux->setStartLifeTime(1);
 		// aniaadimos las particulas a la lista
 		generatedGameObjects[aux] = true; // Aniaadir al mapa

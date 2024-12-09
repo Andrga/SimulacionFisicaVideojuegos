@@ -11,7 +11,7 @@ public:
 
 	//setters
 	void setPosition(PxVec3 pos) override { GameObject::setPosition(pos); actor->setGlobalPose(*pose); };
-	void setShape(PxShape* shp, float siz) override;
+	void setShape(PxShape* shp, Vector3 siz) override;
 	void setDensity(float d) { density = d; };
 	void setVisibility(bool vis) override;
 	// getters

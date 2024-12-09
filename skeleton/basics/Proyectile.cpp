@@ -1,11 +1,11 @@
 #include "Proyectile.h"
 
-Proyectile::Proyectile(string nam, Scene* scn, Vector3 Pos, Vector3 Vel, float siz) :
+Proyectile::Proyectile(string nam, Scene* scn, Vector3 Pos, Vector3 Vel, Vector3 siz) :
 	Proyectile(nam, scn, Pos, Vel, { 0,0,0 }, 1, 1, siz)
 {
 }
 
-Proyectile::Proyectile(string nam, Scene* scn, Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float mas, float siz) :
+Proyectile::Proyectile(string nam, Scene* scn, Vector3 Pos, Vector3 Vel, Vector3 Acc, float Dmp, float mas, Vector3 siz) :
 	Particle(nam, scn, Pos)
 {
 	velocity = Vel;

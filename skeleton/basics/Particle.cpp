@@ -21,9 +21,9 @@ Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 	velocity = { 0,0,0 };
 	acceleration = { 0,0,0 };
 	damping = 0.8;
-	size = 5;
+	size = { 5,5,5 };
 	startlifeTime = 10;
-	shape = CreateShape(physx::PxSphereGeometry(size));
+	shape = CreateShape(physx::PxSphereGeometry(size.y));
 	color = { 0.5, 1, 1, 1.0 };
 	renderItem = new RenderItem(shape, pose, color);
 

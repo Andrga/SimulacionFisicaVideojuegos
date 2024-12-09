@@ -11,7 +11,7 @@ ScenaSolidoRigido::~ScenaSolidoRigido()
 void ScenaSolidoRigido::setup()
 {
 	RBStatic* suelo = new RBStatic("suelo", this, gPhysics);
-	suelo->setShape(CreateShape(PxBoxGeometry(100, 100, 100)), 200);
+	suelo->setShape(CreateShape(PxBoxGeometry(100, 100, 100)), { 100, 100, 100 });
 	suelo->setPosition({ 0,-200,0 });
 	gScene->addActor(*suelo->getActor());
 	addGameObject(suelo);
@@ -29,7 +29,7 @@ void ScenaSolidoRigido::setup()
 	particle->setFloor(-300);
 
 	addGameObject(particle);
-	
+
 	/*Particle* particle2 = new Particle("AMAI2", this, { 0,0,0 });
 	particle2->setImmovible(true);
 

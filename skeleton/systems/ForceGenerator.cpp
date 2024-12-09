@@ -137,12 +137,12 @@ Vector3 GomaGenerator::generateForce(GameObject& obj)
 // ------ FLOTACION -----
 Vector3 FlotationGenerator::generateForce(GameObject& particle)
 {
-	float height = particle.getSize() * 2,
+	float height = particle.getSize().y * 2,
 		h = particle.getPosition().y,
 		h0 = origen.y,
 		immersed = 0,
 		liquidDensity = k,
-		volume = pow(particle.getSize() * 2, 3);
+		volume = pow(particle.getSize().y * 2, 3);
 
 	if (h - h0 > height * 0.5) {
 		immersed = 0.0;

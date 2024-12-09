@@ -21,6 +21,6 @@ public:
 	// getters:
 	virtual PxRigidActor* getActor() { return nullptr; };
 	
-	virtual void setShape(PxShape* shp, float siz) override { GameObject::setShape(shp, siz); }
+	virtual void setShape(PxShape* shp, Vector3 siz) override { GameObject::setShape(shp, siz); }
 };
 
