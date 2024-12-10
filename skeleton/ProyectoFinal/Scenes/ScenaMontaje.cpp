@@ -23,3 +23,9 @@ void ScenaMontaje::setup()
 
 	addGameObject(movible3);
 }
+
+void ScenaMontaje::show()
+{
+	Scene::show();
+	camera->moveTo(CAMERA_START_POS);
+}

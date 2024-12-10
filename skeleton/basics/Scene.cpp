@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include "../systems/ParticleGenerator.h"
 
 Scene::Scene(SceneManager* scnMang, physx::PxPhysics* gPhycs, physx::PxScene* gScn) : gPhysics(gPhycs), gScene(gScn), camera(GetCamera()), sceneManager(scnMang)
 {

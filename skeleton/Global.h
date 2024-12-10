@@ -3,8 +3,8 @@
 #include "core.hpp"
 #include <string>
 #include "iostream"
-#include "systems/ParticleGenerator.h"
 
+class ParticleGenerator;
 class GameObject;
 
 struct GameObjectInfo
@@ -12,4 +12,7 @@ struct GameObjectInfo
 	GameObject* gameObject;
 	ParticleGenerator* partGen;
 };
+
+extern GameObject* MovingObj;
+extern bool Moving;
 

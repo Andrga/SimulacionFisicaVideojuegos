@@ -58,8 +58,8 @@ public:
 
 	// devuelve la cantidad de objetos en la escena
 	int getGameObjectsCount() { return gameObjects.size(); }
-	void show();
-	void hide();
+	virtual void show();
+	virtual void hide();
 
 	virtual void keyPressed(unsigned char key, const physx::PxTransform& camera);
 	virtual void mouseInput(int button, int state, int x, int y); // intento de input con raton

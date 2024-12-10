@@ -64,7 +64,7 @@ void initPhysics(bool interactive)
 	ejX = { 10.0,0.0,0.0 };
 	ejY = { 0.0,10.0,0.0 };
 	ejZ = { 0.0,0.0,10.0 };
-	centroPose = PxTransform({ GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 50 });
+	centroPose = PxTransform({ GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z });
 
 	cout << centroPose.p.x << "/" << centroPose.p.y << "/" << centroPose.p.z << endl;
 	cout << GetCamera()->getEye().x << "/" << GetCamera()->getEye().y << "/" << GetCamera()->getEye().z << endl;
@@ -73,7 +73,7 @@ void initPhysics(bool interactive)
 	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejX, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejY, { 0.0, 1.0, 0.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejZ, { 0.0, 0.0, 1.0, 1.0 });
-	centroRI = new RenderItem(CreateShape(PxSphereGeometry(0.5)), &centroPose, { 1.0, 1.0, 1.0, 1 });
+	centroRI = new RenderItem(CreateShape(PxSphereGeometry(0.05)), &centroPose, { 1.0, 1.0, 1.0, 1 });
 
 
 	// ------ creamos el scene manager ------
@@ -95,7 +95,7 @@ void stepPhysics(bool interactive, double t)
 	gScene->fetchResults(true);
 
 	//centroPose.p = GetCamera()->getEye();
-	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 50 };
+	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
 
 	// Update de la escena
 	if (sceneManager != nullptr)

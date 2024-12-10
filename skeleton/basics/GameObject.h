@@ -4,6 +4,7 @@
 #include <string>
 #include <PxPhysicsAPI.h> 
 #include <functional>
+#include "../Global.h"
 
 class Scene;
 

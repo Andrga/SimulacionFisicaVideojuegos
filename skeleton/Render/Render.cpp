@@ -261,7 +261,7 @@ void setupDefaultWindow(const char *name)
 	glutReshapeFunc(reshapeCallback);
 
 	// ventana completa 
-	glutFullScreen();
+	//glutFullScreen();
 	
 	delete[] namestr;
 }
