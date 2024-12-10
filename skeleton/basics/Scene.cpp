@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+
 Scene::Scene(SceneManager* scnMang, physx::PxPhysics* gPhycs, physx::PxScene* gScn) : gPhysics(gPhycs), gScene(gScn), camera(GetCamera()), sceneManager(scnMang)
 {
 	setup();
@@ -134,6 +135,7 @@ void Scene::show()
 
 void Scene::hide()
 {
+	update(0);
 	for (auto go : gameObjects)
 		go.second.gameObject->setVisibility(false);
 
@@ -142,6 +144,7 @@ void Scene::hide()
 
 void Scene::keyPressed(unsigned char key, const physx::PxTransform& camera)
 {
+	if (key == 13) rayCast();
 
 }
 
@@ -152,7 +155,100 @@ void Scene::mouseInput(int button, int state, int x, int y)
 
 GameObject* Scene::rayCast(float mPosX, float mPosY)
 {
-	cout << "X: " << mPosX << " Y: " << mPosY << endl;
 
-	return nullptr;
+	// PARA OTRO MOMENTO SI SE PUEDE
+
+	//cout << "X: " << camera->getMouseWorldPos().x << " Y: " << camera->getMouseWorldPos().y << endl;
+	//cout << "X: " << mPosX - glutGet(GLUT_SCREEN_WIDTH) / 2 << " Y: " << mPosY - glutGet(GLUT_SCREEN_HEIGHT) / 2 << endl;
+
+	//// normalizacion de las coordenadas en la pantalla
+	//float	nX = ((2 * mPosX) / glutGet(GLUT_SCREEN_WIDTH)) - 1,
+	//	nY = 1 - ((2 * mPosY) / glutGet(GLUT_SCREEN_HEIGHT));
+
+	//Vector3 direccion = camera->getDir() + Vector3(nX, nY, 1);
+
+	//cout << "DIRECCION EN Z: " << direccion.z << endl;
+
+	//// HAY QUE NORMALIZAR LA POSICION EN LA PANTALLA
+	//// 
+	//float velz = ((Vector3(0, 0, 0) - camera->getEye()) * PxVec3(1,0,0))
+
+	Particle* particleRaycast = new Particle("Ray", this, camera->getMouseWorldPos());
+	particleRaycast->setVelocity({ 0,0,-0.4 });
+	particleRaycast->setStartLifeTime(1000);
+	particleRaycast->setFloor(false);
+	particleRaycast->setDamping(1);
+
+	//particleRaycast->update(1);
+
+	cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
+	cout << camera->getEye().x << "/" << camera->getEye().y << "/" << camera->getEye().z << endl;
+	// lanzamiento del raycast si golpea elimina la particula
+	GameObject* golpeado = nullptr;
+
+
+	while (particleRaycast->getAlive())
+	{
+		particleRaycast->update(0.5);
+
+		for (auto& o2 : gameObjects)
+		{
+			// si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
+			if (typeid(o2.second.gameObject) == typeid(Widget*)) continue;
+			//cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
+			if (checkColisions(particleRaycast, o2.second.gameObject))
+			{
+				// llama a los metodos de colision de ambos objetos
+				o2.second.gameObject->onCollision(particleRaycast);
+				golpeado = o2.second.gameObject;
+				particleRaycast->setAlive(false);
+				cout << "HA COLISIONADO" << endl;
+			}
+		}
+	}
+	//cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
+
+	delete particleRaycast;
+
+	return golpeado;
+}
+
+GameObject* Scene::rayCast()
+{
+	// creacion de la particula que va a hacer de rayo
+	Particle* particleRaycast = new Particle("Ray", this, camera->getEye());
+	particleRaycast->setSize({ 0.5,0.5,0.5 });
+	particleRaycast->setVelocity(camera->getDir());
+	particleRaycast->setStartLifeTime(1000);
+	particleRaycast->setFloor(false);
+	particleRaycast->setDamping(1);
+
+
+	GameObject* golpeado = nullptr;
+
+
+	while (particleRaycast->getAlive())
+	{
+		particleRaycast->update(0.5);
+
+		for (auto& o2 : gameObjects)
+		{
+			// si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
+			if (typeid(o2.second.gameObject) == typeid(Widget*)) continue;
+			//cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
+			if (checkColisions(particleRaycast, o2.second.gameObject))
+			{
+				// llama a los metodos de colision de ambos objetos
+				o2.second.gameObject->onCollision(particleRaycast);
+				golpeado = o2.second.gameObject;
+				particleRaycast->setAlive(false);
+				//cout << "HA COLISIONADO" << endl;
+			}
+		}
+	}
+	//cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
+
+	delete particleRaycast;
+
+	return golpeado;
 }

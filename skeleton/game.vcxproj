@@ -265,7 +265,9 @@
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp" />
+    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
@@ -299,7 +301,9 @@
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="ProyectoFinal\Basics\Button.h" />
+    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />

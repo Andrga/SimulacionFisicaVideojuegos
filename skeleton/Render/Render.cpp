@@ -1,4 +1,5 @@
 // This code contains NVIDIA Confidential Information and is disclosed to you
+// This code contains NVIDIA Confidential Information and is disclosed to you
 // under a form of NVIDIA software license agreement provided separately to you.
 //
 // Notice
@@ -29,6 +30,8 @@
 
 #include "Render.h"
 #include <assert.h>
+
+float widthCam, heightCam;
 
 using namespace physx;
 
@@ -237,6 +240,8 @@ namespace
 void reshapeCallback(int width, int height)
 {
 	glViewport(0, 0, width, height);
+	widthCam = width;
+	heightCam = height;
 }
 }
 
@@ -256,7 +261,7 @@ void setupDefaultWindow(const char *name)
 	glutReshapeFunc(reshapeCallback);
 
 	// ventana completa 
-	//glutFullScreen();
+	glutFullScreen();
 	
 	delete[] namestr;
 }

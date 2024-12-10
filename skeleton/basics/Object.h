@@ -18,7 +18,8 @@ public:
 	virtual bool update(double t) = 0;
 
 	// getters
-	// setters
 	bool getAlive() const noexcept { return alive; }
+	// setters
+	void setAlive(bool alv) noexcept { alive = alv; }
 };
 

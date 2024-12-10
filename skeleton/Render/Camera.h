@@ -50,6 +50,7 @@ public:
 
 	physx::PxVec3		getEye()	const;
 	physx::PxVec3		getDir()	const;
+	physx::PxVec3		getMouseWorldPos()	const;
 	physx::PxTransform	getTransform() const;
 	void				setMovible(bool mov) noexcept;
 private:

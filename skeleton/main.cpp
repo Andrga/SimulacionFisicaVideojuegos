@@ -33,8 +33,8 @@ ContactReportCallback gContactReportCallback;
 
 SceneManager* sceneManager = nullptr;
 
-RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL;
-PxTransform ejX, ejY, ejZ;
+RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL, * centroRI = NULL;
+PxTransform ejX, ejY, ejZ, centroPose;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -64,10 +64,16 @@ void initPhysics(bool interactive)
 	ejX = { 10.0,0.0,0.0 };
 	ejY = { 0.0,10.0,0.0 };
 	ejZ = { 0.0,0.0,10.0 };
+	centroPose = PxTransform({ GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 50 });
+
+	cout << centroPose.p.x << "/" << centroPose.p.y << "/" << centroPose.p.z << endl;
+	cout << GetCamera()->getEye().x << "/" << GetCamera()->getEye().y << "/" << GetCamera()->getEye().z << endl;
+	//centroPose.p = {GetCamera()->getDir().x, GetCamera()->getDir().y, GetCamera()->getDir().z - 10};
 
 	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejX, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejY, { 0.0, 1.0, 0.0, 1.0 });
 	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejZ, { 0.0, 0.0, 1.0, 1.0 });
+	centroRI = new RenderItem(CreateShape(PxSphereGeometry(0.5)), &centroPose, { 1.0, 1.0, 1.0, 1 });
 
 
 	// ------ creamos el scene manager ------
@@ -87,6 +93,9 @@ void stepPhysics(bool interactive, double t)
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
+
+	//centroPose.p = GetCamera()->getEye();
+	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 50 };
 
 	// Update de la escena
 	if (sceneManager != nullptr)
@@ -126,7 +135,7 @@ void mouseInput(int button, int state, int x, int y)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
-	
+
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
 

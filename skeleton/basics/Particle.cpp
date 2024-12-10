@@ -32,7 +32,7 @@ Particle::Particle(string nam, Scene* scn, Vector3 Pos) : GameObject(nam, scn)
 
 Particle::~Particle()
 {
-	cout << "-----PARTICULA ELIMINADA -----" << endl;;
+	//cout << "-----PARTICULA ELIMINADA -----" << endl;;
 }
 
 
@@ -59,12 +59,12 @@ bool Particle::update(double t)
 	if (!alive)
 		return false;
 
-	if (lifeTime > startlifeTime)
+	if (startlifeTime >= 0 &&lifeTime > startlifeTime)
 	{
 		alive = false;
 		return false;
 	}
-	else
+	else if(startlifeTime >=0)
 		lifeTime += t;
 
 
@@ -77,7 +77,8 @@ bool Particle::update(double t)
 	// Metodo que hace los calculos para integrar la posicion
 	integrate(t);
 
-	if (pose->p.y <= floor)
+	// si hay suelo y la particula esta mas baja de lo que deberia la posicion en y de la particula es la del suelo
+	if (haysuelo && pose->p.y <= floor)
 		pose->p.y = floor;
 
 

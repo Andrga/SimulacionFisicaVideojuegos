@@ -27,7 +27,7 @@ void ScenaMuelles::setup()
 	part1->setStartLifeTime(50);
 	part1->applyGravity();
 	part1->setColor({ 0.2,0.2,0.8,1 });
-	part1->setFloor(20.5);
+	part1->setFloor(20.5f);
 
 	// ancla
 	Particle* anch = new Particle("anch", this, { -20, 70, 0 });
@@ -45,7 +45,7 @@ void ScenaMuelles::setup()
 	part2->setStartLifeTime(50);
 	part2->applyGravity();
 	part2->setColor({ 0.2,0.6,0.8,1 });
-	part2->setFloor(20.5);
+	part2->setFloor(20.5f);
 
 	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part2, part1));
 
@@ -56,7 +56,7 @@ void ScenaMuelles::setup()
 	part3->applyGravity();
 	part3->setMass(2);
 	part3->setColor({ 0.8,0.6,0.2,1 });
-	part3->setFloor(20.5);
+	part3->setFloor(20.5f);
 
 	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part3, part2));
 
@@ -65,7 +65,7 @@ void ScenaMuelles::setup()
 	part4->setStartLifeTime(50);
 	part4->applyGravity();
 	part4->setColor({ 0.8,0.2,0.2,1 });
-	part4->setFloor(20.5);
+	part4->setFloor(20.5f);
 	part4->setMass(50);
 
 	fsys->addForceGenerator(new GomaGenerator(this, 10, 7, part4, part3));
@@ -87,7 +87,7 @@ void ScenaMuelles::setup()
 	partD->setStartLifeTime(50);
 	partD->applyGravity();
 	partD->setColor({ 0.2,0.8,0.2,1 });
-	partD->setFloor(20.5);
+	partD->setFloor(20.5f);
 
 	sprngGen = new SpringGenerator(anch2->getPosition(), this, 10, 10, partD);
 	fsys->addForceGenerator(sprngGen);

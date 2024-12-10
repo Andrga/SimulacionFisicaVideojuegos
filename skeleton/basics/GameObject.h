@@ -59,6 +59,7 @@ public:
 	void setSize(Vector3 siz) noexcept { size = siz; };
 	void setMass(float mas) noexcept { mass = mas; };
 	void setVelocity(Vector3 vel) noexcept { velocity = vel; }
+	void setStartLifeTime(float life) { startlifeTime = life; }
 #pragma endregion
 
 	//gestion de fuerzas

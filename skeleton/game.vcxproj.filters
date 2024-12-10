@@ -86,6 +86,8 @@
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp">
       <Filter>Proyecto final\basics</Filter>
     </ClCompile>
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp" />
+    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -179,6 +181,8 @@
     <ClInclude Include="ProyectoFinal\Basics\Button.h">
       <Filter>Proyecto final\basics</Filter>
     </ClInclude>
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h" />
+    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

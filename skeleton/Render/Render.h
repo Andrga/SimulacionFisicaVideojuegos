@@ -49,6 +49,8 @@
 
 extern std::string display_text;
 
+extern float widthCam, heightCam;
+
 namespace Snippets
 {
 void setupDefaultWindow(const char* name);

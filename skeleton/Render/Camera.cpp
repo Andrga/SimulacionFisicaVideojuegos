@@ -33,6 +33,8 @@
 #include <ctype.h>
 #include "foundation/PxMat33.h"
 
+#include "../core.hpp"
+
 using namespace physx;
 
 namespace Snippets
@@ -124,6 +126,18 @@ namespace Snippets
 	PxVec3 Camera::getDir() const
 	{
 		return mDir;
+	}
+
+	physx::PxVec3 Camera::getMouseWorldPos() const
+	{
+		// posiciones normalizadas
+		float   nX = (2 * mMouseX) / widthCam - 1.0,
+				nY = 1- (2 * mMouseY) / heightCam;
+		// posiciones en el mundo
+		float   wX = nX * 100,
+				wY = nY * 60;
+
+		return physx::PxVec3(wX, wY, mEye.z);
 	}
 
 	// Mover la camara a una nueva posicion

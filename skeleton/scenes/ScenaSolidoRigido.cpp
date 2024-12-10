@@ -26,7 +26,7 @@ void ScenaSolidoRigido::setup()
 	Particle* particle = new Particle("AMAI", this, { 110,20,0 });
 	particle->setImmovible(false);
 	particle->applyGravity();
-	particle->setFloor(-300);
+	particle->setFloor(-300.0f);
 
 	addGameObject(particle);
 

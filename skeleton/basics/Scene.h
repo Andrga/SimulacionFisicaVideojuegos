@@ -16,6 +16,8 @@ protected:
 	SceneManager* sceneManager;
 	// Mapa objetos de juego 
 	unordered_map<string, GameObjectInfo> gameObjects;
+	// Mapa Particulas colision por raycast
+	unordered_map<string, GameObject> raycastPart;
 	// vector de sistemas
 	vector<System*> systems;
 	Camera* camera = nullptr;
@@ -50,14 +52,16 @@ public:
 	// metodo para comprobar si dos gameobjects se estan overlapeando
 	bool checkColisions(GameObject* gb1, GameObject* gb2);
 
+	// lanza una particula desde la camara hacia delante y devuelve el gameobject con el que ha chocado
+	GameObject* rayCast(float mPosX, float mPosY); // este no funciona es un intento de input con raton
+	GameObject* rayCast();
+
 	// devuelve la cantidad de objetos en la escena
 	int getGameObjectsCount() { return gameObjects.size(); }
 	void show();
 	void hide();
 
 	virtual void keyPressed(unsigned char key, const physx::PxTransform& camera);
-	virtual void mouseInput(int button, int state, int x, int y);
-	// lanza una particula desde la camara hacia delante y devuelve el gameobject con el que ha chocado
-	GameObject* rayCast(float mPosX, float mPosY);
+	virtual void mouseInput(int button, int state, int x, int y); // intento de input con raton
 };
 

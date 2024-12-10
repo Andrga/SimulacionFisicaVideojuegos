@@ -1,4 +1,5 @@
 #include "ScenaIntro.h"
+#include "../../basics/SceneManager.h"
 
 void ScenaIntro::setup()
 {
@@ -10,19 +11,20 @@ void ScenaIntro::setup()
 
 	Button* but = new Button("Start", this, gPhysics);
 	but->setPosition({ 0,0,0 });
-	but->setShape(CreateShape(PxBoxGeometry(1, 10, 10)), { 1, 10, 10 });
+	but->setShape(CreateShape(PxBoxGeometry(10, 10, 1)), { 10, 10, 1 });
 	addGameObject(but);
 	gScene->addActor(*but->getActor());
 	but->addCallback([this]() {this->Start(); });
-
-	//RBDynamic* cosa = new RBDynamic("caja", this, gPhysics);
-	//cosa->setPosition({ 0,20,0 });
-	//addGameObject(cosa);
-	//gScene->addActor(*cosa->getActor());
 
 }
 
 void ScenaIntro::Start()
 {
 	cout << "Start" << endl;
+	sceneManager->setScene(1);
+}
+
+void ScenaIntro::Quit()
+{
+	cout << "Quit" << endl;
 }

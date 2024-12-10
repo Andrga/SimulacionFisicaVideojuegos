@@ -31,10 +31,10 @@ public:
 
 	// setters:
 	void setAcceleration(Vector3 acc) { acceleration = acc; }
-	void setStartLifeTime(float life) { startlifeTime = life; }
 	void setImmovible(bool im) { immovible = im; }
 	void setDamping(float dmp) { damping = dmp; }
 	void setFloor(float h) { floor = h; }
+	void setFloor(bool flor) { haysuelo = flor; }
 
 	// fuerzas:
 	void addForce(float x, float y, float z) override { forces.push_back({ x,y,z }); }
@@ -53,6 +53,7 @@ protected:
 
 	// propiedades visuales de la particula
 	float floor = 0;
+	bool haysuelo = false;
 
 	//gravity
 	Vector3 gravity = { 0,-9.8,0 };
