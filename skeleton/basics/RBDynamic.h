@@ -4,7 +4,7 @@
 class RBDynamic : public RBActor
 {
 public:
-	RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics);
+	RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene);
 	~RBDynamic();
 
 	bool update(double t) override { return RBActor::update(t); }

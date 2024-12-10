@@ -6,7 +6,7 @@ SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn): gPhysics(gphys), gS
 	//addScene(new ScenaViento(GetCamera()));
 	//addScene(new ScenaTorbellino(GetCamera()));
 	//addScene(new ScenaExplosion(GetCamera()));
-	//addScene(new ScenaSolidoRigido(GetCamera(), gPhysics, gScene));
+	addScene(new ScenaSolidoRigido(this, gPhysics, gScene));
 	//addScene(new ScenaMuelles(this));
 	addScene(new ScenaIntro(this, gPhysics, gScene));
 	addScene(new ScenaMontaje(this, gPhysics, gScene));

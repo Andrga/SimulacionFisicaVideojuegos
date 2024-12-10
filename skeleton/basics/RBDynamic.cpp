@@ -1,17 +1,17 @@
 #include "RBDynamic.h"
 #include "Scene.h"
 
-RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics) : RBActor(nam, scn, gPhysics)
+RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene) : RBActor(nam, scn, gPhysics)
 {
-	density = 10.0f;
+	density = 0.15f;
 	pose = new PxTransform({ 0,20,0 });
 	actor = gPhysics->createRigidDynamic(*pose);
 	actor->setLinearVelocity({ 0,0,0 });
 	actor->setAngularVelocity({ 0,0,0 });
 	PxRigidBodyExt::updateMassAndInertia(*actor, density);
-	actor->setMass(100);
+	//actor->setMass(100);
 	size = { 10,10,10 };
-	//actor->setRigidBodyFlag(PxRigidBodyFlag::eENABLE_CCD, true);
+	gScene->addActor(*actor);
 
 	shape = CreateShape(PxBoxGeometry(size / 2));
 	actor->attachShape(*shape);

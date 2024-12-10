@@ -10,17 +10,15 @@ ScenaSolidoRigido::~ScenaSolidoRigido()
 
 void ScenaSolidoRigido::setup()
 {
-	RBStatic* suelo = new RBStatic("suelo", this, gPhysics);
+	RBStatic* suelo = new RBStatic("suelo", this, gPhysics, gScene);
 	suelo->setShape(CreateShape(PxBoxGeometry(100, 100, 100)), { 100, 100, 100 });
 	suelo->setPosition({ 0,-200,0 });
-	gScene->addActor(*suelo->getActor());
 	addGameObject(suelo);
 
 
-	RBDynamic* caja = new RBDynamic("caja", this, gPhysics);
+	RBDynamic* caja = new RBDynamic("caja", this, gPhysics, gScene);
 	caja->setPosition({ 0,0,0 });
 	caja->setDensity(100);
-	gScene->addActor(*caja->getActor());
 	addGameObject(caja);
 
 	Particle* particle = new Particle("AMAI", this, { 110,20,0 });

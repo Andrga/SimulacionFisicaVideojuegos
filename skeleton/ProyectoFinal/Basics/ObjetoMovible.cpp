@@ -1,6 +1,6 @@
 #include "ObjetoMovible.h"
 
-ObjetoMovible::ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics) : RBStatic(nam, scn, gPhysics){
+ObjetoMovible::ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene) : RBStatic(nam, scn, gPhysics,gScene){
 	// aniade el callback para alternar si se esta arrastrando el modulo o no
 	addCallback([this]() {this->alternateMoviendo(); });
 }

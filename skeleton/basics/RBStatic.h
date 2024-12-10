@@ -4,7 +4,7 @@
 class RBStatic : public RBActor
 {
 public:
-	RBStatic(string nam, Scene* scn, PxPhysics* gPhysics);
+	RBStatic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene);
 	~RBStatic();
 
 	PxRigidActor* getActor() override { return actor; }

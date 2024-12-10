@@ -9,7 +9,7 @@ void ScenaIntro::setup()
 
 	camera->setMovible(true);
 
-	Button* but = new Button("Start", this, gPhysics);
+	Button* but = new Button("Start", this, gPhysics, gScene);
 	but->setPosition({ 0,0,0 });
 	but->setShape(CreateShape(PxBoxGeometry(10, 10, 1)), { 10, 10, 1 });
 	addGameObject(but);

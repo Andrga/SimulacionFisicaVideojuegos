@@ -5,7 +5,7 @@ class ObjetoMovible : public RBStatic
 {
 	bool moviendo = false;
 public:
-	ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics);
+	ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene);
 	~ObjetoMovible() {};
 
 	bool update(double t) override;
