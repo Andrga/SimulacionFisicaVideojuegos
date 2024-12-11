@@ -1,11 +1,13 @@
 #pragma once
 #include "../../basics/Scene.h"
 #include"../Basics/ObjetoMovible.h"
+#include"../Basics/Button.h"
 
 class ScenaMontaje : public Scene
 {
 private:
-	const Vector3 CAMERA_START_POS = { 0,0,50 };
+	const Vector3 CAMERA_START_POS = { 0,0,100 };
+	ObjetoMovible* cabina = nullptr;
 public:
 	ScenaMontaje(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) :
 		Scene(scnMang, gPhysics, gScene) {};
@@ -13,5 +15,8 @@ public:
 
 	void setup()override;
 	void show() override;
+
+	void saveRocket();
+	void LaunchScene();
 };
 

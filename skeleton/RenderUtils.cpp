@@ -12,6 +12,7 @@ extern void initPhysics(bool interactive);
 extern void stepPhysics(bool interactive, double t);	
 extern void cleanupPhysics(bool interactive);
 extern void keyPress(unsigned char key, const PxTransform& camera);
+extern void keyReleased(unsigned char key, const PxTransform& camera);
 extern void mouseInput(int button, int state, int x, int y);
 extern PxPhysics* gPhysics;
 extern PxMaterial* gMaterial;
@@ -53,13 +54,19 @@ void motionCallback(int x, int y)
 	//sCamera->handleMotion(x, y);
 }
 
-void keyboardCallback(unsigned char key, int x, int y)
+void keyboardDownCallback(unsigned char key, int x, int y)
 {
 	if(key==27)
 		exit(0);
 
 	if(!sCamera->handleKey(key, x, y))
 		keyPress(key, sCamera->getTransform());
+}
+
+void keyboardUpCallback(unsigned char key, int x, int y)
+{
+	if (!sCamera->handleKey(key, x, y))
+		keyReleased(key, sCamera->getTransform());
 }
 
 void mouseCallback(int button, int state, int x, int y)
@@ -146,7 +153,8 @@ void renderLoop()
 
 	glutIdleFunc(idleCallback);
 	glutDisplayFunc(renderCallback);
-	glutKeyboardFunc(keyboardCallback);
+	glutKeyboardFunc(keyboardDownCallback);
+	glutKeyboardUpFunc(keyboardUpCallback); // callback para cuando dejas de pulsar una tecla
 	glutMouseFunc(mouseCallback);
 	glutMotionFunc(motionCallback);
 	motionCallback(0,0);

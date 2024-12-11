@@ -21,11 +21,11 @@ void Scene::update(double t)
 	for (auto& o1 : gameObjects)
 	{
 		// si el objeto1 es un widget ( no le afectan las colisiones) salta al sigiente
-		if (typeid(o1.second.gameObject) == typeid(Widget*)) continue;
+		if (o1.second.gameObject->getName().substr(0, 3) == "wid") continue;
 		for (auto& o2 : gameObjects)
 		{
 			// si el objeto 1 y el objeto 2 son el mismo, o si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
-			if (o1.first == o2.first || typeid(o2.second.gameObject) == typeid(Widget*)) continue;
+			if (o1.first == o2.first || o2.second.gameObject->getName().substr(0, 3) == "wid") continue;
 			if (checkColisions(o1.second.gameObject, o2.second.gameObject))
 			{
 				// llama a los metodos de colision de ambos objetos
@@ -144,15 +144,19 @@ void Scene::hide()
 
 void Scene::keyPressed(unsigned char key, const physx::PxTransform& camera)
 {
-	if (key == 13) rayCast();
+	if (key == 13 && !enterPulsed) { enterPulsed = true; rayCast(); }
+}
 
+void Scene::keyReleased(unsigned char key, const physx::PxTransform& camera)
+{
+	if (key == 13) enterPulsed = false;
 }
 
 void Scene::mouseInput(int button, int state, int x, int y)
 {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) rayCast(x, y);
+	//if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) rayCast(x, y);
 }
-
+/*
 GameObject* Scene::rayCast(float mPosX, float mPosY)
 {
 
@@ -170,7 +174,7 @@ GameObject* Scene::rayCast(float mPosX, float mPosY)
 	//cout << "DIRECCION EN Z: " << direccion.z << endl;
 
 	//// HAY QUE NORMALIZAR LA POSICION EN LA PANTALLA
-	//// 
+	////
 	//float velz = ((Vector3(0, 0, 0) - camera->getEye()) * PxVec3(1,0,0))
 
 	Particle* particleRaycast = new Particle("Ray", this, camera->getMouseWorldPos());
@@ -211,13 +215,13 @@ GameObject* Scene::rayCast(float mPosX, float mPosY)
 	delete particleRaycast;
 
 	return golpeado;
-}
+}*/
 
 GameObject* Scene::rayCast()
 {
 	// creacion de la particula que va a hacer de rayo
-	Particle* particleRaycast = new Particle("Ray", this, camera->getEye());
-	particleRaycast->setSize({ 0.5,0.5,0.5 });
+	Particle* particleRaycast = new Particle("ray", this, camera->getEye());
+	particleRaycast->setSize({ 0.01,0.01,0.01 });
 	particleRaycast->setVelocity(camera->getDir());
 	particleRaycast->setStartLifeTime(1000);
 	particleRaycast->setFloor(false);
@@ -234,7 +238,7 @@ GameObject* Scene::rayCast()
 		for (auto& o2 : gameObjects)
 		{
 			// si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
-			if (typeid(o2.second.gameObject) == typeid(Widget*)) continue;
+			if (o2.second.gameObject->getName().substr(0, 3) == "wid") continue;
 			//cout << particleRaycast->getPosition().x << "/" << particleRaycast->getPosition().y << "/" << particleRaycast->getPosition().z << endl;
 			if (checkColisions(particleRaycast, o2.second.gameObject))
 			{

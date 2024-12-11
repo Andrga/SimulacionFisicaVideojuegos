@@ -128,6 +128,14 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	sceneManager->keyPressed(key, camera);
 }
 
+// Funcion llamada cuando una tecla es despulsada
+void keyReleased(unsigned char key, const PxTransform& camera)
+{
+	PX_UNUSED(camera);
+
+	sceneManager->keyReleased(key, camera);
+}
+
 void mouseInput(int button, int state, int x, int y)
 {
 	sceneManager->mouseInput(button, state, x, y);

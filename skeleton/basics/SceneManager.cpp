@@ -1,6 +1,6 @@
 #include "SceneManager.h"
 
-SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn): gPhysics(gphys), gScene(gscn)
+SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn) : gPhysics(gphys), gScene(gscn)
 {
 	//// ESCENAS DE FUERZAS
 	//addScene(new ScenaViento(GetCamera()));
@@ -34,7 +34,7 @@ void SceneManager::setScene(int id)
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
-			scenes[i]->hide();
+		scenes[i]->hide();
 		if (i == id)
 			scenes[i]->show();
 	}
@@ -67,11 +67,15 @@ void SceneManager::keyPressed(unsigned char key, const physx::PxTransform& camer
 		break;
 
 	default:
-		for (auto s : scenes)
-			s->keyPressed(key, camera);
+		scenes[actualScene]->keyPressed(key, camera);
 
 		break;
 	}
+}
+
+void SceneManager::keyReleased(unsigned char key, const physx::PxTransform& camera)
+{
+		scenes[actualScene]->keyReleased(key, camera);
 }
 
 void SceneManager::mouseInput(int button, int state, int x, int y)

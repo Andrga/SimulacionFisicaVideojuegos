@@ -86,8 +86,15 @@
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp">
       <Filter>Proyecto final\basics</Filter>
     </ClCompile>
-    <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp" />
-    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp" />
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp">
+      <Filter>Proyecto final\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp">
+      <Filter>Proyecto final\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoFinal\Basics\Anchor.cpp">
+      <Filter>Proyecto final\basics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -181,8 +188,15 @@
     <ClInclude Include="ProyectoFinal\Basics\Button.h">
       <Filter>Proyecto final\basics</Filter>
     </ClInclude>
-    <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h" />
-    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h" />
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h">
+      <Filter>Proyecto final\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h">
+      <Filter>Proyecto final\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectoFinal\Basics\Anchor.h">
+      <Filter>Proyecto final\basics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
@@ -226,6 +240,9 @@
     </Filter>
     <Filter Include="Proyecto final\basics">
       <UniqueIdentifier>{1ad2e0d1-535d-43a0-88af-ac0443ebee5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Proyecto final\objetosDeJuego">
+      <UniqueIdentifier>{65a723bb-9dc3-465f-baee-568b85d9ef9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

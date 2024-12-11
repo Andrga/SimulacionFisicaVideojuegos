@@ -1,25 +1,28 @@
 #include "ScenaMontaje.h"
+#include <algorithm>
 
 void ScenaMontaje::setup()
 {
-	GameObject* movible1 = new ObjetoMovible("mov1", this, gPhysics, gScene);
-	movible1->setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5, 5, 5 });
-	movible1->setPosition({ -20,20,0 });
-	movible1->setColor({ 1,0,0,1 });
+	GameObject* butConfirm = new Button("buttonConfirmar", this, gPhysics, gScene);
+	butConfirm->setShape(CreateShape(PxBoxGeometry(5, 5, 1)), { 5, 5, 1 });
+	butConfirm->setPosition({ 50,50,0 });
+	butConfirm->setColor({ 0.5,1,0.5,1 });
+	butConfirm->addCallback([this]() {this->saveRocket(); });
+	butConfirm->addCallback([this]() {this->LaunchScene(); });
+	addGameObject(butConfirm);
 
-	addGameObject(movible1); 
+	cabina = new ObjetoMovible("mov1", this, gPhysics, gScene, CABINA);
+	cabina->setPosition({ -20,20,0 });
 
-	GameObject* movible2 = new ObjetoMovible("mov2", this, gPhysics, gScene);
-	movible2->setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5, 5, 5 });
+	addGameObject(cabina);
+
+	ObjetoMovible* movible2 = new ObjetoMovible("mov2", this, gPhysics, gScene, TANQUE);
 	movible2->setPosition({ 0,20,0 });
-	movible2->setColor({ 0,1,0,1 });
 
 	addGameObject(movible2);
-	
-	GameObject* movible3 = new ObjetoMovible("mov3", this, gPhysics, gScene);
-	movible3->setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5, 5, 5 });
+
+	ObjetoMovible* movible3 = new ObjetoMovible("mov3", this, gPhysics, gScene, PROPULSOR);
 	movible3->setPosition({ 20,20,0 });
-	movible3->setColor({ 0,0,1,1 });
 
 	addGameObject(movible3);
 }
@@ -28,4 +31,14 @@ void ScenaMontaje::show()
 {
 	Scene::show();
 	camera->moveTo(CAMERA_START_POS);
+}
+
+void ScenaMontaje::saveRocket()
+{
+	Cohete = cabina->generateModulo();
+}
+
+void ScenaMontaje::LaunchScene()
+{
+	cout << "LAUNCHSCENE" << endl;
 }

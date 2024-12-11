@@ -2,3 +2,4 @@
 
 GameObject* MovingObj = nullptr;
 bool Moving = false;
+ModuloInfo* Cohete = nullptr;

@@ -264,6 +264,7 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ProyectoFinal\Basics\Anchor.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
@@ -300,6 +301,7 @@
     <ClInclude Include="callbacks.hpp" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="ProyectoFinal\Basics\Anchor.h" />
     <ClInclude Include="ProyectoFinal\Basics\Button.h" />
     <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />
