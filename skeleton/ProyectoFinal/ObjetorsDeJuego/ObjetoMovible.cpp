@@ -70,8 +70,8 @@ void ObjetoMovible::addAnchor(ObjetoMovible* anch)
 		if (posAnch.x < posThis.x - sizeThis.x) // la posicion x del otro objeto es menor que el limite izquierdo de este objeto
 		{
 			//cout << "IZQUIERDA" << endl;
-			if (izquieda == nullptr) {
-				izquieda = anch;
+			if (izquierda == nullptr) {
+				izquierda = anch;
 				anch->derecha = this;
 				anch->alternateMoviendo();
 				anch->setPosition(Vector3(posThis.x - sizeAnch.x - sizeThis.x - 1, posThis.y, posThis.z));
@@ -83,7 +83,7 @@ void ObjetoMovible::addAnchor(ObjetoMovible* anch)
 			//cout << "DERECHA" << endl;
 			if (derecha == nullptr) {
 				derecha = anch;
-				anch->izquieda = this;
+				anch->izquierda = this;
 				anch->alternateMoviendo();
 				anch->setPosition(Vector3(posThis.x + sizeAnch.x + sizeThis.x + 1, posThis.y, posThis.z));
 				cout << anch->getPosition().x << "/" << anch->getPosition().y << "/" << anch->getPosition().z << endl;
@@ -125,12 +125,12 @@ void ObjetoMovible::deAtachAllAnch()
 {
 	if (derecha) derecha->deAtachAnch(2);
 	if (abajo) abajo->deAtachAnch(3);
-	if (izquieda) izquieda->deAtachAnch(0);
+	if (izquierda) izquierda->deAtachAnch(0);
 	if (arriba) arriba->deAtachAnch(1);
 
 	derecha = nullptr;
 	abajo = nullptr;
-	izquieda = nullptr;
+	izquierda = nullptr;
 	arriba = nullptr;
 }
 
@@ -140,7 +140,7 @@ void ObjetoMovible::deAtachAnch(int id)
 	{
 	case 0: derecha = nullptr; break;
 	case 1: abajo = nullptr; break;
-	case 2: izquieda = nullptr; break;
+	case 2: izquierda = nullptr; break;
 	case 3: arriba = nullptr; break;
 	default:
 		cout << "Estas intentando desatachar fuera del los lados del modulo" << endl;
@@ -150,30 +150,68 @@ void ObjetoMovible::deAtachAnch(int id)
 
 ModuloInfo* ObjetoMovible::generateModulo()
 {
-	ModuloInfo* nuevoModulo = new ModuloInfo();
+	ModuloInfo* base = new ModuloInfo();
 
 	// Asignamos el tipo de módulo
-	nuevoModulo->tipo = this->tipo;
+	base->tipo = this->tipo;
 
-	// Relacionamos los módulos adyacentes, usando las propiedades de izquierda, derecha, arriba y abajo
+	// Relacionamos los modulos adyacentes, usando las propiedades de izquierda, derecha, arriba y abajo
 	if (this->derecha != nullptr) {
-		nuevoModulo->derecha = this->derecha->generateModulo();
-		nuevoModulo->derecha->izquierda = nuevoModulo; // Relación bidireccional
+		this->derecha->izquierda = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modDer = generateModulo(this->derecha, base);
+		base->derecha = modDer; // asignamos el modulostruct al modulo base
 	}
 	if (this->abajo != nullptr) {
-		nuevoModulo->abajo = this->abajo->generateModulo();
-		nuevoModulo->abajo->arriba = nuevoModulo; // Relación bidireccional
+		this->abajo->arriba = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modAbaj = generateModulo(this->abajo, base);
+		base->abajo = modAbaj; // asignamos el modulostruct al modulo base
 	}
-	if (this->izquieda != nullptr) {
-		nuevoModulo->izquierda = this->izquieda->generateModulo();
-		nuevoModulo->izquierda->derecha = nuevoModulo; // Relación bidireccional
+	if (this->izquierda != nullptr) {
+		this->izquierda->derecha = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modIzq = generateModulo(this->izquierda, base);
+		base->izquierda = modIzq; // asignamos el modulostruct al modulo base
 	}
 	if (this->arriba != nullptr) {
-		nuevoModulo->arriba = this->arriba->generateModulo();
-		nuevoModulo->arriba->abajo = nuevoModulo; // Relación bidireccional
+		this->arriba->abajo = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modArr = generateModulo(this->arriba, base);
+		base->arriba = modArr; // asignamos el modulostruct al modulo base
 	}
 
-	return nuevoModulo;
+	return base;
+}
+
+ModuloInfo* ObjetoMovible::generateModulo(ObjetoMovible* nuevomodOBJ, ModuloInfo* nuevomodInfo)
+{
+	if (nuevomodOBJ == nullptr) return nullptr;
+
+	ModuloInfo* base = new ModuloInfo();
+	// Asignamos el tipo de modulo
+	base->tipo = nuevomodOBJ->tipo;
+
+
+	// Relacionamos los modulos adyacentes, usando las propiedades de izquierda, derecha, arriba y abajo
+	if (nuevomodOBJ->derecha != nullptr) {
+		nuevomodOBJ->derecha->izquierda = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modDer = generateModulo(nuevomodOBJ->derecha, base);
+		base->derecha = modDer; // asignamos el modulostruct al modulo base
+	}
+	if (nuevomodOBJ->abajo != nullptr) {
+		nuevomodOBJ->abajo->arriba = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modAbaj = generateModulo(nuevomodOBJ->abajo, base);
+		base->abajo = modAbaj; // asignamos el modulostruct al modulo base
+	}
+	if (nuevomodOBJ->izquierda != nullptr) {
+		nuevomodOBJ->izquierda->derecha = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modIzq = generateModulo(nuevomodOBJ->izquierda, base);
+		base->izquierda = modIzq; // asignamos el modulostruct al modulo base
+	}
+	if (nuevomodOBJ->arriba != nullptr) {
+		nuevomodOBJ->arriba->abajo = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
+		ModuloInfo* modArr = generateModulo(nuevomodOBJ->arriba, base);
+		base->arriba = modArr; // asignamos el modulostruct al modulo base
+	}
+
+	return base;
 }
 
 void ObjetoMovible::alternateMoviendo() {

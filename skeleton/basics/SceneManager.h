@@ -10,6 +10,7 @@
 #include "../scenes/ScenaSolidoRigido.h"
 #include "../ProyectoFinal/scenes/ScenaIntro.h"
 #include "../ProyectoFinal/scenes/ScenaMontaje.h"
+#include "../ProyectoFinal/scenes/ScenaLaunch.h"
 
 #include <vector>
 using namespace std;

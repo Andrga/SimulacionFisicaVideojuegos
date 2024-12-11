@@ -3,12 +3,9 @@
 
 void ScenaIntro::setup()
 {
-	// posicion de la camara
-	camera->moveTo({ 0,0,100 });
-	camera->lookAt({ 0,0,0 });
+	
 
-	camera->setMovible(true);
-
+	// boton de empezar
 	Button* but = new Button("Start", this, gPhysics, gScene);
 	but->setPosition({ 0,0,0 });
 	but->setShape(CreateShape(PxBoxGeometry(10, 10, 1)), { 10, 10, 1 });
@@ -27,4 +24,15 @@ void ScenaIntro::Start()
 void ScenaIntro::Quit()
 {
 	cout << "Quit" << endl;
+}
+
+void ScenaIntro::show()
+{
+	Scene::show();
+
+	// posicion de la camara
+	camera->moveTo({ 0,0,100 });
+	camera->lookAt({ 0,0,0 });
+
+	camera->setMovible(true);
 }

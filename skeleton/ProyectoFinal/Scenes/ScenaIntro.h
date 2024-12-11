@@ -14,5 +14,7 @@ public:
 	void Start();
 	void Quit();
 
+	void show() override;
+
 };
 

@@ -266,8 +266,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Anchor.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp" />
-    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp" />
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Modulo.cpp" />
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaLaunch.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
@@ -303,8 +305,10 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="ProyectoFinal\Basics\Anchor.h" />
     <ClInclude Include="ProyectoFinal\Basics\Button.h" />
-    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h" />
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Modulo.h" />
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaLaunch.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />

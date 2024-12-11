@@ -1,6 +1,6 @@
 #pragma once
 #include "../../basics/Scene.h"
-#include"../Basics/ObjetoMovible.h"
+#include"../ObjetorsDeJuego/ObjetoMovible.h"
 #include"../Basics/Button.h"
 
 class ScenaMontaje : public Scene

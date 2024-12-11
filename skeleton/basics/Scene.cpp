@@ -105,6 +105,8 @@ void Scene::pxSceneVisivility(PxRigidActor* actor, bool vis)
 
 bool Scene::checkColisions(GameObject* gb1, GameObject* gb2)
 {
+
+	// ANDRES AQUI, LA COLISION SOLO SE DETECTA CON UNA MITAD DEL OBJETO
 	if (gb1 == nullptr || gb2 == nullptr)
 		return false;
 	// mitad del lado del bounding box

@@ -10,6 +10,7 @@ SceneManager::SceneManager(PxPhysics* gphys, PxScene* gscn) : gPhysics(gphys), g
 	//addScene(new ScenaMuelles(this));
 	addScene(new ScenaIntro(this, gPhysics, gScene));
 	addScene(new ScenaMontaje(this, gPhysics, gScene));
+	addScene(new ScenaLaunch(this, gPhysics, gScene));
 	setScene(0);
 }
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "../../basics/RBStatic.h"
-#include "Anchor.h"
 #include "../../basics/Widget.h"
 
 class ObjetoMovible : public RBStatic
@@ -14,7 +13,7 @@ protected:
 
 	ObjetoMovible* derecha = nullptr;
 	ObjetoMovible* abajo = nullptr;
-	ObjetoMovible* izquieda = nullptr;
+	ObjetoMovible* izquierda = nullptr;
 	ObjetoMovible* arriba = nullptr;
 
 public:
@@ -40,10 +39,13 @@ public:
 	TipoModulo getType() noexcept { return tipo; };
 	ObjetoMovible* getDerecha() noexcept { return derecha; }
 	ObjetoMovible* getAbajo() noexcept { return abajo; }
-	ObjetoMovible* getIzquierda() noexcept { return izquieda; }
+	ObjetoMovible* getIzquierda() noexcept { return izquierda; }
 	ObjetoMovible* getArriba() noexcept { return arriba; }
 
+	// genera el modulo raiz y llama a los metodos recursivos que generan los modulos hijos
 	ModuloInfo* generateModulo();
+	// metodo recursivo para generar los modulos atachados a este modulo ( se salta el modulo que ha llamado a esta funcion
+	ModuloInfo* generateModulo(ObjetoMovible* nuevomodOBJ, ModuloInfo* nuevoModulo);
 
 	void alternateMoviendo();
 

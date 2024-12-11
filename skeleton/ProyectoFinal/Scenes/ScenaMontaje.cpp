@@ -1,15 +1,20 @@
 #include "ScenaMontaje.h"
+#include "../../basics/SceneManager.h"
 #include <algorithm>
 
 void ScenaMontaje::setup()
 {
-	GameObject* butConfirm = new Button("buttonConfirmar", this, gPhysics, gScene);
-	butConfirm->setShape(CreateShape(PxBoxGeometry(5, 5, 1)), { 5, 5, 1 });
-	butConfirm->setPosition({ 50,50,0 });
-	butConfirm->setColor({ 0.5,1,0.5,1 });
-	butConfirm->addCallback([this]() {this->saveRocket(); });
-	butConfirm->addCallback([this]() {this->LaunchScene(); });
-	addGameObject(butConfirm);
+	// coloca la camara
+	camera->moveTo({ 0,0,-100 });
+
+	// boton de confirmar cohete
+	Button* but = new Button("Confirmar", this, gPhysics, gScene);
+	but->setPosition({ 50,50,0 });
+	but->setShape(CreateShape(PxBoxGeometry(10, 5, 1)), { 10, 5, 1 });
+	addGameObject(but);
+	gScene->addActor(*but->getActor());
+	but->addCallback([this]() {this->saveRocket(); });
+	but->addCallback([this]() {this->LaunchScene(); });
 
 	cabina = new ObjetoMovible("mov1", this, gPhysics, gScene, CABINA);
 	cabina->setPosition({ -20,20,0 });
@@ -41,4 +46,5 @@ void ScenaMontaje::saveRocket()
 void ScenaMontaje::LaunchScene()
 {
 	cout << "LAUNCHSCENE" << endl;
+	sceneManager->setScene(2);
 }

@@ -33,7 +33,7 @@ public:
 
 	virtual void setup() {};
 
-	void update(double t);
+	virtual void update(double t);
 
 	// Aniade particula al vector
 	//void addParticle(Particle* prt, ParticleGenerator* gen = nullptr);

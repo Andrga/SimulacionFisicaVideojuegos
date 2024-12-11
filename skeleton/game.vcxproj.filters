@@ -89,11 +89,17 @@
     <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp">
       <Filter>Proyecto final\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ProyectoFinal\Basics\ObjetoMovible.cpp">
-      <Filter>Proyecto final\basics</Filter>
-    </ClCompile>
     <ClCompile Include="ProyectoFinal\Basics\Anchor.cpp">
       <Filter>Proyecto final\basics</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoFinal\Scenes\ScenaLaunch.cpp">
+      <Filter>Proyecto final\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.cpp">
+      <Filter>Proyecto final\objetosDeJuego</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Modulo.cpp">
+      <Filter>Proyecto final\objetosDeJuego</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,11 +197,17 @@
     <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h">
       <Filter>Proyecto final\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ProyectoFinal\Basics\ObjetoMovible.h">
-      <Filter>Proyecto final\basics</Filter>
-    </ClInclude>
     <ClInclude Include="ProyectoFinal\Basics\Anchor.h">
       <Filter>Proyecto final\basics</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectoFinal\Scenes\ScenaLaunch.h">
+      <Filter>Proyecto final\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Modulo.h">
+      <Filter>Proyecto final\objetosDeJuego</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.h">
+      <Filter>Proyecto final\objetosDeJuego</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
