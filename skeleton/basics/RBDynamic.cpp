@@ -11,6 +11,7 @@ RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScen
 	PxRigidBodyExt::updateMassAndInertia(*actor, density);
 	//actor->setMass(100);
 	size = { 10,10,10 };
+	shape = CreateShape(PxBoxGeometry(size));
 	gScene->addActor(*actor);
 
 	shape = CreateShape(PxBoxGeometry(size / 2));

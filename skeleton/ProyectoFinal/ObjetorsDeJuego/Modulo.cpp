@@ -1,6 +1,6 @@
 #include "Modulo.h"
 
-Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, TipoModulo tipo) : RBDynamic("mod" + nam, scn, gPhysics, gScene)
+Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, TipoModulo tpo) : RBDynamic("mod" + nam, scn, gPhysics, gScene), tipo(tpo)
 {
 	switch (tipo)
 	{

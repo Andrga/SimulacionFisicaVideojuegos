@@ -165,3 +165,12 @@ Vector3 FlotationGenerator::generateForce(GameObject& particle)
 	return force;
 }
 
+// GRAVEDAD PLANETARIA
+Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
+{
+	Vector3 force = object.getPosition() - origen;
+
+	force.normalize();
+
+	return force * gravedad;
+}

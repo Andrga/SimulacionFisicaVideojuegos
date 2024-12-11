@@ -26,6 +26,11 @@ void ScenaMontaje::setup()
 
 	addGameObject(movible2);
 
+	ObjetoMovible* movible4 = new ObjetoMovible("mov4", this, gPhysics, gScene, TANQUE);
+	movible2->setPosition({ 0, 40,0 });
+
+	addGameObject(movible4);
+
 	ObjetoMovible* movible3 = new ObjetoMovible("mov3", this, gPhysics, gScene, PROPULSOR);
 	movible3->setPosition({ 20,20,0 });
 
