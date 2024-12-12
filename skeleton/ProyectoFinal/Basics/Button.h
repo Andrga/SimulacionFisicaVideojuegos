@@ -11,5 +11,6 @@ public:
 
 	void onCollision(GameObject* other)override;
 	void setVisibility(bool vis) override;
+	void setPulsado(bool puls) { pulsado = puls; };
 };
 

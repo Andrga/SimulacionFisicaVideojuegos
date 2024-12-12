@@ -2,11 +2,18 @@
 #include "Scene.h"
 
 bool GameObject::update(double t) {
-	if (!alive) scene->deleteGameObject(name);
-	return alive;
+	if (startlifeTime >= 0 && lifeTime > startlifeTime)
+	{
+		alive = false;
+		return false;
+	}
+	else if (startlifeTime >= 0)
+		lifeTime += t;
+
+	return true;
 }
 void GameObject::setShape(PxShape* shp, Vector3 siz) {
-	renderItem->shape = shp; 
-	shape = shp; 
+	renderItem->shape = shp;
+	shape = shp;
 	size = siz;
 }

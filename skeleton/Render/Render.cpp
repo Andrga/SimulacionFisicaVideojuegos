@@ -269,7 +269,8 @@ namespace Snippets
 	void setupDefaultRenderState()
 	{
 		// Setup default render states
-		glClearColor(0.3f, 0.4f, 0.5f, 1.0);
+		//glClearColor(0.3f, 0.4f, 0.5f, 1.0);
+		glClearColor(0, 0, 0.1, 1.0);
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_COLOR_MATERIAL);
 		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -307,7 +308,8 @@ namespace Snippets
 		glLoadIdentity();
 		gluLookAt(GLdouble(cameraEye.x), GLdouble(cameraEye.y), GLdouble(cameraEye.z), GLdouble(cameraEye.x + cameraDir.x), GLdouble(cameraEye.y + cameraDir.y), GLdouble(cameraEye.z + cameraDir.z), 0.0, 1.0, 0.0);
 
-		glColor4f(0.4f, 0.4f, 0.4f, 1.0f);
+		//glColor4f(0.4f, 0.4f, 0.4f, 1.0f);
+		//glColor4f(0.4f, 0.4f, 0.4f, 1.0f);
 
 		assert(glGetError() == GL_NO_ERROR);
 	}
@@ -413,7 +415,8 @@ namespace Snippets
 				glRasterPos2i(x, yOffset);
 			}
 			else
-				glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
+				//glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
+				glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, (int)text[i]);
 		}
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);

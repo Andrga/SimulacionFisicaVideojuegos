@@ -68,14 +68,14 @@ void Scene::addSystem(System* sys)
 
 void Scene::addGameObject(GameObject* gob, ParticleGenerator* partGen)
 {
-	if (gameObjects.count(gob->getName())) {
+	while (gameObjects.count(gob->getName())) {
 		std::cout << "YA EXISTE ESTE OBJETO" << std::endl;
 		gob->setName(gob->getName() + "(1)");
 	}
 	GameObjectInfo infogb;
 
 	infogb = { gob, partGen };
-
+	cout << "creado: " << gob->getName() << endl;
 	gameObjects.insert({ gob->getName(), infogb });
 }
 

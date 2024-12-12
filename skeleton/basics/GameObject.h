@@ -53,7 +53,7 @@ public:
 	// setters
 #pragma region Setters
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
-	virtual void setRotation(PxQuat rot) { pose->q = rot; };
+	virtual void setRotation(const PxQuat rot) { pose->q = rot; renderItem->transform = pose; };
 	virtual void setShape(PxShape* shp, Vector3 siz);
 	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };

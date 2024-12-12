@@ -10,7 +10,7 @@ using namespace physx;
 class RBActor : public GameObject
 {
 public:
-	RBActor(string nam, Scene* scn, PxPhysics* gPhysics) : GameObject(nam, scn) {};
+	RBActor(string nam, Scene* scn, PxPhysics* gPhysics) : GameObject(nam, scn) { setStartLifeTime(-1); };
 	virtual ~RBActor() = default;
 
 	// visibilidad

@@ -32,9 +32,12 @@ struct ModuloInfo
 	ModuloInfo* arriba;
 };
 
+extern void centreVis(bool vis);
+
 // vector que indica los modulos del cohete
 extern ModuloInfo* Cohete;
 
+extern float TENSION_ENTRE_MODULOS;
 extern float sizeModul;
 extern Vector3 tamanioCohete;
 

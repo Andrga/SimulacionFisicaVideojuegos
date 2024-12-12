@@ -3,26 +3,34 @@
 #include "../ObjetorsDeJuego/Modulo.h"
 #include "../../systems/ForceSystem.h"
 #include "../../systems/ForceGenerator.h"
+#include "../../systems/ParticleSystem.h"
+#include "../../systems/ParticleGenerator.h"
 
 class ScenaLaunch : public Scene
 {
 protected:
 	ForceSystem* fsys = nullptr;
+	ParticleSystem* psys = nullptr;
 	Modulo* cabina = nullptr;
-
+	RBStatic* PlataformaLanzamiento = nullptr;
 	float porcentajeFuerzProp = 1;
+	bool propulsando = false;
+	Vector3 DirPropulsion = { 0,0,0 };
+	float zoom = 0;
 
 	Vector3 posIniCabina = { 0,0,0 };
+	Vector3 cameraOffset = { 0,0,-100 };
 public:
-	ScenaLaunch(SceneManager * scnMang, physx::PxPhysics * gPhysics = nullptr, physx::PxScene * gScene = nullptr) : Scene(scnMang, gPhysics, gScene) {};
+	ScenaLaunch(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) : Scene(scnMang, gPhysics, gScene) {};
 	~ScenaLaunch() {};
 	void setup();
 
 	void montarCohete();
 	Modulo* montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod);
-	void propulsar();
+	void propulsar(Vector3 impulseRotation);
 
 	void keyPressed(unsigned char key, const physx::PxTransform& camera) override;
+	void keyReleased(unsigned char key, const physx::PxTransform& camera) override;
 
 	void update(double t) override;
 	void show() override;

@@ -86,6 +86,14 @@ void initPhysics(bool interactive)
 
 }
 
+void centreVis(bool vis) {
+	//cout << "CENTRO" << (vis ? " SE VE" : " NO SE VE") << endl;
+	vis ?
+		RegisterRenderItem(centroRI) :
+		DeregisterRenderItem(centroRI);
+
+	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
+}
 
 // Function to configure what happens in each step of physics
 // interactive: true if the game is rendering, false if it offline
@@ -97,12 +105,13 @@ void stepPhysics(bool interactive, double t)
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 
-	//centroPose.p = GetCamera()->getEye();
-	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
 
 	// Update de la escena
 	if (sceneManager != nullptr)
 		sceneManager->update(t);
+
+
+	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
 }
 
 // Function to clean data

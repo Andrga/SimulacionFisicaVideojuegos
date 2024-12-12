@@ -5,7 +5,7 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 	switch (tipo)
 	{
 	case CABINA:
-		setShape(CreateShape(PxSphereGeometry(5)), { 5,5,5 });
+		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
 		setColor({ 0.5,0.5,1,0 });
 		break;
 	case TANQUE:
@@ -13,12 +13,14 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 		setColor({ 1,1,1,1 });
 		break;
 	case PROPULSOR:
-		setShape(CreateShape(PxBoxGeometry(5,5,5)), { 5,5,5 });
+		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
 		setColor({ 1,0.5,0.5,1 });
 		break;
 	default:
 		break;
 	}
+	setDensity(1000);
+	actor->setLinearDamping(0.99);
 }
 
 bool Modulo::update(double t)
@@ -27,9 +29,11 @@ bool Modulo::update(double t)
 	if (cabina != nullptr)
 	{
 		// todos los objetos tienen la misma rotacion que la cabina
-		pose = &(actor->getGlobalPose());
-		pose->q = cabina->getActor()->getGlobalPose().q;
-		actor->setGlobalPose(*pose);
+		/*pose = &(actor->getGlobalPose());
+		PxQuat cabRot = cabina->getActor()->getGlobalPose().q;
+		PxVec3 angleY(0, 0, 1);
+		pose->q = PxQuat(cabRot.getAngle(), angleY);
+		actor->setGlobalPose(*pose);*/
 	}
 
 

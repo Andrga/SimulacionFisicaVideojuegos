@@ -145,7 +145,27 @@ public:
 
 	bool onRadious(GameObject* part) override { return part == object2; };
 
-	Vector3 generateForce(GameObject& object) override;
+	virtual Vector3 generateForce(GameObject& object) override;
+
+};
+
+// generador de goma modificado para que funcione como union de modulos del cohete
+class UnionGenerator : public GomaGenerator
+{
+protected:
+
+public:
+	/// <param name="K"> Constante de elasticidad</param>
+	/// <param name="restLength"> Largo muelle reposo</param>
+	/// <param name="part2">Particula afectada</param>
+	/// <param name="part1">Particula(ancla)</param>
+	UnionGenerator(Scene* scn, float K, float restLength, GameObject* obj2, GameObject* obj1 = nullptr) :
+		GomaGenerator(scn, k,restingLength,obj2, obj1) {};
+	~UnionGenerator() {};
+
+	bool onRadious(GameObject* part) override { return part == object2; };
+
+	Vector3 generateForce(GameObject& obj) override;
 
 };
 

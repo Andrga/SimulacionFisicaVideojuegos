@@ -36,36 +36,35 @@ void SceneManager::setScene(int id)
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		scenes[i]->hide();
-		if (i == id)
-			scenes[i]->show();
 	}
 	actualScene = id;
+	scenes[actualScene]->show();
 }
 
 void SceneManager::keyPressed(unsigned char key, const physx::PxTransform& camera)
 {
 	switch (toupper(key))
 	{
-	case '0':
-		setScene(0);
-		cout << "-- ESCENA 0 --" << endl;
-		break;
-	case'1':
-		cout << "-- ESCENA 1 --" << endl;
-		setScene(1);
-		break;
-	case'2':
-		cout << "-- ESCENA 2 --" << endl;
-		setScene(2);
-		break;
-	case'3':
-		cout << "-- ESCENA 3 --" << endl;
-		setScene(3);
-		break;
-	case'4':
-		cout << "-- ESCENA 4 --" << endl;
-		setScene(4);
-		break;
+		/*case '0':
+			setScene(0);
+			cout << "-- ESCENA 0 --" << endl;
+			break;
+		case'1':
+			cout << "-- ESCENA 1 --" << endl;
+			setScene(1);
+			break;
+		case'2':
+			cout << "-- ESCENA 2 --" << endl;
+			setScene(2);
+			break;
+		case'3':
+			cout << "-- ESCENA 3 --" << endl;
+			setScene(3);
+			break;
+		case'4':
+			cout << "-- ESCENA 4 --" << endl;
+			setScene(4);
+			break;*/
 
 	default:
 		scenes[actualScene]->keyPressed(key, camera);
@@ -76,7 +75,7 @@ void SceneManager::keyPressed(unsigned char key, const physx::PxTransform& camer
 
 void SceneManager::keyReleased(unsigned char key, const physx::PxTransform& camera)
 {
-		scenes[actualScene]->keyReleased(key, camera);
+	scenes[actualScene]->keyReleased(key, camera);
 }
 
 void SceneManager::mouseInput(int button, int state, int x, int y)

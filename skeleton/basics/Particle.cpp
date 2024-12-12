@@ -59,15 +59,6 @@ bool Particle::update(double t)
 	if (!alive)
 		return false;
 
-	if (startlifeTime >= 0 &&lifeTime > startlifeTime)
-	{
-		alive = false;
-		return false;
-	}
-	else if(startlifeTime >=0)
-		lifeTime += t;
-
-
 	// para particulas que no se mueven
 	if (immovible) return true;
 
@@ -83,7 +74,7 @@ bool Particle::update(double t)
 
 
 	//cout << acceleration.x << "/" << acceleration.y << "/" << acceleration.z << endl;
-	return true;
+	return GameObject::update(t);
 }
 
 void Particle::applyGravity()

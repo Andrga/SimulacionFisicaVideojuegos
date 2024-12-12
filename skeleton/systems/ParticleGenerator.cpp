@@ -22,6 +22,7 @@ void ParticleGenerator::update(double t)
 
 bool ParticleGenerator::mayGenerate()
 {
+	//cout << "nGameObjects: " << nGameObjects << "startNGameObjects: " << startNGameObjects << endl;
 	return nGameObjects <= startNGameObjects;
 }
 
@@ -196,4 +197,57 @@ void RandomParticleGen::generateParticle()
 
 
 
+}
+
+// generador de particulas propulsor
+void PropulsionParticleGen::generateParticle()
+{
+	// cantidad de particulas no generadas
+	int restParticles = startNGameObjects - nGameObjects;
+
+	// Generamos una cantidad de particulas, cuya cantidad entra en el rango de la capacidad de particulas maxima,
+	// es decir restParticles
+	std::uniform_int_distribution<int> numPartsUniform(0, restParticles); // numero de 0 a restParticles
+	std::uniform_int_distribution<int> PosUniformDist(-2.5, 2.5); // posicion donde sale
+	std::normal_distribution<double> FuerzaPropnormalDistribution(*porcentajeFuerzProp, 0.1); // media|dispersion fuerza de propulsion
+	std::normal_distribution<double> LFEnormalDistribution(2, 10.0); // media|dispersion
+
+	// origen de la nueva particula
+	origen = propulsor->getActor()->getGlobalPose().p;
+	// velocidad para la nueva particula
+	Vector3 velocity;
+	velocity.x = 0;
+	// tiempo de vida para la nueva particula
+	float lifetime;
+	// cantidad de particulas que se van a generar
+	int particlesGenerated = numPartsUniform(generator);
+
+	// setting de la direccion en la que propulsar
+	PxVec3 globalDirection = propulsor->getActor()->getGlobalPose().q.rotate({ 0,1,0 });
+	Vector3 force;
+
+	//cout << "particlesGenerated: " << particlesGenerated<< "restParticles: "<< restParticles << "startNGameObjects: "<< startNGameObjects << "nGameObjects: " << nGameObjects << endl;
+
+	for (int i = 0; i < particlesGenerated; i++) {
+		origen += Vector3(PosUniformDist(generator), PosUniformDist(generator), PosUniformDist(generator));
+		// velocidad con la propulsion
+		force = (-globalDirection * (1 * FuerzaPropnormalDistribution(generator)));
+		// tiempo de vida aleatorio
+		lifetime = LFEnormalDistribution(generator);
+
+		// creamos la nueva particula
+		Particle* aux = new Particle("wid", scene, origen);
+		aux->setShape(CreateShape(PxSphereGeometry(1)), { 1,1,1 });
+		aux->addForce(force);
+		aux->setStartLifeTime(1);
+
+		// añadimos las particulas a la lista
+		generatedGameObjects[aux] = true; // Aniadir al mapa
+		scene->addGameObject(aux, this); // Aniadir a la escena y pasar referencia del generador
+
+		//particles.push_back(aux);
+		nGameObjects++;
+		nGameObjectsTotal++;
+
+	}
 }

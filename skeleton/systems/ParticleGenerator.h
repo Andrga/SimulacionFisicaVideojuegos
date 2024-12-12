@@ -1,5 +1,6 @@
 #pragma once
 #include "../basics/Particle.h"
+#include "../basics/RBDynamic.h"
 #include <unordered_map>
 #include <random>
 
@@ -72,6 +73,23 @@ class RandomParticleGen : public ParticleGenerator
 public:
 	RandomParticleGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn) : ParticleGenerator(org, nparts, partsys, scn) {};
 	~RandomParticleGen() {};
+
+	void generateParticle() override;
+};
+
+// --- GENERADOR DE PARTICULAS DE VARIAS MASAS ---
+class PropulsionParticleGen : public ParticleGenerator
+{
+private:
+	PxPhysics* gPhysics = nullptr;
+	PxScene* gScene = nullptr;
+	float* porcentajeFuerzProp = nullptr;
+
+	RBDynamic* propulsor = nullptr;
+public:
+	PropulsionParticleGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn, PxPhysics* gphys, PxScene* gscn, float* porcFuercProp, RBDynamic* prop)
+		: ParticleGenerator(org, nparts, partsys, scn), gPhysics(gphys), gScene(gscn), porcentajeFuerzProp(porcFuercProp), propulsor(prop) {};
+	~PropulsionParticleGen() {};
 
 	void generateParticle() override;
 };
