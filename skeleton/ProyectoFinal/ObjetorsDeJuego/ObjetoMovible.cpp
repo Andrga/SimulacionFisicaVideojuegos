@@ -154,27 +154,33 @@ ModuloInfo* ObjetoMovible::generateModulo()
 
 	// Asignamos el tipo de módulo
 	base->tipo = this->tipo;
+	tamanioCohete.x += sizeModul;
+	tamanioCohete.y += sizeModul;
 
 	// Relacionamos los modulos adyacentes, usando las propiedades de izquierda, derecha, arriba y abajo
 	if (this->derecha != nullptr) {
 		this->derecha->izquierda = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modDer = generateModulo(this->derecha, base);
 		base->derecha = modDer; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (this->abajo != nullptr) {
 		this->abajo->arriba = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modAbaj = generateModulo(this->abajo, base);
 		base->abajo = modAbaj; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (this->izquierda != nullptr) {
 		this->izquierda->derecha = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modIzq = generateModulo(this->izquierda, base);
 		base->izquierda = modIzq; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (this->arriba != nullptr) {
 		this->arriba->abajo = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modArr = generateModulo(this->arriba, base);
 		base->arriba = modArr; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 
 	return base;
@@ -194,21 +200,25 @@ ModuloInfo* ObjetoMovible::generateModulo(ObjetoMovible* nuevomodOBJ, ModuloInfo
 		nuevomodOBJ->derecha->izquierda = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modDer = generateModulo(nuevomodOBJ->derecha, base);
 		base->derecha = modDer; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (nuevomodOBJ->abajo != nullptr) {
 		nuevomodOBJ->abajo->arriba = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modAbaj = generateModulo(nuevomodOBJ->abajo, base);
 		base->abajo = modAbaj; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (nuevomodOBJ->izquierda != nullptr) {
 		nuevomodOBJ->izquierda->derecha = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modIzq = generateModulo(nuevomodOBJ->izquierda, base);
 		base->izquierda = modIzq; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 	if (nuevomodOBJ->arriba != nullptr) {
 		nuevomodOBJ->arriba->abajo = nullptr; // eliminamos la referencia izquierda del modulo derecho (this)
 		ModuloInfo* modArr = generateModulo(nuevomodOBJ->arriba, base);
 		base->arriba = modArr; // asignamos el modulostruct al modulo base
+		tamanioCohete.y += sizeModul; // Actualizacion tamanio cohete
 	}
 
 	return base;

@@ -113,6 +113,11 @@ namespace Snippets
 		return PxTransform(mEye, PxQuat(m));
 	}
 
+	void Camera::setDir(PxVec3 dir) noexcept
+	{
+		mDir = dir.getNormalized();
+	}
+
 	void Camera::setMovible(bool mov) noexcept
 	{
 		movible = mov;

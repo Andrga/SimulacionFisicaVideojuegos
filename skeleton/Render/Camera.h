@@ -52,6 +52,7 @@ public:
 	physx::PxVec3		getDir()	const;
 	physx::PxVec3		getMouseWorldPos()	const;
 	physx::PxTransform	getTransform() const;
+	void				setDir(const physx::PxVec3) noexcept;
 	void				setMovible(bool mov) noexcept;
 private:
 	physx::PxVec3	mEye;

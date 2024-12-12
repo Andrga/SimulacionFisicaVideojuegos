@@ -12,6 +12,7 @@ public:
 	ScenaMontaje(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) :
 		Scene(scnMang, gPhysics, gScene) {};
 	~ScenaMontaje() {};
+	void update(double t) override;
 
 	void setup()override;
 	void show() override;

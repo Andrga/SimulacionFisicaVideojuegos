@@ -3,7 +3,7 @@
 
 RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene) : RBActor(nam, scn, gPhysics)
 {
-	density = 0.15f;
+	density = 100;
 	pose = new PxTransform({ 0,20,0 });
 	actor = gPhysics->createRigidDynamic(*pose);
 	actor->setLinearVelocity({ 0,0,0 });

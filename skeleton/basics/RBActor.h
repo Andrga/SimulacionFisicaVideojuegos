@@ -13,8 +13,6 @@ public:
 	RBActor(string nam, Scene* scn, PxPhysics* gPhysics) : GameObject(nam, scn) {};
 	virtual ~RBActor() = default;
 
-	virtual bool update(double t) override { return true; }
-
 	// visibilidad
 	virtual void setVisibility(bool vis) override { GameObject::setVisibility(vis); };
 

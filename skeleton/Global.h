@@ -34,3 +34,12 @@ struct ModuloInfo
 
 // vector que indica los modulos del cohete
 extern ModuloInfo* Cohete;
+
+extern float sizeModul;
+extern Vector3 tamanioCohete;
+
+// constantes juego
+extern float FUERZA_PROPULSOR;
+
+extern float RADIO_PLANETA_TIERRA;
+extern float RADIO_GRAVEDAD_TIERRA;

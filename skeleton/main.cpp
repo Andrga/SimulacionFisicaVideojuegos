@@ -12,6 +12,9 @@
 
 
 std::string display_text = "This is a test";
+physx::PxVec4 display_text_color = { 1.0f, 0.2f, 0.2f, 1.0f };
+physx::PxVec2 display_text_position = { 0.0f, 0.0f };
+int display_text_lineSpacing = 15;
 
 
 using namespace physx;

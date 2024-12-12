@@ -2,6 +2,17 @@
 #include "../../basics/SceneManager.h"
 #include <algorithm>
 
+void ScenaMontaje::update(double t)
+{
+	Scene::update(t);
+	// texto con informacion
+	display_text_position = { 20,100 };
+	display_text = "MONTAJE DE COHETE";
+	display_text += "#------------------";
+	display_text += "#CONTROLES:";
+	display_text += "#W,A,S,D: Movimiento de la camara, INTRO: interactuar";
+}
+
 void ScenaMontaje::setup()
 {
 	// coloca la camara
@@ -40,6 +51,8 @@ void ScenaMontaje::setup()
 void ScenaMontaje::show()
 {
 	Scene::show();
+	
+
 	camera->moveTo(CAMERA_START_POS);
 }
 

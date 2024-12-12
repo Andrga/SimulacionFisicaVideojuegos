@@ -48,6 +48,9 @@
 #include <string>
 
 extern std::string display_text;
+extern physx::PxVec4 display_text_color;
+extern physx::PxVec2 display_text_position;
+extern int display_text_lineSpacing;
 
 extern float widthCam, heightCam;
 

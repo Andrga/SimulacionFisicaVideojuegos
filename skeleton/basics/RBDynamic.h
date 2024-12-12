@@ -7,8 +7,6 @@ public:
 	RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene);
 	~RBDynamic();
 
-	bool update(double t) override { return RBActor::update(t); }
-
 	//setters
 	void setPosition(PxVec3 pos) override { GameObject::setPosition(pos); actor->setGlobalPose(*pose); };
 	void setShape(PxShape* shp, Vector3 siz) override;
@@ -21,7 +19,7 @@ public:
 	void addForce(float x, float y, float z) override { actor->addForce({ x,y,z }); }
 	void addForce(Vector3 fc) override { actor->addForce(fc); }
 
-private:
+protected:
 	PxRigidDynamic* actor = nullptr;
 	float density = 1.5;
 };

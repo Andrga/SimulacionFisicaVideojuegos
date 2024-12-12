@@ -168,9 +168,26 @@ Vector3 FlotationGenerator::generateForce(GameObject& particle)
 // GRAVEDAD PLANETARIA
 Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
 {
-	Vector3 force = object.getPosition() - origen;
+	float distanciaCentro = (object.getPosition() - origen).magnitude();
+	// porcentaje de gravedad que afecta al objeto (cuanto mas lejos del planeta menos le afecta
+	float gravedadAplicada;
 
-	force.normalize();
+	// calculo de porcentaje de gravedad que se aplica
+	if (distanciaCentro <= radioPlaneta)
+		gravedadAplicada = 1;
+	else if (distanciaCentro >= radious)
+		gravedadAplicada = 0;
+	else
+		gravedadAplicada = (radious - distanciaCentro) / (radious - radioPlaneta);
 
-	return force * gravedad;
+	// aplicamos la gravedad base
+	gravedadAplicada *= gravedad;
+
+	// calculo de la direccion a la que aplicar la fuerza (hacia el centro del planeta)
+	Vector3 dir = object.getPosition() - origen;
+	dir.normalize();
+
+	//cout << object.getName() << " GRAVEDAD ACTUAL: " << gravedadAplicada << endl;
+
+	return dir * gravedadAplicada;
 }

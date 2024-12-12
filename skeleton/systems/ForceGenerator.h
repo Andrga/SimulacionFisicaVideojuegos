@@ -174,14 +174,16 @@ class GravedadPlanetaGenerator : public ForceGenerator
 {
 protected:
 	float gravedad; // gravedad del planeta
-
+	float radioPlaneta; // radio del planeta
 public:
 	/// <param name="origen"> centro del planeta </param>
 	/// <param name="scn"> Scene</param>
-	/// <param name="g"> gravedad del planeta</param>
-	/// <param name="rad"> radio de la gravedad del planeta</param>
-	GravedadPlanetaGenerator(Vector3 origen, Scene* scn, float g, float rad) :
-		ForceGenerator(origen, scn), gravedad(g) {};
+	/// <param name="g"> gravedad del planeta (negativa)</param>
+	/// <param name="rad"> radio del planeta</param>
+	GravedadPlanetaGenerator(Vector3 origen, Scene* scn, float g, float radAffec, float rad) :
+		ForceGenerator(origen, scn), gravedad(g), radioPlaneta(rad) {
+		setRadious(radAffec);
+	};
 	~GravedadPlanetaGenerator() {};
 
 	Vector3 generateForce(GameObject& object) override;
