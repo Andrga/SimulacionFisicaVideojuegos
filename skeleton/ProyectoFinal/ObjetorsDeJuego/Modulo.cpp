@@ -19,8 +19,9 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 	default:
 		break;
 	}
-	setDensity(1000);
-	actor->setLinearDamping(0.99);
+	setDensity(1.5f);
+	actor->setLinearDamping(1);
+	actor->setMass(10000);
 }
 
 bool Modulo::update(double t)

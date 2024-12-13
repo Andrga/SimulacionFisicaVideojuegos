@@ -10,10 +10,11 @@
 #include "basics/SceneManager.h"
 #include <iostream>
 
-
-std::string display_text = "This is a test";
+std::string display_text1 = "This is a test";
+physx::PxVec2 display_text1_position = { 0.0f, 0.0f };
+std::string display_text2 = "This is a test";
+physx::PxVec2 display_text2_position = { 0.0f, 0.0f };
 physx::PxVec4 display_text_color = { 1.0f, 0.2f, 0.2f, 1.0f };
-physx::PxVec2 display_text_position = { 0.0f, 0.0f };
 int display_text_lineSpacing = 15;
 
 
@@ -86,13 +87,13 @@ void initPhysics(bool interactive)
 
 }
 
-void centreVis(bool vis) {
+void centreVis(bool vis, int dir) {
 	//cout << "CENTRO" << (vis ? " SE VE" : " NO SE VE") << endl;
 	vis ?
 		RegisterRenderItem(centroRI) :
 		DeregisterRenderItem(centroRI);
 
-	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
+	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z + (5 * dir) };
 }
 
 // Function to configure what happens in each step of physics

@@ -16,8 +16,6 @@ protected:
 	SceneManager* sceneManager;
 	// Mapa objetos de juego 
 	unordered_map<string, GameObjectInfo> gameObjects;
-	// Mapa Particulas colision por raycast
-	unordered_map<string, GameObject> raycastPart;
 	// vector de sistemas
 	vector<System*> systems;
 	Camera* camera = nullptr;

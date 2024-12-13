@@ -297,7 +297,8 @@ namespace Snippets
 
 		// Display text
 		glColor4f(display_text_color.x, display_text_color.y, display_text_color.z, display_text_color.w);
-		drawText(display_text, display_text_position.x, display_text_position.y);
+		drawText(display_text1, display_text1_position.x, display_text1_position.y);
+		drawText(display_text2, display_text2_position.x, display_text2_position.y);
 
 		// Setup camera
 		glMatrixMode(GL_PROJECTION);

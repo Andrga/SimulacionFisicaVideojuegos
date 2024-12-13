@@ -18,6 +18,7 @@ void ScenaLaunch::setup()
 	PlanetaTierra->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
 	PlanetaTierra->setColor({ 0.75,0.85,1,1 });
 	addGameObject(PlanetaTierra);
+	fsys->addForceGenerator(new GravedadPlanetaGenerator({ 0,0,0 }, this, -9.8, RADIO_GRAVEDAD_TIERRA, RADIO_PLANETA_TIERRA + 100));
 
 #pragma region subdivisiones de la esfera del planeta
 	RBStatic* PlanetaTierra2 = new RBStatic("PlanetaTierra2", this, gPhysics, gScene);
@@ -41,7 +42,6 @@ void ScenaLaunch::setup()
 	addGameObject(PlataformaLanzamiento);
 
 
-	fsys->addForceGenerator(new GravedadPlanetaGenerator({ 0,0,0 }, this, -9.8, RADIO_GRAVEDAD_TIERRA, RADIO_PLANETA_TIERRA));
 
 }
 
@@ -229,13 +229,15 @@ void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera
 		// zoom
 	case'o':
 		zoom += 10;
-		if (zoom >= 1260) centreVis(true);
-		else centreVis(false);
+		if (abs(zoom) >= 1260) centreVis(true, 1);
+		else centreVis(false, 1);
 		break;
 	case'l':
 		zoom -= 10;
-		if (zoom <= -1260) centreVis(true);
-		else centreVis(false);
+		if (abs(zoom) >= 1260)
+			centreVis(true, -1);
+		else
+			centreVis(false, -1);
 		break;
 		// direccion de impulso
 	case'w':
@@ -283,16 +285,19 @@ void ScenaLaunch::update(double t)
 	if (propulsando) propulsar({ 0,0,0 });
 
 	// texto con informacion
-	display_text_position = { 20,150 };
-	display_text = "LANZAMIENTO";
-	display_text += "#------------------------";
-	display_text += "#-Planeta Actual: ";
-	display_text += "#-Potencia Proulsores: " + to_string(porcentajeFuerzProp * 100) + "%";
-	display_text += "#-Direccion Propulsion: X:" + to_string((int)DirPropulsion.x) + " Z: " + to_string((int)DirPropulsion.z);
-	display_text += "#-Zoom: " + to_string((int)zoom);
-	display_text += "##CONTROLES:";
-	display_text += "#------------------------";
-	display_text += "#-INTRO: propulsar#-I: Aumento potencia, K: Disminuye potencia#-A: Inclinacion Izquierda, D: InclinacionDerecha";
+	display_text1_position = { 10,500 };
+	display_text1 = "LANZAMIENTO";
+	display_text1 += "#------------------------";
+	display_text1 += "#-Planeta Actual: ";
+	display_text1 += "#-Potencia Proulsores: " + to_string(porcentajeFuerzProp * 100) + "%";
+	if (cabina) display_text1 += "#-Fuerza Aplicada: " + to_string(cabina->getActualForce().x) + "||" + to_string(cabina->getActualForce().y) + "||" + to_string(cabina->getActualForce().z);
+	display_text1 += "#-Direccion Propulsion: X:" + to_string((int)DirPropulsion.x) + " Z: " + to_string((int)DirPropulsion.z);
+	display_text1 += "#-Zoom: " + to_string((int)zoom);
+
+	display_text2_position = { 10,100 };
+	display_text2 = "CONTROLES:";
+	display_text2 += "#------------------------";
+	display_text2 += "#-INTRO: propulsar#-I: Aumento potencia, K: Disminuye potencia#-A: Inclinacion Izquierda, D: InclinacionDerecha";
 
 }
 

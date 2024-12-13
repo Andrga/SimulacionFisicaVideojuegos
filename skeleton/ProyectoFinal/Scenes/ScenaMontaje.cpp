@@ -7,12 +7,14 @@ void ScenaMontaje::update(double t)
 	Scene::update(t);
 
 	// texto con informacion
-	display_text_position = { 20,100 };
 	display_text_color = { 0,1,1,1 };
-	display_text = "MONTAJE DE COHETE";
-	display_text += "#------------------";
-	display_text += "#CONTROLES:";
-	display_text += "#W,A,S,D: Movimiento de la camara, INTRO: interactuar";
+	display_text1_position = { 10,500 };
+	display_text1 = "MONTAJE DE COHETE";
+	display_text1 += "#------------------";
+	display_text2_position = { 10,100 };
+	display_text2 = "#CONTROLES";
+	display_text2 += "#------------------";
+	display_text2 += "#W,A,S,D: Movimiento de la camara, INTRO: interactuar";
 }
 
 void ScenaMontaje::setup()
@@ -88,7 +90,7 @@ void ScenaMontaje::show()
 	camera->moveTo(CAMERA_START_POS);
 	camera->lookAt({ 0,0,0 });
 	camera->setMovible(true);
-	centreVis(true);
+	centreVis(true, 1);
 }
 
 void ScenaMontaje::creaPropulsor()

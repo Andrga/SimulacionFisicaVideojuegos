@@ -47,9 +47,11 @@
 #endif
 #include <string>
 
-extern std::string display_text;
+extern std::string display_text1;
+extern physx::PxVec2 display_text1_position;
+extern std::string display_text2;
+extern physx::PxVec2 display_text2_position;
 extern physx::PxVec4 display_text_color;
-extern physx::PxVec2 display_text_position;
 extern int display_text_lineSpacing;
 
 extern float widthCam, heightCam;

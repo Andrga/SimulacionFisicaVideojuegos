@@ -3,13 +3,14 @@
 
 RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene) : RBActor(nam, scn, gPhysics)
 {
-	density = 100;
+	density = 1.5f;
 	pose = new PxTransform({ 0,20,0 });
 	actor = gPhysics->createRigidDynamic(*pose);
 	actor->setLinearVelocity({ 0,0,0 });
 	actor->setAngularVelocity({ 0,0,0 });
 	PxRigidBodyExt::updateMassAndInertia(*actor, density);
-	//actor->setMass(100);
+	actor->setMassSpaceInertiaTensor({ 10,10,10 });
+	actor->setMass(10);
 	size = { 10,10,10 };
 	shape = CreateShape(PxBoxGeometry(size));
 	gScene->addActor(*actor);

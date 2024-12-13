@@ -134,29 +134,6 @@ Vector3 GomaGenerator::generateForce(GameObject& obj)
 	return force;
 }
 
-// ------ GOMA ELASTICA MODIFICADA ------
-Vector3 UnionGenerator::generateForce(GameObject& obj)
-{
-	Vector3 position1 = object1->getPosition();
-	Vector3 force{ 0,0,0 };
-
-	// largura actual del muelle
-	Vector3 dir = position1 - obj.getPosition();
-	float actuallenth = dir.magnitude();
-
-	dir.normalize();
-
-	// deformacion del muelle
-	float difflenth = actuallenth - restingLength;
-	if (difflenth <= 0) return force;
-	// calculo de la fuerza
-	force = dir * k * difflenth;
-
-	// aplica la fueza a ambos extremos del muelle
-	object1->addForce(-force);
-	return force;
-}
-
 // ------ FLOTACION -----
 Vector3 FlotationGenerator::generateForce(GameObject& particle)
 {

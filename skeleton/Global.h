@@ -32,7 +32,7 @@ struct ModuloInfo
 	ModuloInfo* arriba;
 };
 
-extern void centreVis(bool vis);
+extern void centreVis(bool vis, int dir);
 
 // vector que indica los modulos del cohete
 extern ModuloInfo* Cohete;
