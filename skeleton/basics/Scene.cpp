@@ -129,8 +129,8 @@ bool Scene::checkColisions(GameObject* gb1, GameObject* gb2)
 
 	// overlapX || overlapY || overlapZ;//= physx::PxGeometryQuery::overlap(gb1->getShape()->getGeometry().any(), *gb1->getTransform(), gb2->getShape()->getGeometry().any(), *gb2->getTransform());
 
-	if (col)
-		cout << "HA OLISIONADO " << gb1->getName() << " con " << gb2->getName() << endl;
+	/*if (col)
+		cout << "HA OLISIONADO " << gb1->getName() << " con " << gb2->getName() << endl;*/
 	return col;
 }
 
