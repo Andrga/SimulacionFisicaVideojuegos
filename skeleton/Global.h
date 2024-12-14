@@ -46,3 +46,6 @@ extern float FUERZA_PROPULSOR;
 
 extern float RADIO_PLANETA_TIERRA;
 extern float RADIO_GRAVEDAD_TIERRA;
+
+extern float RADIO_LUNA;
+extern float RADIO_GRAVEDAD_LUNA;

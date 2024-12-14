@@ -24,6 +24,8 @@ void Scene::update(double t)
 		if (o1.second.gameObject->getName().substr(0, 3) == "wid") continue;
 		for (auto& o2 : gameObjects)
 		{
+
+
 			// si el objeto 1 y el objeto 2 son el mismo, o si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
 			if (o1.first == o2.first || o2.second.gameObject->getName().substr(0, 3) == "wid") continue;
 			if (checkColisions(o1.second.gameObject, o2.second.gameObject))
@@ -69,12 +71,14 @@ void Scene::addSystem(System* sys)
 void Scene::addGameObject(GameObject* gob, ParticleGenerator* partGen)
 {
 	int nObj = 0;
-	while (gameObjects.count(gob->getName() + "(" + to_string(nObj) + ")")) {
-		nObj++;
-		std::cout << "YA EXISTE ESTE OBJETO" << std::endl;
-	}
-	if (nObj > 0)
+	if (gameObjects.count(gob->getName())) {
+		while (gameObjects.count(gob->getName() + "(" + to_string(nObj) + ")")) {
+			nObj++;
+			std::cout << "YA EXISTE ESTE OBJETO" << std::endl;
+		}
+
 		gob->setName(gob->getName() + "(" + to_string(nObj) + ")");
+	}
 	GameObjectInfo infogb;
 
 	infogb = { gob, partGen };

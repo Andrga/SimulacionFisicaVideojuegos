@@ -148,6 +148,14 @@ void ObjetoMovible::deAtachAnch(int id)
 	}
 }
 
+void ObjetoMovible::reset()
+{
+	derecha = nullptr;
+	abajo = nullptr;
+	izquierda = nullptr;
+	arriba = nullptr;
+}
+
 ModuloInfo* ObjetoMovible::generateModulo()
 {
 	ModuloInfo* base = new ModuloInfo();

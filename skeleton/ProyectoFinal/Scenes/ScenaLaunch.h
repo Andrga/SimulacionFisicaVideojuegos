@@ -13,13 +13,24 @@ protected:
 	ParticleSystem* psys = nullptr;
 	Modulo* cabina = nullptr;
 	RBStatic* PlataformaLanzamiento = nullptr;
+
+	// propulsion;
+	vector<PropulsionParticleGen*> partGenerators;
+
+	bool introPulsed = false;
 	float porcentajeFuerzProp = 1;
 	bool propulsando = false;
 	Vector3 DirPropulsion = { 0,0,0 };
-	float zoom = 0;
 
 	Vector3 posIniCabina = { 0,0,0 };
-	Vector3 cameraOffset = { 0,0,-100 };
+	Vector3 cameraOffset = { 0,0, +100 };
+
+	// cosas visuales
+	float zoom = 0;
+	float zoomVel = 10;
+	float zoomFactor = 0;
+	// velocidad del tiempo
+	int timeFactor = 1;
 public:
 	ScenaLaunch(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) : Scene(scnMang, gPhysics, gScene) {};
 	~ScenaLaunch() {};

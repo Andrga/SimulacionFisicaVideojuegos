@@ -35,6 +35,7 @@ public:
 	// 0:derecha, 1:abajo, 2:izquierda, 3:arriba
 	void deAtachAnch(int id);
 
+	void reset();
 	void setType(TipoModulo type) noexcept { tipo = type; };
 	TipoModulo getType() noexcept { return tipo; };
 	ObjetoMovible* getDerecha() noexcept { return derecha; }

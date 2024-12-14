@@ -10,7 +10,7 @@ RBDynamic::RBDynamic(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScen
 	actor->setAngularVelocity({ 0,0,0 });
 	PxRigidBodyExt::updateMassAndInertia(*actor, density);
 	actor->setMassSpaceInertiaTensor({ 10,10,10 });
-	actor->setMass(10);
+	//actor->setMass(10);
 	size = { 10,10,10 };
 	shape = CreateShape(PxBoxGeometry(size));
 	gScene->addActor(*actor);

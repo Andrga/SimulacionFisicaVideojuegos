@@ -20,8 +20,8 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 		break;
 	}
 	setDensity(1.5f);
-	actor->setLinearDamping(1);
-	actor->setMass(10000);
+	actor->setLinearDamping(0.9);
+	actor->setMass(100);
 }
 
 bool Modulo::update(double t)
@@ -30,12 +30,13 @@ bool Modulo::update(double t)
 	if (cabina != nullptr)
 	{
 		// todos los objetos tienen la misma rotacion que la cabina
-		/*pose = &(actor->getGlobalPose());
-		PxQuat cabRot = cabina->getActor()->getGlobalPose().q;
-		PxVec3 angleY(0, 0, 1);
-		pose->q = PxQuat(cabRot.getAngle(), angleY);
-		actor->setGlobalPose(*pose);*/
 	}
+	/*pose = &(actor->getGlobalPose());
+	PxQuat cabRot = pose->q;
+	PxVec3 angleY(0, 0, 1);
+	pose->q = PxQuat(cabRot.getAngle(), angleY);
+	pose->p = { pose->p.x, pose->p.y, 0 };
+	actor->setGlobalPose(*pose);*/
 
 
 	return GameObject::update(t);

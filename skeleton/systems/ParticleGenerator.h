@@ -37,7 +37,7 @@ public:
 
 
 	virtual void generateParticle() = 0;
-	bool mayGenerate();
+	virtual bool mayGenerate();
 	int getNParticles() { return nGameObjects; }
 	void onGameObjectDeath(GameObject* p); // Método para actualizar el conteo
 
@@ -84,12 +84,17 @@ private:
 	PxPhysics* gPhysics = nullptr;
 	PxScene* gScene = nullptr;
 	float* porcentajeFuerzProp = nullptr;
+	bool generate = false;
 
 	RBDynamic* propulsor = nullptr;
 public:
 	PropulsionParticleGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn, PxPhysics* gphys, PxScene* gscn, float* porcFuercProp, RBDynamic* prop)
-		: ParticleGenerator(org, nparts, partsys, scn), gPhysics(gphys), gScene(gscn), porcentajeFuerzProp(porcFuercProp), propulsor(prop) {};
+		: ParticleGenerator(org, nparts, partsys, scn), gPhysics(gphys), gScene(gscn), porcentajeFuerzProp(porcFuercProp), propulsor(prop) {
+	};
 	~PropulsionParticleGen() {};
 
 	void generateParticle() override;
+	bool mayGenerate() override;
+	void stopGenerate() { generate = false; };
+	void startGenerate() { generate = true; };
 };

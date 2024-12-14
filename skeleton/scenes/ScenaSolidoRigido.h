@@ -9,5 +9,7 @@ public:
 	~ScenaSolidoRigido();
 
 	void setup()override;
+
+	void show()override;
 };
 

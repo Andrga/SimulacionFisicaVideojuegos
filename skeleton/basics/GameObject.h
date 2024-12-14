@@ -46,7 +46,7 @@ public:
 	virtual PxQuat getRotation() { return pose->q; };
 	Vector3 getSize() { return size; };
 	string getName() { return name; };
-	float getMass() { return mass; };
+	virtual float getMass() { return mass; };
 	Vector3 getVelocity() { return velocity; };
 #pragma endregion
 

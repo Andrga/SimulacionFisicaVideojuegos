@@ -149,7 +149,7 @@ void RandomParticleGen::generateParticle()
 {
 
 	// cantidad de particulas no generadas
-	int restParticles = (startNGameObjects / 2) - nGameObjects;
+	int restParticles = (startNGameObjects - nGameObjects) / 2;
 
 	std::uniform_int_distribution<int> numPartsUniform(0, restParticles); // numero de 0 a restParticles
 	std::uniform_int_distribution<int> posXZUniform(-40, 40); // numero de -40 a 40
@@ -250,4 +250,12 @@ void PropulsionParticleGen::generateParticle()
 		nGameObjectsTotal++;
 
 	}
+}
+
+bool PropulsionParticleGen::mayGenerate()
+{
+	if (!generate)
+		return false;
+	else
+		ParticleGenerator::mayGenerate();
 }

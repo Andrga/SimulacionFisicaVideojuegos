@@ -60,6 +60,7 @@ void ScenaMontaje::setup()
 
 
 #pragma region decoracion
+#pragma region Tierra
 	RBStatic* PlanetaTierra = new RBStatic("PlanetaTierra", this, gPhysics, gScene);
 	PlanetaTierra->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
 	PlanetaTierra->setPosition(PlanetaTierra->getPosition() - Vector3(0, RADIO_PLANETA_TIERRA + 50, 0));
@@ -80,11 +81,30 @@ void ScenaMontaje::setup()
 	PlanetaTierra3->setColor({ 0.65,0.75,1,1 });
 	addGameObject(PlanetaTierra3);
 #pragma endregion
+#pragma endregion
 }
 
 void ScenaMontaje::show()
 {
 	Scene::show();
+	Cohete = nullptr;
+	tamanioCohete = { 0,0,0 };
+
+	// eliminacion de gameobjects del cohete antiguo
+	vector<string> aEliminar;
+	for (auto go : gameObjects)
+	{
+		// si es un objeto movible lo elimina
+		if (go.second.gameObject->getName().substr(0, 3) == "mov")
+			if (((ObjetoMovible*)go.second.gameObject)->getType() != CABINA) aEliminar.push_back(go.second.gameObject->getName());
+	}
+
+
+	for (auto n : aEliminar)
+		deleteGameObject(n);
+	// reseteo de la cabina
+	cabina->reset();
+
 
 	// settea la posicion de la camara
 	camera->moveTo(CAMERA_START_POS);

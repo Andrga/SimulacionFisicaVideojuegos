@@ -190,7 +190,7 @@ Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
 
 	//cout << object.getName() << " GRAVEDAD ACTUAL: " << gravedadAplicada << endl;
 
-	return dir * gravedadAplicada;
+	return dir * gravedadAplicada* object.getMass();
 }
 
 
