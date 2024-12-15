@@ -12,6 +12,13 @@ void ScenaLaunch::setup()
 	psys = new ParticleSystem(this);
 	addSystem(psys);
 
+	cameraAnchor = new RBDynamic("widCameraFollow", this, gPhysics, gScene);
+	cameraAnchor->setStartLifeTime(-1);
+	cameraAnchor->setShape(CreateShape(PxSphereGeometry(0.1)), { 0, 0, 0 });
+	cameraAnchor->getActor().damping
+	addGameObject(cameraAnchor);
+
+
 	//psys->addParticleGenerator(new NieblaGen(posIniCabina, 100, psys, this));
 
 
@@ -84,68 +91,10 @@ void ScenaLaunch::montarCohete()
 
 	posIniCabina.y = RADIO_PLANETA_TIERRA + tamanioCohete.y + 5;
 	cabina->setPosition(posIniCabina);
-
-	// crea los modulos colindantes	
-	if (Cohete->derecha)
-	{
-		Cohete->derecha->izquierda = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* derecha = new Modulo("derecha", this, gPhysics, gScene, Cohete->derecha->tipo, cabina);
-		derecha->setPosition({ cabina->getPosition().x + sizeModul,cabina->getPosition().y ,cabina->getPosition().z });
-		montarCoheteRec(Cohete->derecha, derecha);
-		// unimos los modulos por gomas elasticas
-		if (derecha) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, derecha, cabina));
-			addGameObject(derecha);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (Cohete->derecha->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(derecha->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, derecha));
-		}
-	}
-	if (Cohete->abajo) {
-		Cohete->abajo->arriba = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* abajo = new Modulo("abajo", this, gPhysics, gScene, Cohete->abajo->tipo, cabina);
-		abajo->setPosition({ cabina->getPosition().x ,cabina->getPosition().y - sizeModul,cabina->getPosition().z });
-		montarCoheteRec(Cohete->abajo, abajo);
-		// unimos los modulos por gomas elasticas
-		if (abajo) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, abajo, cabina));
-			addGameObject(abajo);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (Cohete->abajo->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(abajo->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, abajo));
-		}
-	}
-	if (Cohete->izquierda) {
-		Cohete->izquierda->derecha = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* izquierda = new Modulo("izquierda", this, gPhysics, gScene, Cohete->izquierda->tipo, cabina);
-		izquierda->setPosition({ cabina->getPosition().x - sizeModul,cabina->getPosition().y ,cabina->getPosition().z });
-		montarCoheteRec(Cohete->izquierda, izquierda);
-		// unimos los modulos por gomas elasticas
-		if (izquierda) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, izquierda, cabina));
-			addGameObject(izquierda);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (Cohete->izquierda->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(izquierda->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, izquierda));
-		}
-	}
-	if (Cohete->arriba) {
-		Cohete->arriba->abajo = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* arriba = new Modulo("arriba", this, gPhysics, gScene, Cohete->arriba->tipo, cabina);
-		arriba->setPosition({ cabina->getPosition().x ,cabina->getPosition().y + sizeModul,cabina->getPosition().z });
-		montarCoheteRec(Cohete->arriba, arriba);
-		// unimos los modulos por gomas elasticas
-		if (arriba) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, arriba, cabina));
-			addGameObject(arriba);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (Cohete->arriba->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(arriba->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, arriba));
-
-		}
-	}
-
 	addGameObject(cabina);
+
+	montarCoheteRec(Cohete, cabina);
+
 }
 
 Modulo* ScenaLaunch::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod)
@@ -158,63 +107,46 @@ Modulo* ScenaLaunch::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod)
 	if (modulo->derecha)
 	{
 		modulo->derecha->izquierda = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* derecha = new Modulo("derecha", this, gPhysics, gScene, modulo->derecha->tipo, cabina);
-		derecha->setPosition({ actualMod->getPosition().x + sizeModul,actualMod->getPosition().y,actualMod->getPosition().z });
+		Modulo* derecha = creaModulo(modulo->derecha, actualMod, { -1,0,0 });
 		montarCoheteRec(modulo->derecha, derecha);
-		// unimos los modulos por gomas elasticas
-		if (derecha) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, derecha, actualMod));
-			addGameObject(derecha);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (modulo->derecha->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(derecha->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, derecha));
-		}
 	}
 	if (modulo->abajo) {
 		modulo->abajo->arriba = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* abajo = new Modulo("abajo", this, gPhysics, gScene, modulo->abajo->tipo, cabina);
-		abajo->setPosition({ actualMod->getPosition().x,actualMod->getPosition().y - sizeModul,actualMod->getPosition().z });
+		Modulo* abajo = creaModulo(modulo->abajo, actualMod, { 0,1,0 });
 		montarCoheteRec(modulo->abajo, abajo);
-		// unimos los modulos por gomas elasticas
-		if (abajo) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, abajo, actualMod));
-			addGameObject(abajo);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (modulo->abajo->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(abajo->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, abajo));
-		}
 	}
 	if (modulo->izquierda) {
 		modulo->izquierda->derecha = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* izquierda = new Modulo("izquierda", this, gPhysics, gScene, modulo->izquierda->tipo, cabina);
-		izquierda->setPosition({ actualMod->getPosition().x - sizeModul,actualMod->getPosition().y,actualMod->getPosition().z });
+		Modulo* izquierda = creaModulo(modulo->izquierda, actualMod, { 1,0,0 });
 		montarCoheteRec(modulo->izquierda, izquierda);
-		// unimos los modulos por gomas elasticas
-		if (izquierda) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, izquierda, actualMod));
-			addGameObject(izquierda);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (modulo->izquierda->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(izquierda->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, izquierda));
-		}
 	}
 	if (modulo->arriba) {
 		modulo->arriba->abajo = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* arriba = new Modulo("arriba", this, gPhysics, gScene, modulo->arriba->tipo, cabina);
-		arriba->setPosition({ actualMod->getPosition().x,actualMod->getPosition().y + sizeModul,actualMod->getPosition().z });
+		Modulo* arriba = creaModulo(modulo->arriba, actualMod, { 0,-1,0 });
 		montarCoheteRec(modulo->derecha, arriba);
-		// unimos los modulos por gomas elasticas
-		if (arriba) {
-			fsys->addForceGenerator(new GomaGenerator(this, TENSION_ENTRE_MODULOS, sizeModul, arriba, actualMod));
-			addGameObject(arriba);
-			// si es un propulsor aniadimos sistema de particulas para la propulsion
-			if (modulo->arriba->tipo == PROPULSOR)
-				partGenerators.push_back(new PropulsionParticleGen(arriba->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, arriba));
-		}
 	}
 
 	return actualMod;
 
+}
+
+Modulo* ScenaLaunch::creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 dir)
+{
+	Modulo* mod = new Modulo("nuevo", this, gPhysics, gScene, modulo->tipo, cabina);
+	mod->setPosition(actualMod->getPosition() + (dir * sizeModul));
+
+	// unimos los modulos por fixedJoints
+	PxFixedJoint* fixedJoint = PxFixedJointCreate(*gPhysics,
+		actualMod->getActor(), PxTransform(PxVec3(0.0f, 0.0f, 0.0f)),
+		mod->getActor(), PxTransform(dir * sizeModul));
+	// aniade el gameobject
+	addGameObject(mod);
+
+	// si es un propulsor aniadimos sistema de particulas para la propulsion
+	if (modulo->tipo == PROPULSOR)
+		partGenerators.push_back(new PropulsionParticleGen(mod->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, mod));
+
+	return mod;
 }
 
 void ScenaLaunch::propulsar(Vector3 impulseRotation)
@@ -302,22 +234,22 @@ void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera
 	switch (key)
 	{
 	case '0':
-		timeFactor = 1;
+		SimulateTime = 1;
 		break;
 	case '1':
-		timeFactor = 2;
+		SimulateTime = 2;
 		break;
 	case '2':
-		timeFactor = 8;
+		SimulateTime = 8;
 		break;
 	case '3':
-		timeFactor = 32;
+		SimulateTime = 32;
 		break;
 	case '4':
-		timeFactor = 256;
+		SimulateTime = 256;
 		break;
 	case '5':
-		timeFactor = 2048;
+		SimulateTime = 2048;
 		break;
 	default:
 		break;
@@ -339,13 +271,12 @@ void ScenaLaunch::keyReleased(unsigned char key, const physx::PxTransform& camer
 
 void ScenaLaunch::update(double t)
 {
-	Scene::update(t * timeFactor);
+	Scene::update(t);
 	if (cabina) {
 		PxVec3 globalDirection = (cabina->getActor()->getGlobalPose().q.rotate({ 0,0,-1 }));
 
-		//camera->moveTo((globalDirection * 100) + cabina->getPosition());
-
-		camera->moveTo(cabina->getPosition() + Vector3(cameraOffset.x, cameraOffset.y, cameraOffset.z + zoom));
+		//cameraAnchor->setPosition((globalDirection * 100) + cabina->getPosition());
+		camera->moveTo(cameraAnchor->getPosition() + Vector3(0, 0, -10));// + Vector3(cameraOffset.x, cameraOffset.y, cameraOffset.z + zoom));
 		camera->lookAt(cabina->getPosition());
 	}
 
@@ -361,7 +292,7 @@ void ScenaLaunch::update(double t)
 	if (cabina) display_text1 += "#->Fuerza Aplicada: " + to_string(cabina->getActualForce().x) + "||" + to_string(cabina->getActualForce().y) + "||" + to_string(cabina->getActualForce().z);
 	display_text1 += "#->Direccion Propulsion: X:" + to_string((int)DirPropulsion.x) + " Z: " + to_string((int)DirPropulsion.z);
 	display_text1 += "#->Zoom: " + to_string((int)zoom);
-	display_text1 += "#->Velocidad Tiempo: " + to_string(timeFactor);
+	display_text1 += "#->Velocidad Tiempo: " + to_string(SimulateTime);
 
 	display_text2_position = { 10,100 };
 	display_text2 = "CONTROLES:";
@@ -378,6 +309,8 @@ void ScenaLaunch::show()
 	propulsando = false;
 
 	montarCohete();
+	cameraAnchor->setPosition(cabina->getPosition() + Vector3(0, 0, 100));
+	fsys->addForceGenerator(new GomaModificadoGenerator(this, 10, 100, cameraAnchor, cabina));
 
 	// setteo de la camara
 	camera->setMovible(false);

@@ -41,6 +41,8 @@ extern float TENSION_ENTRE_MODULOS;
 extern float sizeModul;
 extern Vector3 tamanioCohete;
 
+extern float SimulateTime;
+
 // constantes juego
 extern float FUERZA_PROPULSOR;
 

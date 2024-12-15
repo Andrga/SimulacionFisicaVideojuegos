@@ -9,6 +9,8 @@ float TENSION_ENTRE_MODULOS = 100000;
 float sizeModul = 10;
 Vector3 tamanioCohete = { 0,0, 0 };
 
+float SimulateTime = 1;
+
 // CONSTANTES DE JUEGO
 float FUERZA_PROPULSOR = 10000;
 

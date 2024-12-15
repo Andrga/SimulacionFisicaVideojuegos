@@ -29,8 +29,7 @@ protected:
 	float zoom = 0;
 	float zoomVel = 10;
 	float zoomFactor = 0;
-	// velocidad del tiempo
-	int timeFactor = 1;
+	RBDynamic* cameraAnchor = nullptr;
 public:
 	ScenaLaunch(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) : Scene(scnMang, gPhysics, gScene) {};
 	~ScenaLaunch() {};
@@ -38,6 +37,7 @@ public:
 
 	void montarCohete();
 	Modulo* montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod);
+	Modulo* creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 posRelativa);
 	void propulsar(Vector3 impulseRotation);
 
 	void keyPressed(unsigned char key, const physx::PxTransform& camera) override;

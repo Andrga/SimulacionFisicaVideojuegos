@@ -103,13 +103,13 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
-	gScene->simulate(t);
+	gScene->simulate(t * SimulateTime);
 	gScene->fetchResults(true);
 
 
 	// Update de la escena
 	if (sceneManager != nullptr)
-		sceneManager->update(t);
+		sceneManager->update(t * SimulateTime);
 
 
 	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };

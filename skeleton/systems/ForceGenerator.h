@@ -149,6 +149,30 @@ public:
 
 };
 
+class GomaModificadoGenerator : public ForceGenerator
+{
+protected:
+	GameObject* object1 = nullptr;
+	GameObject* object2 = nullptr;
+
+	float k;
+	float restingLength;
+public:
+	/// <param name="K"> Constante de elasticidad</param>
+	/// <param name="restLength"> Largo muelle reposo</param>
+	/// <param name="part2">Particula afectada</param>
+	/// <param name="part1">Particula(ancla)</param>
+	GomaModificadoGenerator(Scene* scn, float K, float restLength, GameObject* obj2, GameObject* obj1 = nullptr) :
+		ForceGenerator({ 0,0,0 }, scn), k(K), restingLength(restLength), object1(obj1), object2(obj2) {
+	};
+	~GomaModificadoGenerator() {};
+
+	bool onRadious(GameObject* part) override { return part == object2; };
+
+	virtual Vector3 generateForce(GameObject& obj) override;
+
+};
+
 class FlotationGenerator : public ForceGenerator
 {
 protected:

@@ -87,6 +87,9 @@ void ScenaMontaje::setup()
 void ScenaMontaje::show()
 {
 	Scene::show();
+	// tiempo de simulacion al normal
+	SimulateTime = 1;
+
 	Cohete = nullptr;
 	tamanioCohete = { 0,0,0 };
 
