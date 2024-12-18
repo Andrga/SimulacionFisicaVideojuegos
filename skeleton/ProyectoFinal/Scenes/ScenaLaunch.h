@@ -1,6 +1,6 @@
 #pragma once
 #include "../../basics/Scene.h"
-#include "../ObjetorsDeJuego/Modulo.h"
+#include "../ObjetorsDeJuego/Cohete.h"	
 #include "../../systems/ForceSystem.h"
 #include "../../systems/ForceGenerator.h"
 #include "../../systems/ParticleSystem.h"
@@ -11,34 +11,25 @@ class ScenaLaunch : public Scene
 protected:
 	ForceSystem* fsys = nullptr;
 	ParticleSystem* psys = nullptr;
-	Modulo* cabina = nullptr;
+	//Modulo* cabina = nullptr;
+	Cohete* cohete = nullptr;
 	RBStatic* PlataformaLanzamiento = nullptr;
 
-	// propulsion;
-	vector<PropulsionParticleGen*> partGenerators;
-
 	bool introPulsed = false;
-	float porcentajeFuerzProp = 1;
 	bool propulsando = false;
-	Vector3 DirPropulsion = { 0,0,0 };
 
-	Vector3 posIniCabina = { 0,0,0 };
 	Vector3 cameraOffset = { 0,0, +100 };
 
 	// cosas visuales
 	float zoom = 0;
 	float zoomVel = 10;
 	float zoomFactor = 0;
-	RBDynamic* cameraAnchor = nullptr;
+	RBStatic* cameraAnchor1 = nullptr;
+	RBDynamic* cameraAnchor2 = nullptr;
 public:
 	ScenaLaunch(SceneManager* scnMang, physx::PxPhysics* gPhysics = nullptr, physx::PxScene* gScene = nullptr) : Scene(scnMang, gPhysics, gScene) {};
-	~ScenaLaunch() {};
+	~ScenaLaunch();
 	void setup();
-
-	void montarCohete();
-	Modulo* montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod);
-	Modulo* creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 posRelativa);
-	void propulsar(Vector3 impulseRotation);
 
 	void keyPressed(unsigned char key, const physx::PxTransform& camera) override;
 	void keyReleased(unsigned char key, const physx::PxTransform& camera) override;

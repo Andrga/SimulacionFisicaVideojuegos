@@ -27,6 +27,7 @@ public:
 	void saveRocket();
 	void LaunchScene();
 
+	void keyPressed(unsigned char key, const physx::PxTransform& camera) override;
 	void keyReleased(unsigned char key, const physx::PxTransform& camera)override;
 };
 

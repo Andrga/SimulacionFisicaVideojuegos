@@ -90,7 +90,7 @@ void ScenaMontaje::show()
 	// tiempo de simulacion al normal
 	SimulateTime = 1;
 
-	Cohete = nullptr;
+	CoheteInfo = nullptr;
 	tamanioCohete = { 0,0,0 };
 
 	// eliminacion de gameobjects del cohete antiguo
@@ -134,13 +134,26 @@ void ScenaMontaje::creaTanque()
 
 void ScenaMontaje::saveRocket()
 {
-	Cohete = cabina->generateModulo();
+	CoheteInfo = cabina->generateModulo();
 }
 
 void ScenaMontaje::LaunchScene()
 {
 	cout << "LAUNCHSCENE" << endl;
 	sceneManager->setScene(2);
+}
+
+void ScenaMontaje::keyPressed(unsigned char key, const physx::PxTransform& camera)
+{
+	// boton para poner un cohete predefinido
+	if (key == '1') {
+		CoheteInfo = &cohetePrefab;
+		tamanioCohete = tamanioCohetePrefab;
+		cout << "Cohete Prefab1" << endl;
+		LaunchScene();
+	};
+
+	Scene::keyPressed(key, camera);
 }
 
 void ScenaMontaje::keyReleased(unsigned char key, const physx::PxTransform& camera)

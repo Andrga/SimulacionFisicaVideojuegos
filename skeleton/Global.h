@@ -26,22 +26,31 @@ enum TipoModulo {
 struct ModuloInfo
 {
 	TipoModulo tipo;
-	ModuloInfo* derecha;
-	ModuloInfo* abajo;
-	ModuloInfo* izquierda;
-	ModuloInfo* arriba;
+	ModuloInfo* derecha = nullptr;
+	ModuloInfo* abajo = nullptr;
+	ModuloInfo* izquierda = nullptr;
+	ModuloInfo* arriba = nullptr;
+
+	ModuloInfo() {};
+	ModuloInfo(TipoModulo tp) :tipo(tp) { derecha = nullptr; izquierda = nullptr; arriba = nullptr; abajo = nullptr; };
+	ModuloInfo(TipoModulo tp, ModuloInfo* der, ModuloInfo* abj, ModuloInfo* izq, ModuloInfo* arr) :tipo(tp), derecha(der), abajo(abj), izquierda(izq), arriba(arr) {};
 };
 
 extern void centreVis(bool vis, int dir);
 
 // vector que indica los modulos del cohete
-extern ModuloInfo* Cohete;
+extern ModuloInfo* CoheteInfo;
 
 extern float TENSION_ENTRE_MODULOS;
-extern float sizeModul;
+extern float sizeModule;
 extern Vector3 tamanioCohete;
 
 extern float SimulateTime;
+
+extern Vector3 POS_INI_CABINA_LAUNCH;
+
+extern ModuloInfo cohetePrefab;
+extern Vector3 tamanioCohetePrefab;
 
 // constantes juego
 extern float FUERZA_PROPULSOR;

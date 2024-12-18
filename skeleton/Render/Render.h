@@ -61,7 +61,7 @@ namespace Snippets
 void setupDefaultWindow(const char* name);
 void setupDefaultRenderState();
 
-void startRender(const physx::PxVec3& cameraEye, const physx::PxVec3& cameraDir, physx::PxReal nearClip = 1.f, physx::PxReal farClip = 10000.f);
+void startRender(const physx::PxVec3& cameraEye, const physx::PxVec3& cameraDir, physx::PxReal nearClip = 1.f, physx::PxReal farClip = 10000000.f);
 void renderShape(const physx::PxShape& shape, const physx::PxTransform& transform, const physx::PxVec4& color);
 void renderActors(physx::PxRigidActor** actors, const physx::PxU32 numActors, bool shadows = false, const physx::PxVec4 & color = physx::PxVec4(0.0f, 0.75f, 0.0f, 1.0f));
 void finishRender();

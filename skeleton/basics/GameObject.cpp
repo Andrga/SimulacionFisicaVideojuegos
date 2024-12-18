@@ -17,3 +17,8 @@ void GameObject::setShape(PxShape* shp, Vector3 siz) {
 	shape = shp;
 	size = siz;
 }
+
+void GameObject::setShape(PxShape* shp)
+{
+	renderItem->shape = shp;
+}

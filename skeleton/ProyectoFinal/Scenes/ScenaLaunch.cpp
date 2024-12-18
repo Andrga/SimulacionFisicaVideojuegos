@@ -12,14 +12,18 @@ void ScenaLaunch::setup()
 	psys = new ParticleSystem(this);
 	addSystem(psys);
 
-	cameraAnchor = new RBDynamic("widCameraFollow", this, gPhysics, gScene);
-	cameraAnchor->setStartLifeTime(-1);
-	cameraAnchor->setShape(CreateShape(PxSphereGeometry(0.1)), { 0, 0, 0 });
-	cameraAnchor->getActor().damping
-	addGameObject(cameraAnchor);
+	cameraAnchor1 = new RBStatic("wid1CameraFollow", this, gPhysics, gScene);
+	cameraAnchor1->setStartLifeTime(-1);
+	cameraAnchor1->setShape(CreateShape(PxSphereGeometry(0.1)), { 0, 0, 0 });
+	addGameObject(cameraAnchor1);
+
+	cameraAnchor2 = new RBDynamic("wid2CameraFollow", this, gPhysics, gScene);
+	cameraAnchor2->setStartLifeTime(-1);
+	cameraAnchor2->setShape(CreateShape(PxSphereGeometry(0.1)), { 0, 0, 0 });
+	((PxRigidDynamic*)cameraAnchor2->getActor())->setLinearDamping(0.1);
+	addGameObject(cameraAnchor2);
 
 
-	//psys->addParticleGenerator(new NieblaGen(posIniCabina, 100, psys, this));
 
 
 #pragma region subdivisiones de la esfera del planeta
@@ -45,7 +49,7 @@ void ScenaLaunch::setup()
 
 
 	// gravedad de planeta tierra
-	fsys->addForceGenerator(new GravedadPlanetaGenerator(PlanetaTierra->getPosition(), this, -9.8, RADIO_GRAVEDAD_TIERRA, RADIO_PLANETA_TIERRA + 100));
+	fsys->addForceGenerator(new GravedadPlanetaGenerator(PlanetaTierra->getPosition(), this, -98, RADIO_GRAVEDAD_TIERRA, RADIO_PLANETA_TIERRA));
 #pragma endregion
 #pragma region Luna
 
@@ -71,112 +75,21 @@ void ScenaLaunch::setup()
 
 
 	// GRAVEDAD DE LA LUNA
-	fsys->addForceGenerator(new GravedadPlanetaGenerator(Luna1->getPosition(), this, -1.62f, RADIO_GRAVEDAD_LUNA, RADIO_LUNA + 100));
+	fsys->addForceGenerator(new GravedadPlanetaGenerator(Luna1->getPosition(), this, -16.2f, RADIO_GRAVEDAD_LUNA, RADIO_LUNA + 100));
 #pragma endregion
 
 	// plataforma de lanzamiento del cohete
 	PlataformaLanzamiento = new RBStatic("PlataformaLanzamiento", this, gPhysics, gScene);
-	PlataformaLanzamiento->setPosition({ posIniCabina.x ,RADIO_PLANETA_TIERRA + 5, posIniCabina.z });
+	PlataformaLanzamiento->setPosition({ POS_INI_CABINA_LAUNCH.x ,RADIO_PLANETA_TIERRA + 5, POS_INI_CABINA_LAUNCH.z });
 	PlataformaLanzamiento->setShape(CreateShape(PxBoxGeometry(tamanioCohete.x + 5, 5, tamanioCohete.x + 5)), { tamanioCohete.x + 5, 5, tamanioCohete.x + 5 });
 	PlataformaLanzamiento->setColor({ 1,1,1,1 });
 	addGameObject(PlataformaLanzamiento);
 
+	psys->addParticleGenerator(new NieblaGen(PlataformaLanzamiento->getPosition(), 10, psys, this));
 
 
 }
 
-void ScenaLaunch::montarCohete()
-{
-	cabina = new Modulo("Cabina", this, gPhysics, gScene, Cohete->tipo, nullptr);
-
-	posIniCabina.y = RADIO_PLANETA_TIERRA + tamanioCohete.y + 5;
-	cabina->setPosition(posIniCabina);
-	addGameObject(cabina);
-
-	montarCoheteRec(Cohete, cabina);
-
-}
-
-Modulo* ScenaLaunch::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod)
-{
-	// si no hay modulo info entonces no puede crear modulo
-	if (modulo == nullptr) return nullptr;
-
-
-	//crea los modulos colindantes	
-	if (modulo->derecha)
-	{
-		modulo->derecha->izquierda = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* derecha = creaModulo(modulo->derecha, actualMod, { -1,0,0 });
-		montarCoheteRec(modulo->derecha, derecha);
-	}
-	if (modulo->abajo) {
-		modulo->abajo->arriba = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* abajo = creaModulo(modulo->abajo, actualMod, { 0,1,0 });
-		montarCoheteRec(modulo->abajo, abajo);
-	}
-	if (modulo->izquierda) {
-		modulo->izquierda->derecha = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* izquierda = creaModulo(modulo->izquierda, actualMod, { 1,0,0 });
-		montarCoheteRec(modulo->izquierda, izquierda);
-	}
-	if (modulo->arriba) {
-		modulo->arriba->abajo = nullptr; // eliminamos la referencia al modulo cabina para que no lo cree nuevamente en el metodo recursivo
-		Modulo* arriba = creaModulo(modulo->arriba, actualMod, { 0,-1,0 });
-		montarCoheteRec(modulo->derecha, arriba);
-	}
-
-	return actualMod;
-
-}
-
-Modulo* ScenaLaunch::creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 dir)
-{
-	Modulo* mod = new Modulo("nuevo", this, gPhysics, gScene, modulo->tipo, cabina);
-	mod->setPosition(actualMod->getPosition() + (dir * sizeModul));
-
-	// unimos los modulos por fixedJoints
-	PxFixedJoint* fixedJoint = PxFixedJointCreate(*gPhysics,
-		actualMod->getActor(), PxTransform(PxVec3(0.0f, 0.0f, 0.0f)),
-		mod->getActor(), PxTransform(dir * sizeModul));
-	// aniade el gameobject
-	addGameObject(mod);
-
-	// si es un propulsor aniadimos sistema de particulas para la propulsion
-	if (modulo->tipo == PROPULSOR)
-		partGenerators.push_back(new PropulsionParticleGen(mod->getPosition(), 10, psys, this, gPhysics, gScene, &porcentajeFuerzProp, mod));
-
-	return mod;
-}
-
-void ScenaLaunch::propulsar(Vector3 impulseRotation)
-{
-	DirPropulsion = impulseRotation;
-
-	for (auto pg : partGenerators)
-		pg->startGenerate();
-
-	for (auto o : gameObjects) {
-		// si o no es un modulo de cohete, ni un propulsor lo salta
-		if (o.second.gameObject->getName().substr(0, 3) == "mod" && ((Modulo*)o.second.gameObject)->getTipo() == PROPULSOR) {
-			// setting de la direccion en la que propulsar
-			PxVec3 globalDirection = ((Modulo*)o.second.gameObject)->getActor()->getGlobalPose().q.rotate({ 0,1,0 });
-
-			// si hay rotacion por input se aniade rotacion adicional
-			if (impulseRotation.x != 0 || impulseRotation.z != 0)
-			{
-				PxQuat aditionalRotation(PxPi * 30 / 180, impulseRotation);
-				globalDirection = aditionalRotation.rotate(globalDirection);
-
-			}
-
-
-			o.second.gameObject->addForce(globalDirection * (FUERZA_PROPULSOR * porcentajeFuerzProp));
-		}
-
-	}
-
-}
 
 void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera)
 {
@@ -190,12 +103,12 @@ void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera
 	}
 	// aumentar disminuir potencia de impulso
 	if (key == 'i') {
-		if (porcentajeFuerzProp < 1) porcentajeFuerzProp += 0.01;
-		else porcentajeFuerzProp = 1;
+		if (cohete->getPorcPropulsion() < 1) cohete->setPorcPropulsion(cohete->getPorcPropulsion() + 0.01);
+		else cohete->setPorcPropulsion(1);
 	}
 	if (key == 'k') {
-		if (porcentajeFuerzProp > 0) porcentajeFuerzProp -= 0.01;
-		else porcentajeFuerzProp = 0;
+		if (cohete->getPorcPropulsion() > 0) cohete->setPorcPropulsion(cohete->getPorcPropulsion() - 0.01);
+		else cohete->setPorcPropulsion(0);
 	}
 	// zoom
 	if (key == 'o') {
@@ -214,21 +127,16 @@ void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera
 	}
 	// direccion de impulso
 	if (key == 'w') {
-		propulsar({ 1,0,0 });
+		cohete->propulsar({ 1,0,0 });
 	}
 	if (key == 's') {
-		propulsar({ -1,0,0 });
+		cohete->propulsar({ -1,0,0 });
 	}
 	if (key == 'a') {
-		propulsar({ 0,0,-1 });
+		cohete->propulsar({ 0,0,-1 });
 	}
 	if (key == 'd') {
-		propulsar({ 0,0,1 });
-	}
-	// volver a la zona de montaje
-	if (key == 'q') {
-		cout << "Start" << endl;
-		sceneManager->setScene(1);
+		cohete->propulsar({ 0,0,1 });
 	}
 
 	switch (key)
@@ -242,14 +150,15 @@ void ScenaLaunch::keyPressed(unsigned char key, const physx::PxTransform& camera
 	case '2':
 		SimulateTime = 8;
 		break;
-	case '3':
-		SimulateTime = 32;
+		// activa el paracaidas
+	case 'm':
+		cohete->useParachute();
+		cout << "PARACAIDAS" << endl;
 		break;
-	case '4':
-		SimulateTime = 256;
-		break;
-	case '5':
-		SimulateTime = 2048;
+		// volver a la zona de montaje
+	case 'q':
+		cout << "Start" << endl;
+		sceneManager->setScene(1);
 		break;
 	default:
 		break;
@@ -263,8 +172,7 @@ void ScenaLaunch::keyReleased(unsigned char key, const physx::PxTransform& camer
 	if (key == 13 || key == 'w' || key == 'a' || key == 's' || key == 'd')
 	{
 		if (key == 13)introPulsed = false;
-		for (auto pg : partGenerators)
-			pg->stopGenerate();
+		cohete->stopParticles();
 	}
 }
 
@@ -272,15 +180,17 @@ void ScenaLaunch::keyReleased(unsigned char key, const physx::PxTransform& camer
 void ScenaLaunch::update(double t)
 {
 	Scene::update(t);
-	if (cabina) {
-		PxVec3 globalDirection = (cabina->getActor()->getGlobalPose().q.rotate({ 0,0,-1 }));
+	// si no hay cohete no hace lo siguiente
+	if (!cohete) return;
 
-		//cameraAnchor->setPosition((globalDirection * 100) + cabina->getPosition());
-		camera->moveTo(cameraAnchor->getPosition() + Vector3(0, 0, -10));// + Vector3(cameraOffset.x, cameraOffset.y, cameraOffset.z + zoom));
-		camera->lookAt(cabina->getPosition());
-	}
+	PxVec3 globalDirection = (cohete->getRotation().rotate({ 0,0,-1 }));
 
-	if (propulsando) propulsar({ 0,0,0 });
+	cameraAnchor1->setPosition(cohete->getPosition() + Vector3(0, 0, 100 + zoom));
+	camera->moveTo(cameraAnchor2->getPosition() + Vector3(0, 0, -10));// + Vector3(cameraOffset.x, cameraOffset.y, cameraOffset.z + zoom));
+	camera->lookAt(cohete->getPosition());
+
+
+	if (propulsando) cohete->propulsar({ 0,0,0 });
 
 	// texto con informacion
 	display_text1_position = { 10,500 };
@@ -288,9 +198,10 @@ void ScenaLaunch::update(double t)
 	display_text1 += "#<------------------------>";
 	display_text1 += "#->Planeta Actual: ";
 	display_text1 += "#->PROPULSANDO: "; propulsando ? display_text1 += "SI" : display_text1 += "NO";
-	display_text1 += "#->Potencia Proulsores: " + to_string(porcentajeFuerzProp * 100) + "%";
-	if (cabina) display_text1 += "#->Fuerza Aplicada: " + to_string(cabina->getActualForce().x) + "||" + to_string(cabina->getActualForce().y) + "||" + to_string(cabina->getActualForce().z);
-	display_text1 += "#->Direccion Propulsion: X:" + to_string((int)DirPropulsion.x) + " Z: " + to_string((int)DirPropulsion.z);
+	display_text1 += "#->Potencia Proulsores: " + to_string(cohete->getPorcPropulsion() * 100) + "%";
+	display_text1 += "#->Combustible: " + to_string(cohete->getCombustible());
+	//if (cohete) display_text1 += "#->Fuerza Aplicada: " + to_string(cabina->getActualForce().x) + "||" + to_string(cabina->getActualForce().y) + "||" + to_string(cabina->getActualForce().z);
+	//display_text1 += "#->Direccion Propulsion: X:" + to_string((int)DirPropulsion.x) + " Z: " + to_string((int)DirPropulsion.z);
 	display_text1 += "#->Zoom: " + to_string((int)zoom);
 	display_text1 += "#->Velocidad Tiempo: " + to_string(SimulateTime);
 
@@ -304,21 +215,19 @@ void ScenaLaunch::update(double t)
 void ScenaLaunch::show()
 {
 	Scene::show();
-	// resetero de propulsion
-	partGenerators.clear();
 	propulsando = false;
 
-	montarCohete();
-	cameraAnchor->setPosition(cabina->getPosition() + Vector3(0, 0, 100));
-	fsys->addForceGenerator(new GomaModificadoGenerator(this, 10, 100, cameraAnchor, cabina));
+
+	cohete = new Cohete(this, psys, fsys, gPhysics, gScene);
+	cameraAnchor1->setPosition(cohete->getPosition() + Vector3(0, 0, 100));
+	//cameraAnchor1->setVisibility(false);
+	cameraAnchor2->setPosition(cameraAnchor1->getPosition() + Vector3(0, 0, 10));
+	//cameraAnchor2->setVisibility(false);
+	fsys->addForceGenerator(new GomaModificadoGenerator(this, 10, 10, cameraAnchor2, cameraAnchor1));
 
 	// setteo de la camara
 	camera->setMovible(false);
-	camera->moveTo({ cabina->getPosition().x, cabina->getPosition().y, cabina->getPosition().z - 100 });
-
-	//propulsion
-	for (auto pg : partGenerators)
-		psys->addParticleGenerator(pg);
+	camera->moveTo({ cohete->getPosition().x, cohete->getPosition().y, cohete->getPosition().z - 100 });
 
 	// definimos la gravedad en esta escena
 	gScene->setGravity({ 0,0,0 });

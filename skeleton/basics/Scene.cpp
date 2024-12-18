@@ -24,8 +24,6 @@ void Scene::update(double t)
 		if (o1.second.gameObject->getName().substr(0, 3) == "wid") continue;
 		for (auto& o2 : gameObjects)
 		{
-
-
 			// si el objeto 1 y el objeto 2 son el mismo, o si el objeto2 es un widget ( no le afectan las colisiones) salta al sigiente
 			if (o1.first == o2.first || o2.second.gameObject->getName().substr(0, 3) == "wid") continue;
 			if (checkColisions(o1.second.gameObject, o2.second.gameObject))
@@ -51,15 +49,15 @@ void Scene::update(double t)
 			objetosEliminar.push_back(ob.second.gameObject->getName());
 	}
 
-	for (auto n : objetosEliminar)
-		deleteGameObject(n);
-
 	//actualizacion de los sistemas
 	for (auto s : systems)
 	{
-		s->update(t);
 		s->affectParticles(gameObjects, t);
+		s->update(t);
 	}
+
+	for (auto n : objetosEliminar)
+		deleteGameObject(n);
 }
 
 void Scene::addSystem(System* sys)
@@ -123,9 +121,9 @@ bool Scene::checkColisions(GameObject* gb1, GameObject* gb2)
 	Vector3 posObj1 = gb1->getPosition();
 	Vector3 posObj2 = gb2->getPosition();
 
-	bool col = (posObj1.x + halfSide1.x >= posObj2.x && posObj1.x - halfSide1.x <= posObj2.x + halfSide2.x) &&
-		(posObj1.y + halfSide1.y >= posObj2.y - halfSide2.y && posObj1.y - halfSide1.y <= posObj2.y + halfSide2.y) &&
-		(posObj1.z + halfSide1.z >= posObj2.z - halfSide2.y && posObj1.z - halfSide1.z <= posObj2.z + halfSide2.z);
+	bool col = (posObj1.x + halfSide1.x >= posObj2.x - halfSide2.x - 1 && posObj1.x - halfSide1.x <= posObj2.x + halfSide2.x + 1) &&
+		(posObj1.y + halfSide1.y >= posObj2.y - halfSide2.y - 1 && posObj1.y - halfSide1.y <= posObj2.y + halfSide2.y + 1) &&
+		(posObj1.z + halfSide1.z >= posObj2.z - halfSide2.z - 1 && posObj1.z - halfSide1.z <= posObj2.z + halfSide2.z + 1);
 
 	/*if (col)
 		cout << "HA OLISIONADO " << gb1->getName() << " con " << gb2->getName() << endl;*/

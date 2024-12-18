@@ -202,15 +202,14 @@ void RandomParticleGen::generateParticle()
 // generador de particulas propulsor
 void PropulsionParticleGen::generateParticle()
 {
-	// cantidad de particulas no generadas
-	int restParticles = startNGameObjects - nGameObjects;
-
 	// Generamos una cantidad de particulas, cuya cantidad entra en el rango de la capacidad de particulas maxima,
 	// es decir restParticles
-	std::uniform_int_distribution<int> numPartsUniform(0, restParticles); // numero de 0 a restParticles
+	std::uniform_int_distribution<int> numPartsUniform(0, 1); // numero de 0 a restParticles
 	std::uniform_int_distribution<int> PosUniformDist(-2.5, 2.5); // posicion donde sale
 	std::normal_distribution<double> FuerzaPropnormalDistribution(*porcentajeFuerzProp, 0.1); // media|dispersion fuerza de propulsion
 	std::normal_distribution<double> LFEnormalDistribution(2, 10.0); // media|dispersion
+	std::normal_distribution<double> rojoNormalDistribution(1, 0.1); // media|dispersion
+	std::normal_distribution<double> verdeNormalDistribution(0.5, 0.2); // media|dispersion
 
 	// origen de la nueva particula
 	origen = propulsor->getActor()->getGlobalPose().p;
@@ -238,6 +237,7 @@ void PropulsionParticleGen::generateParticle()
 		// creamos la nueva particula
 		Particle* aux = new Particle("wid", scene, origen);
 		aux->setShape(CreateShape(PxSphereGeometry(1)), { 1,1,1 });
+		aux->setColor({ (float)rojoNormalDistribution(generator), (float)verdeNormalDistribution(generator), 0,1 });
 		aux->addForce(force);
 		aux->setStartLifeTime(1);
 
@@ -256,6 +256,4 @@ bool PropulsionParticleGen::mayGenerate()
 {
 	if (!generate)
 		return false;
-	else
-		ParticleGenerator::mayGenerate();
 }

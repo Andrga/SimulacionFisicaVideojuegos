@@ -190,26 +190,33 @@ Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
 
 	//cout << object.getName() << " GRAVEDAD ACTUAL: " << gravedadAplicada << endl;
 
-	return dir * gravedadAplicada* object.getMass();
+	return dir * gravedadAplicada * object.getMass();
 }
 
 Vector3 GomaModificadoGenerator::generateForce(GameObject& obj)
 {
-	Vector3 position1 = object1->getPosition();
+	if (!object1->getAlive() || !obj.getAlive()) return{ 0,0,0 };
+
+	Vector3 positionCabina = object1->getPosition();
+	Vector3 PositionCamara = obj.getPosition();
 	Vector3 force{ 0,0,0 };
 
 	// largura actual del muelle
-	Vector3 dir = position1 - obj.getPosition();
+	Vector3 dir = positionCabina - PositionCamara;
 	float actuallenth = dir.magnitude();
 	dir.normalize();
 
 	// deformacion del muelle
 	float difflenth = actuallenth - restingLength;
-	//if (difflenth <= 0) difflenth = 0;
+
 	// calculo de la fuerza
 	force = dir * k * difflenth;
 
+	// amortiguacion a la fuerza segun la velocidad
+	Vector3 velRelativa = object1->getVelocity() - obj.getVelocity();
+	Vector3 amortiguadoForce = velRelativa * 0.5; // velocidad * amortiguacion
+
 	// aplica la fueza a ambos extremos del muelle
 	//object1->addForce(-force);
-	return force;
+	return force + amortiguadoForce;
 }

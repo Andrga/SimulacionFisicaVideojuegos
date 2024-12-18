@@ -6,22 +6,35 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 	{
 	case CABINA:
 		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
-		setColor({ 0.5,0.5,1,0 });
+		createCabina();
+		setColor({ 0,0,1,0 });
 		break;
 	case TANQUE:
 		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
-		setColor({ 1,1,1,1 });
+		createTanque();
+		setColor({ 1,1,1,0 });
 		break;
 	case PROPULSOR:
 		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
-		setColor({ 1,0.5,0.5,1 });
+		createPropulsor();
+		setColor({ 1,0,0,0 });
 		break;
 	default:
 		break;
 	}
-	setDensity(1.5f);
-	actor->setLinearDamping(0.9);
-	actor->setMass(100);
+	float m = 1000;
+	float d = 1.5;
+	setDensity(d);
+	actor->setLinearDamping(0.99);
+	actor->setMass(m);
+
+	float Ih = (m * ((size.x * size.x) + (size.z * size.z)) / 12);
+	float Iw = (m * ((size.z * size.z) + (size.y * size.y)) / 12);
+	float Id = (m * ((size.x * size.x) + (size.y * size.y)) / 12);
+
+	actor->setMassSpaceInertiaTensor({ Iw, Ih, Id });
+
+	GameObject::setShape(CreateShape(PxSphereGeometry(sizeModule / 2)));
 }
 
 bool Modulo::update(double t)
@@ -40,4 +53,23 @@ bool Modulo::update(double t)
 
 
 	return GameObject::update(t);
+}
+
+void Modulo::createCabina()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, sizeModule / 2, 1)), actor, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxSphereGeometry(sizeModule / 3)), actor, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, 1, 1)), actor, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, 1, sizeModule / 2)), actor, { 0,0.5,1,1 }));
+}
+
+void Modulo::createTanque()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, sizeModule / 2, sizeModule / 2)), actor, { 1,1,1,1 }));
+}
+
+void Modulo::createPropulsor()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, 1, sizeModule / 2)), actor, { 1,0,0,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, sizeModule / 2, 1)), actor, { 1,0,0,1 }));
 }

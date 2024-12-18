@@ -266,6 +266,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Anchor.cpp" />
     <ClCompile Include="ProyectoFinal\Basics\Button.cpp" />
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Cohete.cpp" />
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Modulo.cpp" />
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
@@ -305,6 +306,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="ProyectoFinal\Basics\Anchor.h" />
     <ClInclude Include="ProyectoFinal\Basics\Button.h" />
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Cohete.h" />
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Modulo.h" />
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />

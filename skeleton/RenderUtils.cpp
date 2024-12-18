@@ -148,7 +148,7 @@ void renderLoop()
 	StartCounter();
 	sCamera = new Camera(PxVec3(50.0f, 50.0f, 50.0f), PxVec3(-0.6f,-0.2f,-0.7f));
 
-	setupDefaultWindow("Simulacion Fisica Videojuegos");
+	setupDefaultWindow("Simulacion Fisica Videojuegos : Rocket Simulator");
 	setupDefaultRenderState();
 
 	glutIdleFunc(idleCallback);

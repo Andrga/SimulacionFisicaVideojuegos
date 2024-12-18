@@ -55,6 +55,7 @@ public:
 	virtual void setPosition(Vector3 pos) { pose->p = pos; };
 	virtual void setRotation(const PxQuat rot) { pose->q = rot; renderItem->transform = pose; };
 	virtual void setShape(PxShape* shp, Vector3 siz);
+	virtual void setShape(PxShape* shp);
 	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
 	void setSize(Vector3 siz) noexcept { size = siz; };

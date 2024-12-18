@@ -15,6 +15,7 @@ public:
 	// getters
 	PxRigidActor* getActor() override { return actor; };
 	Vector3 getPosition() override { return actor->getGlobalPose().p; };
+	PxQuat getRotation() override { return actor->getGlobalPose().q; };
 	void setRotation(PxQuat rot) override { pose = &actor->getGlobalPose(); pose->q == rot; actor->setGlobalPose(*pose); };
 
 	float getMass() override { return actor->getMass(); };

@@ -101,6 +101,7 @@
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Modulo.cpp">
       <Filter>Proyecto final\objetosDeJuego</Filter>
     </ClCompile>
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Cohete.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.h">
       <Filter>Proyecto final\objetosDeJuego</Filter>
     </ClInclude>
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Cohete.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
