@@ -53,11 +53,20 @@ void Cohete::startParachute()
 	parachute = new RBDynamic("widParachute", scene, gPhysics, gScene);
 	scene->addGameObject(parachute);
 	parachute->setShape(CreateShape(PxBoxGeometry(sizeModule, sizeModule / 2, sizeModule)), { sizeModule, sizeModule / 2, sizeModule });
-	((PxRigidDynamic*)parachute->getActor())->setLinearDamping(0.5);
+	((PxRigidDynamic*)parachute->getActor())->setLinearDamping(0.1);
+
+	Vector3 size = parachute->getSize();
+
 
 	Vector3 cabinapos = cabina->getPosition();
 	parachute->setPosition({ cabinapos.x, cabinapos.y + tamanioCohete.y, cabinapos.z });
-	parachute->setMass(10);
+	parachute->setMass(10000);
+	parachute->setDensity(0.15);
+
+	float Ih = (10000 * ((size.x * size.x) + (size.z * size.z)) / 12);
+	float Iw = (10000 * ((size.z * size.z) + (size.y * size.y)) / 12);
+	float Id = (10000 * ((size.x * size.x) + (size.y * size.y)) / 12);
+	((PxRigidDynamic*)parachute->getActor())->setMassSpaceInertiaTensor({Iw, Ih, Id});
 
 	forcGenParac = new GomaModificadoGenerator(scene, TENSION_ENTRE_MODULOS, tamanioCohete.y, cabina, parachute);
 	fsys->addForceGenerator(forcGenParac);

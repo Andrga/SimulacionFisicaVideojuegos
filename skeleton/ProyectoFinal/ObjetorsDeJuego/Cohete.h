@@ -30,6 +30,8 @@ private:
 
 	Modulo* montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod, PxPhysics* gPhysics, PxScene* gScene);
 	Modulo* creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 posRelativa, PxPhysics* gPhysics, PxScene* gScene);
+	void startParachute();
+	void stopParachute();
 public:
 	Cohete(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysics* gPhysx, PxScene* gScn);
 	~Cohete();
@@ -45,8 +47,6 @@ public:
 	void stopParticles();
 
 	void useParachute();
-	void startParachute();
-	void stopParachute();
 
 
 	void propulsar(Vector3 dir);
