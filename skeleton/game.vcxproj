@@ -269,6 +269,7 @@
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Cohete.cpp" />
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Modulo.cpp" />
     <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.cpp" />
+    <ClCompile Include="ProyectoFinal\ObjetorsDeJuego\Planeta.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaIntro.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaLaunch.cpp" />
     <ClCompile Include="ProyectoFinal\Scenes\ScenaMontaje.cpp" />
@@ -309,6 +310,7 @@
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Cohete.h" />
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Modulo.h" />
     <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\ObjetoMovible.h" />
+    <ClInclude Include="ProyectoFinal\ObjetorsDeJuego\Planeta.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaIntro.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaLaunch.h" />
     <ClInclude Include="ProyectoFinal\Scenes\ScenaMontaje.h" />

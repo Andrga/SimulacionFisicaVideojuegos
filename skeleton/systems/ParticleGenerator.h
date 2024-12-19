@@ -98,3 +98,23 @@ public:
 	void stopGenerate() { generate = false; };
 	void startGenerate() { generate = true; };
 };
+
+// --- GENERADOR DE PARTICULAS explosion ---
+class ExplosionParticleGen : public ParticleGenerator
+{
+private:
+	PxPhysics* gPhysics = nullptr;
+	PxScene* gScene = nullptr;
+	bool generate = false;
+public:
+	ExplosionParticleGen(Vector3 org, int nparts, ParticleSystem* partsys, Scene* scn, PxPhysics* gphys, PxScene* gscn)
+		: ParticleGenerator(org, nparts, partsys, scn), gPhysics(gphys), gScene(gscn) {
+		startGenerate();
+	};
+	~ExplosionParticleGen() {};
+
+	void generateParticle() override;
+	bool mayGenerate() override;
+	void stopGenerate() { generate = false; };
+	void startGenerate() { generate = true; };
+};

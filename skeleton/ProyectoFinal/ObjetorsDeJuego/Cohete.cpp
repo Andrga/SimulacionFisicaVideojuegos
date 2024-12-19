@@ -3,7 +3,7 @@
 #include "../../systems/ParticleSystem.h"
 #include "../../systems/ForceSystem.h"
 
-Cohete::Cohete(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysics* gPhysx, PxScene* gScn) :scene(scn), psys(psistm), fsys(forcstm), gScene(gScn), gPhysics(gPhysx)
+Spaceship::Spaceship(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysics* gPhysx, PxScene* gScn) :scene(scn), psys(psistm), fsys(forcstm), gScene(gScn), gPhysics(gPhysx)
 {
 	cabina = new Modulo("Cabina", scene, gPhysics, gScene, CoheteInfo->tipo, nullptr);
 	POS_INI_CABINA_LAUNCH.y = RADIO_PLANETA_TIERRA + tamanioCohete.y + 5;
@@ -21,11 +21,11 @@ Cohete::Cohete(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysi
 
 }
 
-Cohete::~Cohete()
+Spaceship::~Spaceship()
 {
 }
 
-void Cohete::startParticles()
+void Spaceship::startParticles()
 {
 	for (int i = 0; i < partGenerators.size(); i++)
 	{
@@ -33,7 +33,7 @@ void Cohete::startParticles()
 	}
 }
 
-void Cohete::stopParticles()
+void Spaceship::stopParticles()
 {
 	for (int i = 0; i < partGenerators.size(); i++)
 	{
@@ -41,39 +41,56 @@ void Cohete::stopParticles()
 	}
 }
 
-void Cohete::useParachute()
+void Spaceship::useParachute()
 {
 	paracaActivo ?
 		stopParachute() :
 		startParachute();
 }
 
-void Cohete::startParachute()
+void Spaceship::explote()
 {
+	if (explotado) return;
+	explotado = true;
+	combustible = 0;
+
+	psys->addParticleGenerator(new ExplosionParticleGen(cabina->getPosition(), 100, psys, scene, gPhysics, gScene));
+
+
+	for (auto fj : fixedjoints)
+		fj->release();
+	fixedjoints.clear();
+}
+
+void Spaceship::startParachute()
+{
+	float mass = 1;
+	float radius = sizeModule;
+
 	parachute = new RBDynamic("widParachute", scene, gPhysics, gScene);
 	scene->addGameObject(parachute);
-	parachute->setShape(CreateShape(PxBoxGeometry(sizeModule, sizeModule / 2, sizeModule)), { sizeModule, sizeModule / 2, sizeModule });
+	parachute->setShape(CreateShape(PxSphereGeometry(radius)), { radius, radius , radius });
 	((PxRigidDynamic*)parachute->getActor())->setLinearDamping(0.1);
 
-	Vector3 size = parachute->getSize();
-
-
 	Vector3 cabinapos = cabina->getPosition();
-	parachute->setPosition({ cabinapos.x, cabinapos.y + tamanioCohete.y, cabinapos.z });
-	parachute->setMass(10000);
+
+	PxVec3 globalDirection = cabina->getRotation().rotate({ 0,1,0 });
+	parachute->setPosition(Vector3(cabinapos.x, cabinapos.y, cabinapos.z) + globalDirection * 100);
+	parachute->setMass(mass);
 	parachute->setDensity(0.15);
 
-	float Ih = (10000 * ((size.x * size.x) + (size.z * size.z)) / 12);
-	float Iw = (10000 * ((size.z * size.z) + (size.y * size.y)) / 12);
-	float Id = (10000 * ((size.x * size.x) + (size.y * size.y)) / 12);
-	((PxRigidDynamic*)parachute->getActor())->setMassSpaceInertiaTensor({Iw, Ih, Id});
+
+
+	// formula esfera hueca
+	float I = (2 * mass * (radius * radius)) / 3;
+	((PxRigidDynamic*)parachute->getActor())->setMassSpaceInertiaTensor({ I, I, I });
 
 	forcGenParac = new GomaModificadoGenerator(scene, TENSION_ENTRE_MODULOS, tamanioCohete.y, cabina, parachute);
 	fsys->addForceGenerator(forcGenParac);
 	paracaActivo = true;
 }
 
-void Cohete::stopParachute()
+void Spaceship::stopParachute()
 {
 	fsys->eraseForceGenerator(forcGenParac);
 	parachute->setAlive(false);
@@ -81,7 +98,7 @@ void Cohete::stopParachute()
 	paracaActivo = false;
 }
 
-void Cohete::propulsar(Vector3 dir)
+void Spaceship::propulsar(Vector3 dir)
 {
 	if (combustible <= 0)
 	{
@@ -117,7 +134,7 @@ void Cohete::propulsar(Vector3 dir)
 	}
 }
 
-Modulo* Cohete::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod, PxPhysics* gPhysics, PxScene* gScene)
+Modulo* Spaceship::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod, PxPhysics* gPhysics, PxScene* gScene)
 {
 	// si no hay modulo info entonces no puede crear modulo
 	if (modulo == nullptr) return nullptr;
@@ -149,7 +166,7 @@ Modulo* Cohete::montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod, PxPhysics
 	return actualMod;
 }
 
-Modulo* Cohete::creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 dir, PxPhysics* gPhysics, PxScene* gScene)
+Modulo* Spaceship::creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 dir, PxPhysics* gPhysics, PxScene* gScene)
 {
 	Modulo* mod = new Modulo("nuevo", scene, gPhysics, gScene, modulo->tipo, cabina);
 	mod->setPosition(actualMod->getPosition() + (dir * sizeModule));
@@ -158,6 +175,10 @@ Modulo* Cohete::creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 dir, P
 	PxFixedJoint* fixedJoint = PxFixedJointCreate(*gPhysics,
 		actualMod->getActor(), PxTransform(PxVec3(0.0f, 0.0f, 0.0f)),
 		mod->getActor(), PxTransform(-dir * sizeModule));
+	// setteamos una fuerza maxima a partir de la cual se rompen separan los constrains
+	fixedJoint->setBreakForce(FUERZA_PROPULSOR * 500, FUERZA_PROPULSOR * 500);
+	// aniado los joints a la lista para eliminarlos en caso de explosion
+	fixedjoints.push_back(fixedJoint);
 
 	Vector3 posrel = dir * sizeModule;
 	cout << posrel.x << "//" << posrel.y << "//" << posrel.z << endl;

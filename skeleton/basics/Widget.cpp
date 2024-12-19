@@ -1,7 +1,7 @@
 #include "Widget.h"
 
 
-Widget::Widget(string nam, Scene* scn, Vector3 Pos, float siz) : GameObject("wid" + nam, scn)
+Widget::Widget(string nam, Scene* scn, Vector3 Pos, float siz) : GameObject(nam, scn)
 {
 	pose = new PxTransform(Pos);
 	size = { siz,siz,siz };
@@ -20,10 +20,13 @@ Widget::Widget(string nam, Scene* scn, Vector3 Pos, physx::PxShape* shap) : Game
 		std::cout << "ERROR AL CREAR WIDGET" << std::endl;
 }
 
-void Widget::changeShape(physx::PxShape* shap)
+Widget::Widget(string nam, Scene* scn, PxTransform* pos, float siz ): GameObject(nam, scn)
 {
-	if (renderItem == nullptr)
-		renderItem = new RenderItem(shap, pose, { 1, 0.0, 0.0, 0.01 });
-	else
-		renderItem->shape = shap;
+	pose = pos;
+	size = { siz,siz,siz };
+
+	if (siz > 0)
+		renderItem = new RenderItem(CreateShape(PxSphereGeometry(siz)), pose, { 1, 0.0, 0.0, 0.01 });
 }
+
+

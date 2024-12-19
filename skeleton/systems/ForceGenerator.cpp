@@ -1,21 +1,22 @@
 #include "ForceGenerator.h"
 #include "../basics/Scene.h"
+#include "../ProyectoFinal/ObjetorsDeJuego/Modulo.h"
 
 #include <cmath>
 
 void ForceGenerator::generateRadiousSphere()
 {
-	if (radious <= 0)
+	if (radius <= 0)
 		return;
 	// si ya existe un render item, elimina el que esta y crea uno nuevo con el nuevo radio
 	if (!widget)
 	{
-		widget = new Widget("RadioSphera", scene, origen, radious);
+		widget = new Widget("widRadioSphera", scene, origen, radius);
 
 		scene->addGameObject(widget);
 	}
 
-	widget->changeShape(CreateShape(physx::PxSphereGeometry(radious)));
+	widget->setShape(CreateShape(physx::PxSphereGeometry(radius)));
 }
 
 ForceGenerator::ForceGenerator(Vector3 org, Scene* scn) : origen(org), scene(scn)
@@ -30,14 +31,14 @@ ForceGenerator::~ForceGenerator()
 bool ForceGenerator::onRadious(GameObject* obj)
 {
 	if (obj == nullptr) return false;
-	if (radious == 0)
+	if (radius == 0)
 		return true;
-	return (obj->getPosition() - origen).magnitude() <= radious;
+	return (obj->getPosition() - origen).magnitude() <= radius;
 }
 
 void ForceGenerator::setRadious(float rad)
 {
-	radious = rad;
+	radius = rad;
 	generateRadiousSphere();
 }
 // ------- GENERADOR DE GRAVEDAD --------
@@ -83,7 +84,7 @@ Vector3 ExplosionGenerator::generateForce(GameObject& obj)
 	// distancia al centro de la explosion
 	float r = (obj.getPosition() - origen).magnitude();
 	// si la distancia es menor que el radio la fuerza es 0
-	if (r >= radious) return force; // creo que esto no hace falta, porque si entra al metodo es porque r<radious
+	if (r >= radius) return force; // creo que esto no hace falta, porque si entra al metodo es porque r<radious
 
 	force = ((k / r * r) * (obj.getPosition() - origen)) * exp(-simuleTime / tau);
 
@@ -164,35 +165,7 @@ Vector3 FlotationGenerator::generateForce(GameObject& particle)
 	// aplica la fueza a ambos extremos del muelle
 	return force;
 }
-
-
-// GRAVEDAD PLANETARIA
-Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
-{
-	float distanciaCentro = (object.getPosition() - origen).magnitude();
-	// porcentaje de gravedad que afecta al objeto (cuanto mas lejos del planeta menos le afecta
-	float gravedadAplicada;
-
-	// calculo de porcentaje de gravedad que se aplica
-	if (distanciaCentro <= radioPlaneta)
-		gravedadAplicada = 1;
-	else if (distanciaCentro >= radious)
-		gravedadAplicada = 0;
-	else
-		gravedadAplicada = (radious - distanciaCentro) / (radious - radioPlaneta);
-
-	// aplicamos la gravedad base
-	gravedadAplicada *= gravedad;
-
-	// calculo de la direccion a la que aplicar la fuerza (hacia el centro del planeta)
-	Vector3 dir = object.getPosition() - origen;
-	dir.normalize();
-
-	//cout << object.getName() << " GRAVEDAD ACTUAL: " << gravedadAplicada << endl;
-
-	return dir * gravedadAplicada * object.getMass();
-}
-
+// goma elastica modificada con amortiguacion para unir con paracaidas
 Vector3 GomaModificadoGenerator::generateForce(GameObject& obj)
 {
 	if (!object1->getAlive() || !obj.getAlive()) return{ 0,0,0 };
@@ -219,4 +192,68 @@ Vector3 GomaModificadoGenerator::generateForce(GameObject& obj)
 	// aplica la fueza a ambos extremos del muelle
 	//object1->addForce(-force);
 	return force + amortiguadoForce;
+}
+
+void GravedadPlanetaGenerator::generateRadiousSphere()
+{
+	if (radius <= 0)
+		return;
+	// si ya existe un render item, elimina el que esta y crea uno nuevo con el nuevo radio
+	if (!widget)
+	{
+		widget = new Widget("radPlt" + planetName, scene, poseOrg, radius); // el nombre de los widgets que representan la gravedad de un planeta comienza por "widplt"
+
+		scene->addGameObject(widget);
+	}
+
+	widget->setShape(CreateShape(physx::PxSphereGeometry(radius)), { radius ,radius ,radius });
+}
+
+// GRAVEDAD PLANETARIA
+Vector3 GravedadPlanetaGenerator::generateForce(GameObject& object)
+{
+	float distanciaCentro = (object.getPosition() - poseOrg->p).magnitude();
+	// porcentaje de gravedad que afecta al objeto (cuanto mas lejos del planeta menos le afecta
+	float gravedadAplicada;
+
+	// calculo de porcentaje de gravedad que se aplica
+	if (distanciaCentro <= radioPlaneta)
+		gravedadAplicada = 1;
+	else if (distanciaCentro >= radius)
+		gravedadAplicada = 0;
+	else
+		gravedadAplicada = (radius - distanciaCentro) / (radius - radioPlaneta);
+
+	// aplicamos la gravedad base
+	gravedadAplicada *= gravedad;
+
+	// calculo de la direccion a la que aplicar la fuerza (hacia el centro del planeta)
+	Vector3 dir = object.getPosition() - poseOrg->p;
+	dir.normalize();
+
+	//cout << object.getName() << " GRAVEDAD ACTUAL: " << gravedadAplicada << endl;
+
+	return dir * gravedadAplicada * object.getMass();
+}
+
+// genera fuerza de arrastre segun el fluido
+Vector3 FuerzaArrastreGenerator::generateForce(GameObject& object)
+{
+	Vector3 force = { 0,0,0 };
+
+	float distanceToCentre = (object.getPosition() - poseOrg->p).magnitude();
+	float rocApplied;
+
+	// calculo de porcentaje de gravedad que se aplica
+	if (distanceToCentre <= radioPlaneta)
+		rocApplied = 1;
+	else if (distanceToCentre >= radius)
+		rocApplied = 0;
+	else
+		rocApplied = (radius - distanceToCentre) / (radius - radioPlaneta);
+
+	// calculo de la fuerza
+	force = ((cohefficient / radius * radius) * (object.getPosition() - poseOrg->p)) * rocApplied;
+
+	return force;
 }

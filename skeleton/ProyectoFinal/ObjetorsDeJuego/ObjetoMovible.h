@@ -7,7 +7,7 @@ class ObjetoMovible : public RBStatic
 protected:
 	bool moviendo = false;
 
-	Widget* baseCono = nullptr;
+	vector<RenderItem*> renderItemsDecoracion;
 
 	TipoModulo tipo = TANQUE;
 
@@ -16,12 +16,16 @@ protected:
 	ObjetoMovible* izquierda = nullptr;
 	ObjetoMovible* arriba = nullptr;
 
+	//crea los modulos
+	void createCabina();
+	void createTanque();
+	void createPropulsor();
+
 public:
 	ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, TipoModulo type);
 	~ObjetoMovible() {};
 
 	bool update(double t) override;
-
 
 	// ejecuta los callbacks del objeto
 	void onCollision(GameObject* other) override;

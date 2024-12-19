@@ -8,13 +8,13 @@ class ForceGenerator
 {
 protected:
 	// Propiedades inicio
-	float radious = 0;
+	float radius = 0;
 	Vector3 origen = { 0,0,0 };
 	// Representacion de la zona de afectacion
 	Widget* widget = nullptr;
 	Scene* scene = nullptr;
 
-	void generateRadiousSphere();
+	virtual void generateRadiousSphere();
 
 public:
 	ForceGenerator(Vector3 org, Scene* scn);
@@ -194,21 +194,45 @@ public:
 	void setDamping(GameObject* obj);
 };
 
+// Genera una fuerza de gravedad, cuanto mas lejos del planeta este el objeto menos fuerza le aplica
 class GravedadPlanetaGenerator : public ForceGenerator
 {
 protected:
 	float gravedad; // gravedad del planeta
 	float radioPlaneta; // radio del planeta
+	string planetName;
+	PxTransform* poseOrg;
 public:
 	/// <param name="origen"> centro del planeta </param>
 	/// <param name="scn"> Scene</param>
 	/// <param name="g"> gravedad del planeta (negativa)</param>
+	/// <param name="radAffec"> radio de afectacion de la gravedad</param>
 	/// <param name="rad"> radio del planeta</param>
-	GravedadPlanetaGenerator(Vector3 origen, Scene* scn, float g, float radAffec, float rad) :
-		ForceGenerator(origen, scn), gravedad(g), radioPlaneta(rad) {
+	GravedadPlanetaGenerator(PxTransform* pose, Scene* scn, float g, float radAffec, float rad, string nam) :
+		ForceGenerator(pose->p, scn), gravedad(g), radioPlaneta(rad), planetName(nam), poseOrg(pose) {
 		setRadious(radAffec);
 	};
 	~GravedadPlanetaGenerator() {};
+
+	void generateRadiousSphere() override;
+	virtual Vector3 generateForce(GameObject& object) override;
+};
+
+// Genera una fuerza de resistencia de un fluido
+class FuerzaArrastreGenerator : public GravedadPlanetaGenerator
+{
+protected:
+	float cohefficient; // coheficiente de arrastre
+public:
+	/// <param name="origen"> centro del planeta </param>
+	/// <param name="scn"> Scene</param>
+	/// <param name="c"> coheficiente de rozamiento del fluido</param>
+	/// <param name="radAffec"> radio de afectacion del arrastre</param>
+	/// <param name="rad"> radio del planeta</param>
+	FuerzaArrastreGenerator(PxTransform* pose, Scene* scn, float c, float radAffec, float rad, string nam) :
+		GravedadPlanetaGenerator(pose, scn, 0, radAffec, rad, nam), cohefficient(c) 
+	{};
+	~FuerzaArrastreGenerator() {};
 
 	Vector3 generateForce(GameObject& object) override;
 };

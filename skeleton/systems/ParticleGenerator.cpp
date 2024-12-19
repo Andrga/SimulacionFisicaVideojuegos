@@ -204,10 +204,11 @@ void PropulsionParticleGen::generateParticle()
 {
 	// Generamos una cantidad de particulas, cuya cantidad entra en el rango de la capacidad de particulas maxima,
 	// es decir restParticles
-	std::uniform_int_distribution<int> numPartsUniform(0, 1); // numero de 0 a restParticles
+	std::uniform_int_distribution<int> numPartsUniform(0, 1); // numero de 0 a 1
+	std::uniform_int_distribution<int> massUniformDistribution(3, 8); // masa de la particula
 	std::uniform_int_distribution<int> PosUniformDist(-2.5, 2.5); // posicion donde sale
 	std::normal_distribution<double> FuerzaPropnormalDistribution(*porcentajeFuerzProp, 0.1); // media|dispersion fuerza de propulsion
-	std::normal_distribution<double> LFEnormalDistribution(2, 10.0); // media|dispersion
+	std::normal_distribution<double> LFEnormalDistribution(0.5, 0.2); // media|dispersion
 	std::normal_distribution<double> rojoNormalDistribution(1, 0.1); // media|dispersion
 	std::normal_distribution<double> verdeNormalDistribution(0.5, 0.2); // media|dispersion
 
@@ -220,6 +221,8 @@ void PropulsionParticleGen::generateParticle()
 	float lifetime;
 	// cantidad de particulas que se van a generar
 	int particlesGenerated = numPartsUniform(generator);
+	// masa de la particula
+	float mass;
 
 	// setting de la direccion en la que propulsar
 	PxVec3 globalDirection = propulsor->getActor()->getGlobalPose().q.rotate({ 0,1,0 });
@@ -233,13 +236,16 @@ void PropulsionParticleGen::generateParticle()
 		force = (-globalDirection * (1 * FuerzaPropnormalDistribution(generator)));
 		// tiempo de vida aleatorio
 		lifetime = LFEnormalDistribution(generator);
+		// masa de la particula
+		mass = massUniformDistribution(generator);
 
 		// creamos la nueva particula
 		Particle* aux = new Particle("wid", scene, origen);
-		aux->setShape(CreateShape(PxSphereGeometry(1)), { 1,1,1 });
+		aux->setShape(CreateShape(PxSphereGeometry(mass/2)), { mass/2,mass/2,mass/2 });
 		aux->setColor({ (float)rojoNormalDistribution(generator), (float)verdeNormalDistribution(generator), 0,1 });
 		aux->addForce(force);
-		aux->setStartLifeTime(1);
+		aux->setStartLifeTime(lifetime);
+		aux->setMass(mass);
 
 		// añadimos las particulas a la lista
 		generatedGameObjects[aux] = true; // Aniadir al mapa
@@ -253,6 +259,59 @@ void PropulsionParticleGen::generateParticle()
 }
 
 bool PropulsionParticleGen::mayGenerate()
+{
+	if (!generate)
+		return false;
+}
+
+void ExplosionParticleGen::generateParticle()
+{
+
+	// Generamos una cantidad de particulas, cuya cantidad entra en el rango de la capacidad de particulas maxima,
+	// es decir restParticles
+	std::uniform_int_distribution<int> forcUniformDist(-1000, 1000); // fuerza de la particula
+	std::uniform_int_distribution<int> massUniformDistribution(3, 8); // masa de la particula
+	std::normal_distribution<double> LFEnormalDistribution(2, 10.0); // media|dispersion
+	std::normal_distribution<double> rojoNormalDistribution(1, 0.1); // media|dispersion
+	std::normal_distribution<double> verdeNormalDistribution(0.7, 0.2); // media|dispersion
+
+	// velocidad para la nueva particula
+	Vector3 force;
+	// tiempo de vida para la nueva particula
+	float lifetime;
+	// masa de la particula
+	float mass;
+
+	for (int i = 0; i < startNGameObjects; i++) {
+		// fuerza con la propulsion
+		force.x = forcUniformDist(generator);
+		force.y = forcUniformDist(generator);
+		force.z = forcUniformDist(generator);
+		// tiempo de vida aleatorio
+		lifetime = LFEnormalDistribution(generator);
+		// masa de la particula
+		mass = massUniformDistribution(generator);
+
+		// creamos la nueva particula
+		Particle* aux = new Particle("wid", scene, origen);
+		aux->setShape(CreateShape(PxSphereGeometry(mass / 2)), { mass / 2,mass / 2,mass / 2 });
+		aux->setColor({ (float)rojoNormalDistribution(generator), (float)verdeNormalDistribution(generator), 1,1 });
+		aux->setVelocity(force);
+		aux->setStartLifeTime(lifetime);
+		aux->setMass(mass);
+
+		// añadimos las particulas a la lista
+		generatedGameObjects[aux] = true; // Aniadir al mapa
+		scene->addGameObject(aux, this); // Aniadir a la escena y pasar referencia del generador
+
+		nGameObjects++;
+		nGameObjectsTotal++;
+
+	}
+	generate = false;
+}
+
+bool ExplosionParticleGen::mayGenerate()
 {
 	if (!generate)
 		return false;

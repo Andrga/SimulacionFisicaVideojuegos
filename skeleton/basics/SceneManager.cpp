@@ -36,6 +36,7 @@ void SceneManager::setScene(int id)
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		scenes[i]->hide();
+		cout << i << endl;
 	}
 	actualScene = id;
 	scenes[actualScene]->show();

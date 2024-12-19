@@ -6,7 +6,7 @@ class ForceSystem;
 class PropulsionParticleGen;
 class ForceGenerator;
 
-class Cohete
+class Spaceship
 {
 private:
 	Scene* scene = nullptr;
@@ -18,6 +18,8 @@ private:
 	// propulsion;
 	vector<PropulsionParticleGen*> partGenerators;
 	vector<Modulo*> Propulsores;
+	vector<PxFixedJoint*> fixedjoints;
+	bool explotado = false;
 	ParticleSystem* psys = nullptr;
 	ForceSystem* fsys = nullptr;
 
@@ -27,28 +29,36 @@ private:
 	RBDynamic* parachute = nullptr;
 	bool paracaActivo = false;
 	ForceGenerator* forcGenParac = nullptr;
+	string actualPlanet = "";
 
+	// metodos privados
 	Modulo* montarCoheteRec(ModuloInfo* modulo, Modulo* actualMod, PxPhysics* gPhysics, PxScene* gScene);
 	Modulo* creaModulo(ModuloInfo* modulo, Modulo* actualMod, Vector3 posRelativa, PxPhysics* gPhysics, PxScene* gScene);
 	void startParachute();
 	void stopParachute();
 public:
-	Cohete(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysics* gPhysx, PxScene* gScn);
-	~Cohete();
+	Spaceship(Scene* scn, ParticleSystem* psistm, ForceSystem* forcstm, PxPhysics* gPhysx, PxScene* gScn);
+	~Spaceship();
 
 	float getCombustible() const noexcept { return combustible; };
 	float getPorcPropulsion() const noexcept { return porcentajeFuerzProp; };
 	Vector3 getPosition() const { return cabina->getPosition(); };
+	Vector3 getDirection() const { return cabina->getRotation().rotate({ 0,1,0 }); };
 	PxQuat getRotation() const { return cabina->getRotation(); };
+	string getPlanet() const { return actualPlanet; };
 
 	void setPorcPropulsion(float prop) noexcept { porcentajeFuerzProp = prop; };
+	void setPlanet(string plt) { actualPlanet = plt; };
 
 	void startParticles();
 	void stopParticles();
 
 	void useParachute();
 
+	void explote();
+
 
 	void propulsar(Vector3 dir);
+
 };
 

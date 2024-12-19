@@ -47,7 +47,8 @@ public:
 	Vector3 getSize() { return size; };
 	string getName() { return name; };
 	virtual float getMass() { return mass; };
-	Vector3 getVelocity() { return velocity; };
+	virtual Vector3 getVelocity() { return velocity; };
+	PxTransform* getPose() { return pose; };
 #pragma endregion
 
 	// setters
@@ -59,8 +60,8 @@ public:
 	void setName(string nam) { name = nam; };
 	void setColor(Vector4 col) { renderItem->color = col; color = col; };
 	void setSize(Vector3 siz) noexcept { size = siz; };
-	void setMass(float mas) noexcept { mass = mas; };
-	void setVelocity(Vector3 vel) noexcept { velocity = vel; }
+	virtual void setMass(float mas) { mass = mas; };
+	void setVelocity(Vector3 vel) { velocity = vel; }
 	void setStartLifeTime(float life) { startlifeTime = life; }
 #pragma endregion
 

@@ -11,10 +11,21 @@ void ScenaMontaje::update(double t)
 	display_text1_position = { 10,500 };
 	display_text1 = "MONTAJE DE COHETE";
 	display_text1 += "#------------------";
+	display_text1 += "#Coloca los modulos de la nave a tu antojo";
+	display_text1 += "##ASTROS A VISITAR:";
+	display_text1 += "#------------------";
+	display_text1 += "#      O   <- Venus";
+	display_text1 += "#      |   ";
+	display_text1 += "#      o   <- Marte";
+	display_text1 += "#      |   ";
+	display_text1 += "#      .   <- Luna";
+	display_text1 += "#      0   <- Tierra";
 	display_text2_position = { 10,100 };
 	display_text2 = "#CONTROLES";
 	display_text2 += "#------------------";
-	display_text2 += "#W,A,S,D: Movimiento de la camara, INTRO: interactuar";
+	display_text2 += "#-> Boton Arriba: Crea tanques";
+	display_text2 += "#-> Boton Abajo: Crea propulsores";
+	display_text2 += "#-> W,A,S,D: Movimiento de la camara#-> INTRO: interactuar";
 }
 
 void ScenaMontaje::setup()
@@ -24,26 +35,23 @@ void ScenaMontaje::setup()
 
 	// boton de confirmar cohete
 	Button* but = new Button("Confirmar", this, gPhysics, gScene);
-	but->setPosition({ 0,-50,0 });
+	but->setPosition({ 0,-40,0 });
 	but->setShape(CreateShape(PxBoxGeometry(10, 5, 1)), { 10, 5, 1 });
+	but->setColor({ 1,0.5,0.5,1 });
 	addGameObject(but);
 	gScene->addActor(*but->getActor());
 	but->addCallback([this]() {this->saveRocket(); });
 	but->addCallback([this]() {this->LaunchScene(); });
 
-	cabina = new ObjetoMovible("mov1", this, gPhysics, gScene, CABINA);
-	cabina->setPosition({ 0,20,0 });
-	addGameObject(cabina);
-
 	// fondo donde estan los botones
-	Widget* fondoBotones = new Widget("fondoBotones", this, { -70, 0, -20 }, 10);
-	fondoBotones->setShape(CreateShape(PxBoxGeometry(15, 60, 1)), { 15,60,1 });
-	fondoBotones->setColor({ 0.5,1,0.75,1 });
+	Widget* fondoBotones = new Widget("widfondoBotones", this, { 0, 0, -20 }, 10);
+	fondoBotones->setShape(CreateShape(PxBoxGeometry(60, 60, 1)), { 60,60,1 });
+	fondoBotones->setColor({ 0.5,1,0.6,1 });
 	addGameObject(fondoBotones);
 
 	// botones spawn de modulos
 	botonTanque = new Button("BotonTanque", this, gPhysics, gScene);
-	botonTanque->setPosition({ -70,20,-10 });
+	botonTanque->setPosition({ -60,20,-10 });
 	botonTanque->setShape(CreateShape(PxBoxGeometry(10, 5, 1)), { 10, 5, 1 });
 	addGameObject(botonTanque);
 	gScene->addActor(*botonTanque->getActor());
@@ -51,7 +59,7 @@ void ScenaMontaje::setup()
 
 
 	botonPropulsor = new Button("botonPropulsor", this, gPhysics, gScene);
-	botonPropulsor->setPosition({ -70,-20,-10 });
+	botonPropulsor->setPosition({ -60,-20,-10 });
 	botonPropulsor->setShape(CreateShape(PxBoxGeometry(10, 5, 1)), { 10, 5, 1 });
 	addGameObject(botonPropulsor);
 	gScene->addActor(*botonPropulsor->getActor());
@@ -61,25 +69,32 @@ void ScenaMontaje::setup()
 
 #pragma region decoracion
 #pragma region Tierra
-	RBStatic* PlanetaTierra = new RBStatic("PlanetaTierra", this, gPhysics, gScene);
+	RBStatic* PlanetaTierra = new RBStatic("widpltPlanetaTierra", this, gPhysics, gScene);
 	PlanetaTierra->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
-	PlanetaTierra->setPosition(PlanetaTierra->getPosition() - Vector3(0, RADIO_PLANETA_TIERRA + 50, 0));
-	PlanetaTierra->setColor({ 0.75,0.85,1,1 });
+	PlanetaTierra->setPosition({ 0,-RADIO_PLANETA_TIERRA - 100, 0 });
+	PlanetaTierra->setColor({ 0.5,1,0.1,1 });
 	addGameObject(PlanetaTierra);
 
-	RBStatic* PlanetaTierra2 = new RBStatic("PlanetaTierra2", this, gPhysics, gScene);
+	RBStatic* PlanetaTierra2 = new RBStatic("widpltPlanetaTierra2", this, gPhysics, gScene);
 	PlanetaTierra2->setPosition(PlanetaTierra->getPosition());
 	PlanetaTierra2->setRotation(PxQuat(PxPi / 2, PxVec3(0, 1, 0)));
 	PlanetaTierra2->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
-	PlanetaTierra2->setColor({ 0.75,0.75,1,1 });
+	PlanetaTierra2->setColor({ 0.1,1,0.5,1 });
 	addGameObject(PlanetaTierra2);
 
-	RBStatic* PlanetaTierra3 = new RBStatic("PlanetaTierra3", this, gPhysics, gScene);
+	RBStatic* PlanetaTierra3 = new RBStatic("widpltPlanetaTierra3", this, gPhysics, gScene);
 	PlanetaTierra3->setPosition(PlanetaTierra->getPosition());
 	PlanetaTierra3->setRotation(PxQuat(PxPi / 2, PxVec3(0, 0, 1)));
 	PlanetaTierra3->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
-	PlanetaTierra3->setColor({ 0.65,0.75,1,1 });
+	PlanetaTierra3->setColor({ 0.5,1,0.1,1 });
 	addGameObject(PlanetaTierra3);
+
+	RBStatic* PlanetaTierra4 = new RBStatic("widpltPlanetaTierra4", this, gPhysics, gScene);
+	PlanetaTierra4->setPosition(PlanetaTierra->getPosition());
+	PlanetaTierra4->setRotation(PxQuat(PxPi / 2, PxVec3(1, 0, 0)));
+	PlanetaTierra4->setShape(CreateShape(PxSphereGeometry(RADIO_PLANETA_TIERRA)), { RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA, RADIO_PLANETA_TIERRA });
+	PlanetaTierra4->setColor({ 0.1,1,0.5,1 });
+	addGameObject(PlanetaTierra4);
 #pragma endregion
 #pragma endregion
 }
@@ -99,12 +114,17 @@ void ScenaMontaje::show()
 	{
 		// si es un objeto movible lo elimina
 		if (go.second.gameObject->getName().substr(0, 3) == "mov")
-			if (((ObjetoMovible*)go.second.gameObject)->getType() != CABINA) aEliminar.push_back(go.second.gameObject->getName());
+			aEliminar.push_back(go.second.gameObject->getName());
 	}
 
 
 	for (auto n : aEliminar)
 		deleteGameObject(n);
+
+	cabina = new ObjetoMovible("mov1", this, gPhysics, gScene, CABINA);
+	cabina->setPosition({ 0,20,0 });
+	addGameObject(cabina);
+
 	// reseteo de la cabina
 	cabina->reset();
 
@@ -113,7 +133,6 @@ void ScenaMontaje::show()
 	camera->moveTo(CAMERA_START_POS);
 	camera->lookAt({ 0,0,0 });
 	camera->setMovible(true);
-	centreVis(true, 1);
 }
 
 void ScenaMontaje::creaPropulsor()

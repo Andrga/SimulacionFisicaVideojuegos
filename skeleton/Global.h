@@ -15,6 +15,7 @@ struct GameObjectInfo
 
 extern GameObject* MovingObj;
 extern bool Moving;
+extern Vector3 EXPLOSION_VELOCITY;
 
 //	para la construccion del cohete
 // tipos de modulos que puede contener el cohete
@@ -35,8 +36,6 @@ struct ModuloInfo
 	ModuloInfo(TipoModulo tp) :tipo(tp) { derecha = nullptr; izquierda = nullptr; arriba = nullptr; abajo = nullptr; };
 	ModuloInfo(TipoModulo tp, ModuloInfo* der, ModuloInfo* abj, ModuloInfo* izq, ModuloInfo* arr) :tipo(tp), derecha(der), abajo(abj), izquierda(izq), arriba(arr) {};
 };
-
-extern void centreVis(bool vis, int dir);
 
 // vector que indica los modulos del cohete
 extern ModuloInfo* CoheteInfo;
@@ -60,3 +59,14 @@ extern float RADIO_GRAVEDAD_TIERRA;
 
 extern float RADIO_LUNA;
 extern float RADIO_GRAVEDAD_LUNA;
+extern float DISTANCIA_TIERRA_LUNA;
+
+
+extern float RADIO_MARTE;
+extern float RADIO_GRAVEDAD_MARTE;
+extern float DISTANCIA_TIERRA_MARTE;
+
+
+extern float RADIO_VENUS;
+extern float RADIO_GRAVEDAD_VENUS;
+extern float DISTANCIA_TIERRA_VENUS;

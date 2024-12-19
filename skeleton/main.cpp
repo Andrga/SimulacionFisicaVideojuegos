@@ -37,8 +37,8 @@ ContactReportCallback gContactReportCallback;
 
 SceneManager* sceneManager = nullptr;
 
-RenderItem* xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL, * centroRI = NULL;
-PxTransform ejX, ejY, ejZ, centroPose;
+RenderItem* /*xRenderItem = NULL, * yRenderItem = NULL, * zRenderItem = NULL,*/  centroRI = nullptr;
+PxTransform /*ejX, ejY, ejZ,*/ centroPose;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -65,18 +65,18 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 
 	// ------ Creamos los ejes ------
-	ejX = { 10.0,0.0,0.0 };
+	/*ejX = { 10.0,0.0,0.0 };
 	ejY = { 0.0,10.0,0.0 };
-	ejZ = { 0.0,0.0,10.0 };
+	ejZ = { 0.0,0.0,10.0 };*/
 	centroPose = PxTransform({ GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z });
 
-	cout << centroPose.p.x << "/" << centroPose.p.y << "/" << centroPose.p.z << endl;
-	cout << GetCamera()->getEye().x << "/" << GetCamera()->getEye().y << "/" << GetCamera()->getEye().z << endl;
+	//cout << centroPose.p.x << "/" << centroPose.p.y << "/" << centroPose.p.z << endl;
+	//cout << GetCamera()->getEye().x << "/" << GetCamera()->getEye().y << "/" << GetCamera()->getEye().z << endl;
 	//centroPose.p = {GetCamera()->getDir().x, GetCamera()->getDir().y, GetCamera()->getDir().z - 10};
 
-	xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejX, { 1.0, 0.0, 0.0, 1.0 });
+	/*xRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejX, { 1.0, 0.0, 0.0, 1.0 });
 	yRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejY, { 0.0, 1.0, 0.0, 1.0 });
-	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejZ, { 0.0, 0.0, 1.0, 1.0 });
+	zRenderItem = new RenderItem(CreateShape(PxSphereGeometry(1)), &ejZ, { 0.0, 0.0, 1.0, 1.0 });*/
 	centroRI = new RenderItem(CreateShape(PxSphereGeometry(0.05)), &centroPose, { 1.0, 1.0, 1.0, 1 });
 
 
@@ -85,15 +85,6 @@ void initPhysics(bool interactive)
 
 
 
-}
-
-void centreVis(bool vis, int dir) {
-	//cout << "CENTRO" << (vis ? " SE VE" : " NO SE VE") << endl;
-	vis ?
-		RegisterRenderItem(centroRI) :
-		DeregisterRenderItem(centroRI);
-
-	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z + (5 * dir) };
 }
 
 // Function to configure what happens in each step of physics
@@ -112,7 +103,7 @@ void stepPhysics(bool interactive, double t)
 		sceneManager->update(t * SimulateTime);
 
 
-	centroPose.p = { GetCamera()->getEye().x, GetCamera()->getEye().y, GetCamera()->getEye().z - 5 };
+	centroPose.p = GetCamera()->getEye() + (GetCamera()->getDir()*5);
 }
 
 // Function to clean data

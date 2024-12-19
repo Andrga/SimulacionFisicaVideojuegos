@@ -1,21 +1,21 @@
 #include "Modulo.h"
+#include "../Scenes/ScenaLaunch.h"
 
 Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, TipoModulo tpo, Modulo* cab) : RBDynamic("mod" + nam, scn, gPhysics, gScene), tipo(tpo), cabina(cab)
 {
+		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
 	switch (tipo)
 	{
 	case CABINA:
-		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
+		cabina = this;
 		createCabina();
 		setColor({ 0,0,1,0 });
 		break;
 	case TANQUE:
-		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
 		createTanque();
 		setColor({ 1,1,1,0 });
 		break;
 	case PROPULSOR:
-		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5,5,5 });
 		createPropulsor();
 		setColor({ 1,0,0,0 });
 		break;
@@ -25,33 +25,27 @@ Modulo::Modulo(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, Tip
 	float m = 1000;
 	float d = 1.5;
 	setDensity(d);
-	actor->setLinearDamping(0.99);
+	actor->setLinearDamping(0.8);
 	actor->setMass(m);
 
+	// formulas cuboide puesto que los modulos son tratados como cubos a pesar de que se vean con otras geometrias
 	float Ih = (m * ((size.x * size.x) + (size.z * size.z)) / 12);
 	float Iw = (m * ((size.z * size.z) + (size.y * size.y)) / 12);
 	float Id = (m * ((size.x * size.x) + (size.y * size.y)) / 12);
 
 	actor->setMassSpaceInertiaTensor({ Iw, Ih, Id });
-
+	// se ensenia el collider en forma de circulo pero en realidad se aplica como un cubo
 	GameObject::setShape(CreateShape(PxSphereGeometry(sizeModule / 2)));
+}
+
+Modulo::~Modulo()
+{
+	for (auto ri : renderItemsDecoracion)
+		DeregisterRenderItem(ri);
 }
 
 bool Modulo::update(double t)
 {
-
-	if (cabina != nullptr)
-	{
-		// todos los objetos tienen la misma rotacion que la cabina
-	}
-	/*pose = &(actor->getGlobalPose());
-	PxQuat cabRot = pose->q;
-	PxVec3 angleY(0, 0, 1);
-	pose->q = PxQuat(cabRot.getAngle(), angleY);
-	pose->p = { pose->p.x, pose->p.y, 0 };
-	actor->setGlobalPose(*pose);*/
-
-
 	return GameObject::update(t);
 }
 
@@ -72,4 +66,19 @@ void Modulo::createPropulsor()
 {
 	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, 1, sizeModule / 2)), actor, { 1,0,0,1 }));
 	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, sizeModule / 2, 1)), actor, { 1,0,0,1 }));
+}
+
+void Modulo::onCollision(GameObject* other)
+{
+	string name = other->getName();
+	if (name.substr(0, 3) == "plt") {
+		if (cabina->getVelocity().x >= EXPLOSION_VELOCITY.x || cabina->getVelocity().y >= EXPLOSION_VELOCITY.y || cabina->getVelocity().z >= EXPLOSION_VELOCITY.z) {
+			((ScenaLaunch*)scene)->exploteSpaceship();
+		}
+
+	}
+	else if (name.substr(0, 6) == "radPlt") {
+		((ScenaLaunch*)scene)->setPlaneta(name.substr(6, name.length() - 1));
+	}
+
 }

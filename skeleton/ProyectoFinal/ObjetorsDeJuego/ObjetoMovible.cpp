@@ -5,40 +5,57 @@
 ObjetoMovible::ObjetoMovible(string nam, Scene* scn, PxPhysics* gPhysics, PxScene* gScene, TipoModulo type) : RBStatic("mov" + nam, scn, gPhysics, gScene), tipo(type) {
 	// aniade el callback para alternar si se esta arrastrando el modulo o no
 	addCallback([this]() {this->alternateMoviendo(); });
+		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5, 5, 5 });
 
 	switch (type)
 	{
 	case CABINA:
-		setShape(CreateShape(PxSphereGeometry(5)), { 5, 5, 5 });
-		setColor({ 0.5,0.5,1,0 });
+		createCabina();
+		setColor({ 0,0,1,0 });
 		break;
 	case TANQUE:
-		setShape(CreateShape(PxBoxGeometry(5, 5, 5)), { 5, 5, 5 });
-		setColor({ 1,1,1,1 });
+		createTanque();
+		setColor({ 1,1,1,0 });
 		break;
 	case PROPULSOR:
-		setShape(CreateShape(PxSphereGeometry(5)), { 5, 5, 5 });
-		setColor({ 1,0.5,0.5,1 });
-		baseCono = new Widget("widBaseCono", scene, getPosition(), CreateShape(PxBoxGeometry(5, 2.5, 5)));
-		scene->addGameObject(baseCono);
-		baseCono->setColor({ 1,0.5,0.5,1 });
+		createPropulsor();
+		setColor({ 1,0,0,0 });
 		break;
 	default:
 		break;
 	}
+
+	// se ensenia el collider en forma de circulo pero en realidad se aplica como un cubo
+	GameObject::setShape(CreateShape(PxSphereGeometry(sizeModule / 2)));
 }
 
 bool ObjetoMovible::update(double t)
 {
 
 	// si estoy arrastrando al modulo sigue a la camara
-	if (moviendo) {
+	if (moviendo) 
 		setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y, getPosition().z });
-		if (baseCono) baseCono->setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y - 2.5f, getPosition().z });
-		//cout << "MOVIENDOOOO--" << endl;
-	}
 
 	return RBActor::update(t);
+}
+
+void ObjetoMovible::createCabina()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, sizeModule / 2, 1)), pose, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxSphereGeometry(sizeModule / 3)), pose, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, 1, 1)), pose, { 0,0.5,1,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, 1, sizeModule / 2)), pose, { 0,0.5,1,1 }));
+}
+
+void ObjetoMovible::createTanque()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, sizeModule / 2, sizeModule / 2)), pose, { 1,1,1,1 }));
+}
+
+void ObjetoMovible::createPropulsor()
+{
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(sizeModule / 2, 1, sizeModule / 2)), pose, { 1,0,0,1 }));
+	renderItemsDecoracion.push_back(new RenderItem(CreateShape(PxBoxGeometry(1, sizeModule / 2, 1)), pose, { 1,0,0,1 }));
 }
 
 void ObjetoMovible::onCollision(GameObject* other)
@@ -117,7 +134,7 @@ void ObjetoMovible::addAnchor(ObjetoMovible* anch)
 		}
 	}
 
-	if (baseCono) baseCono->setPosition({ getPosition().x,  getPosition().y - 2.5f, getPosition().z });
+	//if (baseCono) baseCono->setPosition({ getPosition().x,  getPosition().y - 2.5f, getPosition().z });
 	// si no no hace nada
 }
 
@@ -252,13 +269,13 @@ void ObjetoMovible::alternateMoviendo() {
 	{
 		deAtachAllAnch();
 		setPosition({ getPosition().x, getPosition().y, getPosition().z + 10 });
-		if (baseCono) baseCono->setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y - 2.5f, getPosition().z });
+		//if (baseCono) baseCono->setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y - 2.5f, getPosition().z });
 	}
 	else
 	{
 		setPosition({ getPosition().x, getPosition().y, getPosition().z - 10 });
 
-		if (baseCono) baseCono->setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y - 2.5f, getPosition().z });
+		//if (baseCono) baseCono->setPosition({ GetCamera()->getEye().x,  GetCamera()->getEye().y - 2.5f, getPosition().z });
 	}
 	cout << moviendo << endl;
 
